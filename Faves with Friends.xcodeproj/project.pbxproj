@@ -1,0 +1,590 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		01CCDB16274F3BF4008337BB /* Faves_with_FriendsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CCDB15274F3BF4008337BB /* Faves_with_FriendsApp.swift */; };
+		01CCDB18274F3BF4008337BB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CCDB17274F3BF4008337BB /* ContentView.swift */; };
+		01CCDB1A274F3BF5008337BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01CCDB19274F3BF5008337BB /* Assets.xcassets */; };
+		01CCDB1D274F3BF5008337BB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01CCDB1C274F3BF5008337BB /* Preview Assets.xcassets */; };
+		01CCDB27274F3BF6008337BB /* Faves_with_FriendsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CCDB26274F3BF6008337BB /* Faves_with_FriendsTests.swift */; };
+		01CCDB31274F3BF6008337BB /* Faves_with_FriendsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CCDB30274F3BF6008337BB /* Faves_with_FriendsUITests.swift */; };
+		01CCDB33274F3BF6008337BB /* Faves_with_FriendsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CCDB32274F3BF6008337BB /* Faves_with_FriendsUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		01CCDB23274F3BF5008337BB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 01CCDB0A274F3BF4008337BB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 01CCDB11274F3BF4008337BB;
+			remoteInfo = "Faves with Friends";
+		};
+		01CCDB2D274F3BF6008337BB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 01CCDB0A274F3BF4008337BB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 01CCDB11274F3BF4008337BB;
+			remoteInfo = "Faves with Friends";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		01CCDB12274F3BF4008337BB /* Faves with Friends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Faves with Friends.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		01CCDB15274F3BF4008337BB /* Faves_with_FriendsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Faves_with_FriendsApp.swift; sourceTree = "<group>"; };
+		01CCDB17274F3BF4008337BB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		01CCDB19274F3BF5008337BB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		01CCDB1C274F3BF5008337BB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		01CCDB22274F3BF5008337BB /* Faves with FriendsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Faves with FriendsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		01CCDB26274F3BF6008337BB /* Faves_with_FriendsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Faves_with_FriendsTests.swift; sourceTree = "<group>"; };
+		01CCDB2C274F3BF6008337BB /* Faves with FriendsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Faves with FriendsUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		01CCDB30274F3BF6008337BB /* Faves_with_FriendsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Faves_with_FriendsUITests.swift; sourceTree = "<group>"; };
+		01CCDB32274F3BF6008337BB /* Faves_with_FriendsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Faves_with_FriendsUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		01CCDB0F274F3BF4008337BB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01CCDB1F274F3BF5008337BB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01CCDB29274F3BF6008337BB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		01CCDB09274F3BF4008337BB = {
+			isa = PBXGroup;
+			children = (
+				01CCDB14274F3BF4008337BB /* Faves with Friends */,
+				01CCDB25274F3BF6008337BB /* Faves with FriendsTests */,
+				01CCDB2F274F3BF6008337BB /* Faves with FriendsUITests */,
+				01CCDB13274F3BF4008337BB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		01CCDB13274F3BF4008337BB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				01CCDB12274F3BF4008337BB /* Faves with Friends.app */,
+				01CCDB22274F3BF5008337BB /* Faves with FriendsTests.xctest */,
+				01CCDB2C274F3BF6008337BB /* Faves with FriendsUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		01CCDB14274F3BF4008337BB /* Faves with Friends */ = {
+			isa = PBXGroup;
+			children = (
+				01CCDB15274F3BF4008337BB /* Faves_with_FriendsApp.swift */,
+				01CCDB17274F3BF4008337BB /* ContentView.swift */,
+				01CCDB19274F3BF5008337BB /* Assets.xcassets */,
+				01CCDB1B274F3BF5008337BB /* Preview Content */,
+			);
+			path = "Faves with Friends";
+			sourceTree = "<group>";
+		};
+		01CCDB1B274F3BF5008337BB /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				01CCDB1C274F3BF5008337BB /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		01CCDB25274F3BF6008337BB /* Faves with FriendsTests */ = {
+			isa = PBXGroup;
+			children = (
+				01CCDB26274F3BF6008337BB /* Faves_with_FriendsTests.swift */,
+			);
+			path = "Faves with FriendsTests";
+			sourceTree = "<group>";
+		};
+		01CCDB2F274F3BF6008337BB /* Faves with FriendsUITests */ = {
+			isa = PBXGroup;
+			children = (
+				01CCDB30274F3BF6008337BB /* Faves_with_FriendsUITests.swift */,
+				01CCDB32274F3BF6008337BB /* Faves_with_FriendsUITestsLaunchTests.swift */,
+			);
+			path = "Faves with FriendsUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		01CCDB11274F3BF4008337BB /* Faves with Friends */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 01CCDB36274F3BF6008337BB /* Build configuration list for PBXNativeTarget "Faves with Friends" */;
+			buildPhases = (
+				01CCDB0E274F3BF4008337BB /* Sources */,
+				01CCDB0F274F3BF4008337BB /* Frameworks */,
+				01CCDB10274F3BF4008337BB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Faves with Friends";
+			productName = "Faves with Friends";
+			productReference = 01CCDB12274F3BF4008337BB /* Faves with Friends.app */;
+			productType = "com.apple.product-type.application";
+		};
+		01CCDB21274F3BF5008337BB /* Faves with FriendsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 01CCDB39274F3BF6008337BB /* Build configuration list for PBXNativeTarget "Faves with FriendsTests" */;
+			buildPhases = (
+				01CCDB1E274F3BF5008337BB /* Sources */,
+				01CCDB1F274F3BF5008337BB /* Frameworks */,
+				01CCDB20274F3BF5008337BB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				01CCDB24274F3BF5008337BB /* PBXTargetDependency */,
+			);
+			name = "Faves with FriendsTests";
+			productName = "Faves with FriendsTests";
+			productReference = 01CCDB22274F3BF5008337BB /* Faves with FriendsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		01CCDB2B274F3BF6008337BB /* Faves with FriendsUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 01CCDB3C274F3BF6008337BB /* Build configuration list for PBXNativeTarget "Faves with FriendsUITests" */;
+			buildPhases = (
+				01CCDB28274F3BF6008337BB /* Sources */,
+				01CCDB29274F3BF6008337BB /* Frameworks */,
+				01CCDB2A274F3BF6008337BB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				01CCDB2E274F3BF6008337BB /* PBXTargetDependency */,
+			);
+			name = "Faves with FriendsUITests";
+			productName = "Faves with FriendsUITests";
+			productReference = 01CCDB2C274F3BF6008337BB /* Faves with FriendsUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		01CCDB0A274F3BF4008337BB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1320;
+				LastUpgradeCheck = 1320;
+				TargetAttributes = {
+					01CCDB11274F3BF4008337BB = {
+						CreatedOnToolsVersion = 13.2;
+					};
+					01CCDB21274F3BF5008337BB = {
+						CreatedOnToolsVersion = 13.2;
+						TestTargetID = 01CCDB11274F3BF4008337BB;
+					};
+					01CCDB2B274F3BF6008337BB = {
+						CreatedOnToolsVersion = 13.2;
+						TestTargetID = 01CCDB11274F3BF4008337BB;
+					};
+				};
+			};
+			buildConfigurationList = 01CCDB0D274F3BF4008337BB /* Build configuration list for PBXProject "Faves with Friends" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 01CCDB09274F3BF4008337BB;
+			productRefGroup = 01CCDB13274F3BF4008337BB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				01CCDB11274F3BF4008337BB /* Faves with Friends */,
+				01CCDB21274F3BF5008337BB /* Faves with FriendsTests */,
+				01CCDB2B274F3BF6008337BB /* Faves with FriendsUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		01CCDB10274F3BF4008337BB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01CCDB1D274F3BF5008337BB /* Preview Assets.xcassets in Resources */,
+				01CCDB1A274F3BF5008337BB /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01CCDB20274F3BF5008337BB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01CCDB2A274F3BF6008337BB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		01CCDB0E274F3BF4008337BB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01CCDB18274F3BF4008337BB /* ContentView.swift in Sources */,
+				01CCDB16274F3BF4008337BB /* Faves_with_FriendsApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01CCDB1E274F3BF5008337BB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01CCDB27274F3BF6008337BB /* Faves_with_FriendsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01CCDB28274F3BF6008337BB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01CCDB33274F3BF6008337BB /* Faves_with_FriendsUITestsLaunchTests.swift in Sources */,
+				01CCDB31274F3BF6008337BB /* Faves_with_FriendsUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		01CCDB24274F3BF5008337BB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 01CCDB11274F3BF4008337BB /* Faves with Friends */;
+			targetProxy = 01CCDB23274F3BF5008337BB /* PBXContainerItemProxy */;
+		};
+		01CCDB2E274F3BF6008337BB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 01CCDB11274F3BF4008337BB /* Faves with Friends */;
+			targetProxy = 01CCDB2D274F3BF6008337BB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		01CCDB34274F3BF6008337BB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		01CCDB35274F3BF6008337BB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		01CCDB37274F3BF6008337BB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Faves with Friends/Preview Content\"";
+				DEVELOPMENT_TEAM = HS542V5MUB;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ods.test.Faves-with-Friends";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		01CCDB38274F3BF6008337BB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Faves with Friends/Preview Content\"";
+				DEVELOPMENT_TEAM = HS542V5MUB;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ods.test.Faves-with-Friends";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		01CCDB3A274F3BF6008337BB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HS542V5MUB;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ods.test.Faves-with-FriendsTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Faves with Friends.app/Faves with Friends";
+			};
+			name = Debug;
+		};
+		01CCDB3B274F3BF6008337BB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HS542V5MUB;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ods.test.Faves-with-FriendsTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Faves with Friends.app/Faves with Friends";
+			};
+			name = Release;
+		};
+		01CCDB3D274F3BF6008337BB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HS542V5MUB;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ods.test.Faves-with-FriendsUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Faves with Friends";
+			};
+			name = Debug;
+		};
+		01CCDB3E274F3BF6008337BB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HS542V5MUB;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ods.test.Faves-with-FriendsUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Faves with Friends";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		01CCDB0D274F3BF4008337BB /* Build configuration list for PBXProject "Faves with Friends" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				01CCDB34274F3BF6008337BB /* Debug */,
+				01CCDB35274F3BF6008337BB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		01CCDB36274F3BF6008337BB /* Build configuration list for PBXNativeTarget "Faves with Friends" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				01CCDB37274F3BF6008337BB /* Debug */,
+				01CCDB38274F3BF6008337BB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		01CCDB39274F3BF6008337BB /* Build configuration list for PBXNativeTarget "Faves with FriendsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				01CCDB3A274F3BF6008337BB /* Debug */,
+				01CCDB3B274F3BF6008337BB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		01CCDB3C274F3BF6008337BB /* Build configuration list for PBXNativeTarget "Faves with FriendsUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				01CCDB3D274F3BF6008337BB /* Debug */,
+				01CCDB3E274F3BF6008337BB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 01CCDB0A274F3BF4008337BB /* Project object */;
+}
