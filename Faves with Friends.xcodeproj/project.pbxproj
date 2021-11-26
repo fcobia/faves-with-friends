@@ -25,6 +25,10 @@
 		01A81A3A274F66BC00D47916 /* Color+Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A81A39274F66BC00D47916 /* Color+Palette.swift */; };
 		01A81A3C274F66EE00D47916 /* Color Palettes.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01A81A3B274F66EE00D47916 /* Color Palettes.xcassets */; };
 		01A81A3F274F67C500D47916 /* ColorPalettes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A81A3E274F67C500D47916 /* ColorPalettes.swift */; };
+		01A81A4127504A8100D47916 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A81A4027504A8100D47916 /* AlertManager.swift */; };
+		01A81A4527504B4E00D47916 /* DisplayableErrorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A81A4427504B4E00D47916 /* DisplayableErrorInfo.swift */; };
+		01A81A4727504C9A00D47916 /* DisplayableErrorInfoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A81A4627504C9A00D47916 /* DisplayableErrorInfoButton.swift */; };
+		01A81A4B27505D2100D47916 /* ErrorAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A81A4A27505D2100D47916 /* ErrorAlertView.swift */; };
 		01CCDB16274F3BF4008337BB /* Faves_with_FriendsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CCDB15274F3BF4008337BB /* Faves_with_FriendsApp.swift */; };
 		01CCDB18274F3BF4008337BB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CCDB17274F3BF4008337BB /* ContentView.swift */; };
 		01CCDB1A274F3BF5008337BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01CCDB19274F3BF5008337BB /* Assets.xcassets */; };
@@ -84,6 +88,10 @@
 		01A81A39274F66BC00D47916 /* Color+Palette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color+Palette.swift"; sourceTree = "<group>"; };
 		01A81A3B274F66EE00D47916 /* Color Palettes.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Color Palettes.xcassets"; sourceTree = "<group>"; };
 		01A81A3E274F67C500D47916 /* ColorPalettes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalettes.swift; sourceTree = "<group>"; };
+		01A81A4027504A8100D47916 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
+		01A81A4427504B4E00D47916 /* DisplayableErrorInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayableErrorInfo.swift; sourceTree = "<group>"; };
+		01A81A4627504C9A00D47916 /* DisplayableErrorInfoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayableErrorInfoButton.swift; sourceTree = "<group>"; };
+		01A81A4A27505D2100D47916 /* ErrorAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertView.swift; sourceTree = "<group>"; };
 		01CCDB12274F3BF4008337BB /* Faves with Friends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Faves with Friends.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		01CCDB15274F3BF4008337BB /* Faves_with_FriendsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Faves_with_FriendsApp.swift; sourceTree = "<group>"; };
 		01CCDB17274F3BF4008337BB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -224,6 +232,39 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
+		01A81A4227504AD900D47916 /* Movie */ = {
+			isa = PBXGroup;
+			children = (
+				01CCDB6C274F583C008337BB /* Movie.swift */,
+			);
+			path = Movie;
+			sourceTree = "<group>";
+		};
+		01A81A4327504AFD00D47916 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				01A81A4427504B4E00D47916 /* DisplayableErrorInfo.swift */,
+				01A81A4627504C9A00D47916 /* DisplayableErrorInfoButton.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
+		01A81A4827505CE300D47916 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				01A81A4927505CF100D47916 /* Errors */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		01A81A4927505CF100D47916 /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				01A81A4A27505D2100D47916 /* ErrorAlertView.swift */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
 		01CCDB09274F3BF4008337BB = {
 			isa = PBXGroup;
 			children = (
@@ -249,6 +290,7 @@
 			children = (
 				01CCDB52274F4385008337BB /* Faves-with-Friends-Info.plist */,
 				01CCDB43274F3D31008337BB /* Screens */,
+				01A81A4827505CE300D47916 /* Views */,
 				01CCDB6B274F57EB008337BB /* Models */,
 				01CCDB42274F3D23008337BB /* App */,
 				01CCDB45274F3D9B008337BB /* Managers */,
@@ -323,6 +365,7 @@
 			children = (
 				01A81A11274F5DD100D47916 /* EnvironmentManager.swift */,
 				01A81A13274F5E5600D47916 /* AppEnvironmentManager.swift */,
+				01A81A4027504A8100D47916 /* AlertManager.swift */,
 				01CCDB46274F3DC8008337BB /* User */,
 				01CCDB44274F3D6A008337BB /* Networking */,
 			);
@@ -387,7 +430,8 @@
 		01CCDB6B274F57EB008337BB /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				01CCDB6C274F583C008337BB /* Movie.swift */,
+				01A81A4327504AFD00D47916 /* Error */,
+				01A81A4227504AD900D47916 /* Movie */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -541,6 +585,7 @@
 				01CCDB4C274F3E65008337BB /* User.swift in Sources */,
 				01CCDB5B274F4AFA008337BB /* AppNetworkService.swift in Sources */,
 				01A81A23274F63A800D47916 /* Environment+User.swift in Sources */,
+				01A81A4727504C9A00D47916 /* DisplayableErrorInfoButton.swift in Sources */,
 				01CCDB5E274F4DC0008337BB /* MovieErrorCodes.swift in Sources */,
 				01CCDB66274F513E008337BB /* MovieHTTPServiceErrorMapper.swift in Sources */,
 				01A81A1D274F618000D47916 /* AppDelegate.swift in Sources */,
@@ -548,10 +593,13 @@
 				01A81A14274F5E5600D47916 /* AppEnvironmentManager.swift in Sources */,
 				01CCDB6A274F53E3008337BB /* MovieNetworkManager.swift in Sources */,
 				01A81A1B274F60AF00D47916 /* LaunchScreenView.swift in Sources */,
+				01A81A4B27505D2100D47916 /* ErrorAlertView.swift in Sources */,
+				01A81A4527504B4E00D47916 /* DisplayableErrorInfo.swift in Sources */,
 				01A81A35274F658400D47916 /* AppTextModifier.swift in Sources */,
 				01CCDB49274F3E33008337BB /* UserManager.swift in Sources */,
 				01CCDB4F274F3F01008337BB /* MovieHTTPServiceNetworkConnector.swift in Sources */,
 				01CCDB18274F3BF4008337BB /* ContentView.swift in Sources */,
+				01A81A4127504A8100D47916 /* AlertManager.swift in Sources */,
 				01A81A19274F5FB600D47916 /* Environment+EnvironmentManager.swift in Sources */,
 				01A81A32274F658400D47916 /* AppSecureFieldModifier.swift in Sources */,
 				01CCDB55274F4449008337BB /* TemporaryUserManager.swift in Sources */,

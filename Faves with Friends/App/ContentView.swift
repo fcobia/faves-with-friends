@@ -14,6 +14,9 @@ struct ContentView: View {
 	// MARK: Environment Variables
 	@Environment(\.environmentManager) private var environmentManager: EnvironmentManager
 	
+	// MARK: EnvironmentObjects
+	@EnvironmentObject var alertManager: AlertManager
+	
 	// MARK: State Variables
 	@State private var user: User?
 
@@ -30,6 +33,7 @@ struct ContentView: View {
 				LoginScreenView()
 			}
 		}
+		.alert(alertManager.alertTitle, isPresented: .constant(alertManager.hasErrorToDisplay), presenting: alertManager.errorToDisplay, actions: alertManager.createAlertView)
 		.onReceive(environmentManager.userManager.userPublisher) { user in
 			self.user = user
 		}

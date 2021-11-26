@@ -12,6 +12,9 @@ struct MainView: View {
 	
 	// MARK: Environment Variables
 	@Environment(\.environmentManager) private var environmentManager: EnvironmentManager
+	
+	// MARK: EnvironmentObjects
+	@EnvironmentObject var alertManager: AlertManager
 
 	
 	// MARK: SwiftUI
@@ -39,9 +42,17 @@ struct MainView: View {
 			}
 			.navigationViewStyle(.stack)
 		}
+		.onAppear {
+			DispatchQueue.main.async {
+				alertManager.showAlert(for: TestError.test)
+			}
+		}
 	}
 }
 
+enum TestError: Error {
+	case test
+}
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {

@@ -15,6 +15,7 @@ struct MovieNetworkErrorInfo {
 	let developerMessage: String?
 	let title: String?
 	let message: String?
+	let buttons: [DisplayableErrorInfoButton]?
 }
 
 
@@ -36,5 +37,6 @@ extension MovieNetworkErrorInfo: Decodable {
 		developerMessage = try container.decodeIfPresent(String.self, forKey: .developerMessage)
 		title = nil
 		message = nil
+		buttons = nil
 	}
 }

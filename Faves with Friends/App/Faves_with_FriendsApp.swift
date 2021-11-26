@@ -28,6 +28,7 @@ struct Faves_with_FriendsApp: App {
 					.foregroundColor(palettes.color.primaryText)
 					.environment(\.preferredPalettes, palettes)
 					.environment(\.environmentManager, environmentManager)
+					.environmentObject(AlertManager())
 			}
 			else {
 				LaunchScreenView(hasLaunched: $hasLaunched)
