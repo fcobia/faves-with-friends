@@ -50,6 +50,7 @@
 		01CCDB66274F513E008337BB /* MovieHTTPServiceErrorMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CCDB65274F513E008337BB /* MovieHTTPServiceErrorMapper.swift */; };
 		01CCDB6A274F53E3008337BB /* MovieNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CCDB69274F53E3008337BB /* MovieNetworkManager.swift */; };
 		01CCDB6D274F583C008337BB /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CCDB6C274F583C008337BB /* Movie.swift */; };
+		ED03E0AA2751482D004DDEDA /* MovieSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED03E0A92751482D004DDEDA /* MovieSearchResult.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,6 +117,7 @@
 		01CCDB65274F513E008337BB /* MovieHTTPServiceErrorMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieHTTPServiceErrorMapper.swift; sourceTree = "<group>"; };
 		01CCDB69274F53E3008337BB /* MovieNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieNetworkManager.swift; sourceTree = "<group>"; };
 		01CCDB6C274F583C008337BB /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		ED03E0A92751482D004DDEDA /* MovieSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchResult.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -236,6 +238,7 @@
 			isa = PBXGroup;
 			children = (
 				01CCDB6C274F583C008337BB /* Movie.swift */,
+				ED03E0A92751482D004DDEDA /* MovieSearchResult.swift */,
 			);
 			path = Movie;
 			sourceTree = "<group>";
@@ -592,6 +595,7 @@
 				01A81A3F274F67C500D47916 /* ColorPalettes.swift in Sources */,
 				01A81A14274F5E5600D47916 /* AppEnvironmentManager.swift in Sources */,
 				01CCDB6A274F53E3008337BB /* MovieNetworkManager.swift in Sources */,
+				ED03E0AA2751482D004DDEDA /* MovieSearchResult.swift in Sources */,
 				01A81A1B274F60AF00D47916 /* LaunchScreenView.swift in Sources */,
 				01A81A4B27505D2100D47916 /* ErrorAlertView.swift in Sources */,
 				01A81A4527504B4E00D47916 /* DisplayableErrorInfo.swift in Sources */,

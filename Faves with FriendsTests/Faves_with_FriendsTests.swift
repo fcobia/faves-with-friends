@@ -36,4 +36,10 @@ class Faves_with_FriendsTests: XCTestCase {
 		XCTAssert(movie.id == 550)
 		XCTAssert(movie.title == "Fight Club")
     }
+    
+    func testMovieSearch() async throws {
+        let movies = try await movieNetworkManager.movieSearch(query: "Potter")
+        print(movies)
+        XCTAssert(movies.results.count > 0)
+    }
 }
