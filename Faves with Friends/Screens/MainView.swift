@@ -26,19 +26,45 @@ struct MainView: View {
 				
 				// Tab 1
 				NavigationView {
-					Text("Tab 1")
+					Text("Search")
 				}
 				.tabItem {
-					Text("Tab 1")
+					Image(systemName: "magnifyingglass.circle.fill")
+                    Text("Search")
 				}
 				
 				// Tab 2
 				NavigationView {
-					Text("Tab 2")
+					Text("My List")
 				}
 				.tabItem {
-					Text("Tab 2")
+					Image(systemName: "list.bullet.circle.fill")
+                    Text("My List")
 				}
+                
+                NavigationView {
+                    Text("Your Ratings")
+                }
+                .tabItem {
+                    Image(systemName: "star.circle.fill")
+                    Text("My Ratings")
+                }
+                
+                NavigationView {
+                    Text("Inbox")
+                }
+                .tabItem {
+                    Image(systemName: "tray.circle.fill")
+                    Text("Inbox")
+                }
+                
+                NavigationView {
+                    Text("Profile")
+                }
+                .tabItem {
+                    Image(systemName: "person.crop.circle.fill")
+                    Text("Profile")
+                }
 			}
 			.navigationViewStyle(.stack)
 		}

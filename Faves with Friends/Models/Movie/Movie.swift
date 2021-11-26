@@ -14,10 +14,12 @@ struct Movie: Decodable {
 	private enum CodingKeys: String, CodingKey {
 		case id
 		case title
+        case poster_path
 	}
 	
 	
 	// MARK: JSON Variables
 	let id: Int
 	let title: String
+    let poster_path: String
 }
