@@ -34,4 +34,14 @@ extension AppEnvironmentManager {
 		
 		return AppEnvironmentManager(userManager: userManager, movieNetworkManager: movieNetworkManager)
 	}
+	
+	#if DEBUG
+	static func createPreview(loggedIn: Bool) -> EnvironmentManager {
+		let userManager = TemporaryUserManager(loggedIn: loggedIn)
+		let movieNetworkService = MovieHTTPService(url: URL(string: "https://api.themoviedb.org")!, userManager: userManager, retryCount: 0)
+		let movieNetworkManager = MovieNetworkManager(movieNetworkService: movieNetworkService)
+		
+		return AppEnvironmentManager(userManager: userManager, movieNetworkManager: movieNetworkManager)
+	}
+	#endif
 }

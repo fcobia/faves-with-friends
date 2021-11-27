@@ -29,7 +29,7 @@ struct MainView: View {
 					Text("Search")
 				}
 				.tabItem {
-					Image(systemName: "magnifyingglass.circle.fill")
+					Image(systemName: "magnifyingglass.circle")
                     Text("Search")
 				}
 				
@@ -38,7 +38,7 @@ struct MainView: View {
 					Text("My List")
 				}
 				.tabItem {
-					Image(systemName: "list.bullet.circle.fill")
+					Image(systemName: "list.bullet.circle")
                     Text("My List")
 				}
                 
@@ -46,7 +46,7 @@ struct MainView: View {
                     Text("Your Ratings")
                 }
                 .tabItem {
-                    Image(systemName: "star.circle.fill")
+                    Image(systemName: "star.circle")
                     Text("My Ratings")
                 }
                 
@@ -54,7 +54,7 @@ struct MainView: View {
                     Text("Inbox")
                 }
                 .tabItem {
-                    Image(systemName: "tray.circle.fill")
+                    Image(systemName: "tray.circle")
                     Text("Inbox")
                 }
                 
@@ -62,7 +62,7 @@ struct MainView: View {
                     Text("Profile")
                 }
                 .tabItem {
-                    Image(systemName: "person.crop.circle.fill")
+                    Image(systemName: "person.crop.circle")
                     Text("Profile")
                 }
 			}
@@ -83,5 +83,6 @@ enum TestError: Error {
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         MainView()
+			.modifier(ContentView_Previews.previewEnvironmentModifier)
     }
 }

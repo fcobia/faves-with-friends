@@ -18,7 +18,7 @@ struct ContentView: View {
 	@EnvironmentObject var alertManager: AlertManager
 	
 	// MARK: State Variables
-	@State private var user: User?
+	@State fileprivate var user: User?
 
 	
 	// MARK: SwiftUI
@@ -40,8 +40,38 @@ struct ContentView: View {
 	}
 }
 
+
+// MARK: - Preview
 struct ContentView_Previews: PreviewProvider {
+	
+	// Public Methods
+	static var previewEnvironmentModifier: some ViewModifier {
+		EnvironmentModifier()
+	}
+
+	private static let testUser = User(email: "test@test.com")
+	
+	static func createContntView() -> some View {
+		let result = ContentView()
+		result.user = testUser
+		
+		return result
+	}
+	
     static var previews: some View {
-        ContentView()
+		createContntView()
+			.modifier(previewEnvironmentModifier)
     }
+
+	
+	// MARK: - EnvironmentModifier
+ private struct EnvironmentModifier: ViewModifier {	 
+	 
+	 // ViewModifier
+	 func body(content: Content) -> some View {
+		 content
+			 .modifier(Faves_with_FriendsApp_Previews.previewEnvironmentModifier)
+			 .environment(\.user, testUser)
+	 }
+ }
 }

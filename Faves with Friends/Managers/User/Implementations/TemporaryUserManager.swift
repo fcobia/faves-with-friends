@@ -49,6 +49,15 @@ final class TemporaryUserManager: UserManager {
 	}
 	
 	
+	// MARK: Init
+	init(loggedIn: Bool = false) {
+		if loggedIn {
+			self.user = Constants.user
+			self.userSubject.send(user)
+		}
+	}
+	
+	
 	// MARK: Public Methods
 	func login() async throws -> User {
 		guard let user = user else {
