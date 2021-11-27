@@ -18,7 +18,7 @@ struct LaunchScreenView: View {
 		Text("Launch Screen")
 			.appText()
 			.onAppear {
-				DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+				DispatchQueue.main.asyncAfter(deadline: .now()) {
 					self.hasLaunched = true
 				}
 			}

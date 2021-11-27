@@ -33,14 +33,13 @@ class Faves_with_FriendsTests: XCTestCase {
 
     func testExample() async throws {
 		let movie = try await movieNetworkManager.movieDetails(id: 550)
-        print("poster path = \(movie.poster_path)")
 		XCTAssert(movie.id == 550)
 		XCTAssert(movie.title == "Fight Club")
     }
     
     func testMovieSearch() async throws {
-        let movies = try await movieNetworkManager.movieSearch(query: "Potter")
+        let movies = try await movieNetworkManager.movieSearch(query: "Star Wars Jedi")
         print(movies)
-        XCTAssert(movies.results.count > 0)
+        XCTAssert(movies.results?.count ?? 0 > 0)
     }
 }

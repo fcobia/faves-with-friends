@@ -26,7 +26,7 @@ struct MainView: View {
 				
 				// Tab 1
 				NavigationView {
-					Text("Search")
+					SearchScreenView()
 				}
 				.tabItem {
 					Image(systemName: "magnifyingglass.circle")
@@ -67,11 +67,6 @@ struct MainView: View {
                 }
 			}
 			.navigationViewStyle(.stack)
-		}
-		.onAppear {
-			DispatchQueue.main.async {
-				alertManager.showAlert(for: TestError.test)
-			}
 		}
 	}
 }
