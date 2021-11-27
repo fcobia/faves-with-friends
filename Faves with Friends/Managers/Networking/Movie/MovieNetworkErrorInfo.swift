@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct MovieNetworkErrorInfo {
+struct MovieNetworkErrorInfo: DisplayableErrorInfo {
 	
 	// MARK: JSON Variables
 	let code: Int
