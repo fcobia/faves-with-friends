@@ -15,6 +15,10 @@ struct Movie: Decodable, Identifiable {
 		case id
 		case title
         case posterPathString	= "poster_path"
+        case overview
+        case releaseDate = "release_date"
+        case runtime
+        case status
 	}
 	
 	
@@ -22,6 +26,10 @@ struct Movie: Decodable, Identifiable {
 	let id: Int
 	let title: String
     let posterPathString: String?
+    let overview: String
+    let releaseDate: String
+    let runtime: Int
+    let status: String
 	
 	// MARK: Public Computed Variables
 	var posterPath: URL? {

@@ -29,7 +29,8 @@ struct SearchScreenView: View {
 	@State private var totalResults: Int	= 0
 	@State private var movies: [Movie]		= []
     @State private var showProgressView     = false
-	
+    @State private var searchType: SearchType = .All
+    
 	// MARK: Private Computed Values
 	private var searchTextPublisher: AnyPublisher<String,Never> {
 		searchTextSubject
@@ -40,6 +41,11 @@ struct SearchScreenView: View {
 	// MARK: Private Variables
 	private let searchTextSubject = PassthroughSubject<String,Never>()
 
+    enum SearchType: String {
+        case All
+        case Movies
+        case TVShows
+    }
 	
 	// MARK: SwiftUI
     var body: some View {
@@ -47,7 +53,7 @@ struct SearchScreenView: View {
             RadialGradient(stops: [
                 .init(color: .blue, location: 0.1),
                 .init(color: .white, location: 0.1)
-            ], center: .top, startRadius: 250, endRadius: 400)
+            ], center: .top, startRadius: 300, endRadius: 500)
                 .ignoresSafeArea(edges: .top)
             VStack {
                 VStack {
@@ -55,6 +61,15 @@ struct SearchScreenView: View {
                         .appRoundedTextField()
                         .modifier(ClearButtonModifier(text: $searchText))
                     
+                    Picker("", selection: $searchType) {
+                        Text("All").tag(SearchType.All)
+                        Text("Movies").tag(SearchType.Movies)
+                        Text("TV Shows").tag(SearchType.TVShows)
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                    .background(Color(UIColor.systemBackground)).opacity(0.8).cornerRadius(8.0)
+                    .padding(.bottom)
+                   
                     Text("Result(s): \(totalResults)")
                         .font(.subheadline)
                         .foregroundColor(.white)
