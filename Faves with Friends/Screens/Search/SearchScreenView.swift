@@ -52,39 +52,18 @@ struct SearchScreenView: View {
             VStack {
                 VStack {
                     TextField("Search", text: $searchText)
-                        .appTextField()
+                        .appRoundedTextField()
+                        .modifier(ClearButtonModifier(text: $searchText))
                     
                     Text("Result(s): \(totalResults)")
                         .font(.subheadline)
+                        .foregroundColor(.white)
                 }
-                .foregroundColor(.white)
                 .padding(.horizontal)
                 List {
                     ForEach(movies) { movie in
                         NavigationLink(destination: Text(movie.title)) {
-                            VStack(alignment: .leading) {
-                                HStack {
-                                    AsyncImage(url: movie.posterPath) { phase in
-                                        switch phase {
-                                        case .empty:
-                                            ProgressView()
-                                        case .success(let image):
-                                            image.resizable()
-                                                 .aspectRatio(contentMode: .fit)
-                                                 .frame(maxWidth: 100, maxHeight: 100)
-                                        case .failure:
-                                            Image(systemName: "photo")
-                                        @unknown default:
-                                            // Since the AsyncImagePhase enum isn't frozen,
-                                            // we need to add this currently unused fallback
-                                            // to handle any new cases that might be added
-                                            // in the future:
-                                            EmptyView()
-                                        }
-                                    }
-                                    Text(movie.title)
-                                }
-                            }
+                            SearchScreenRowView(movie: movie)
                         }
                     }
                     .listRowBackground(Color.clear)
@@ -102,7 +81,11 @@ struct SearchScreenView: View {
         }
         .navigationTitle("Faves with Friends")
 		.onChange(of: searchText) { newValue in
-            showProgressView = true
+            if (newValue.count > 0) {
+                showProgressView = true
+            } else {
+                showProgressView = false
+            }
 			searchTextSubject.send(searchText)
 		}
 		.onReceive(searchTextPublisher) { searchText in

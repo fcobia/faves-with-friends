@@ -52,6 +52,9 @@
 		01CCDB6A274F53E3008337BB /* MovieNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CCDB69274F53E3008337BB /* MovieNetworkManager.swift */; };
 		01CCDB6D274F583C008337BB /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CCDB6C274F583C008337BB /* Movie.swift */; };
 		ED03E0AA2751482D004DDEDA /* MovieSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED03E0A92751482D004DDEDA /* MovieSearchResult.swift */; };
+		EDB9F71B27531E990029D771 /* SearchScreenRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB9F71A27531E990029D771 /* SearchScreenRowView.swift */; };
+		EDB9F71D275322A10029D771 /* AppRoundedTextFieldModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB9F71C275322A10029D771 /* AppRoundedTextFieldModifier.swift */; };
+		EDB9F71F275326D30029D771 /* ClearButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB9F71E275326D30029D771 /* ClearButtonModifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,6 +123,9 @@
 		01CCDB69274F53E3008337BB /* MovieNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieNetworkManager.swift; sourceTree = "<group>"; };
 		01CCDB6C274F583C008337BB /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		ED03E0A92751482D004DDEDA /* MovieSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchResult.swift; sourceTree = "<group>"; };
+		EDB9F71A27531E990029D771 /* SearchScreenRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchScreenRowView.swift; sourceTree = "<group>"; };
+		EDB9F71C275322A10029D771 /* AppRoundedTextFieldModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRoundedTextFieldModifier.swift; sourceTree = "<group>"; };
+		EDB9F71E275326D30029D771 /* ClearButtonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearButtonModifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,6 +205,8 @@
 			children = (
 				01A81A29274F658400D47916 /* AppTextFieldModifier.swift */,
 				01A81A2A274F658400D47916 /* AppSecureFieldModifier.swift */,
+				EDB9F71C275322A10029D771 /* AppRoundedTextFieldModifier.swift */,
+				EDB9F71E275326D30029D771 /* ClearButtonModifier.swift */,
 			);
 			path = TextField;
 			sourceTree = "<group>";
@@ -274,6 +282,7 @@
 			isa = PBXGroup;
 			children = (
 				01A81A4D2751D09C00D47916 /* SearchScreenView.swift */,
+				EDB9F71A27531E990029D771 /* SearchScreenRowView.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -589,7 +598,9 @@
 			files = (
 				01CCDB51274F42C3008337BB /* NetworkConstants.swift in Sources */,
 				01A81A1F274F622100D47916 /* MainView.swift in Sources */,
+				EDB9F71D275322A10029D771 /* AppRoundedTextFieldModifier.swift in Sources */,
 				01CCDB62274F4F46008337BB /* MovieNetworkErrorResponse.swift in Sources */,
+				EDB9F71B27531E990029D771 /* SearchScreenRowView.swift in Sources */,
 				01A81A37274F666E00D47916 /* Environment+Palettes.swift in Sources */,
 				01A81A30274F658400D47916 /* Palettes.swift in Sources */,
 				01CCDB58274F4AA8008337BB /* MovieHTTPService.swift in Sources */,
@@ -605,6 +616,7 @@
 				01A81A1D274F618000D47916 /* AppDelegate.swift in Sources */,
 				01A81A3F274F67C500D47916 /* ColorPalettes.swift in Sources */,
 				01A81A14274F5E5600D47916 /* AppEnvironmentManager.swift in Sources */,
+				EDB9F71F275326D30029D771 /* ClearButtonModifier.swift in Sources */,
 				01CCDB6A274F53E3008337BB /* MovieNetworkManager.swift in Sources */,
 				ED03E0AA2751482D004DDEDA /* MovieSearchResult.swift in Sources */,
 				01A81A1B274F60AF00D47916 /* LaunchScreenView.swift in Sources */,
