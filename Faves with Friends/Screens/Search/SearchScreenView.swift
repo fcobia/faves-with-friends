@@ -14,7 +14,7 @@ struct SearchScreenView: View {
 	// MARK: Constants
 	private enum Constants {
 		static let debounceSeconds 		= 1
-		static let minSearchTextLength	= 3
+		static let minSearchTextLength	= 2
 	}
 	
 	
@@ -28,6 +28,7 @@ struct SearchScreenView: View {
 	@State private var searchText: String 	= ""
 	@State private var totalResults: Int	= 0
 	@State private var movies: [Movie]		= []
+    @State private var showProgressView     = false
 	
 	// MARK: Private Computed Values
 	private var searchTextPublisher: AnyPublisher<String,Never> {
@@ -42,19 +43,66 @@ struct SearchScreenView: View {
 	
 	// MARK: SwiftUI
     var body: some View {
-        
-		VStack {
-			TextField("Search", text: $searchText)
-				.appTextField()
-			
-			Text("Result(s): \(totalResults)")
-			
-			List(movies) { movie in
-				Text(movie.title)
-			}
-		}
-		.padding()
+        ZStack {
+            RadialGradient(stops: [
+                .init(color: .blue, location: 0.1),
+                .init(color: .white, location: 0.1)
+            ], center: .top, startRadius: 250, endRadius: 400)
+                .ignoresSafeArea(edges: .top)
+            VStack {
+                VStack {
+                    TextField("Search", text: $searchText)
+                        .appTextField()
+                    
+                    Text("Result(s): \(totalResults)")
+                        .font(.subheadline)
+                }
+                .foregroundColor(.white)
+                .padding(.horizontal)
+                List {
+                    ForEach(movies) { movie in
+                        NavigationLink(destination: Text(movie.title)) {
+                            VStack(alignment: .leading) {
+                                HStack {
+                                    AsyncImage(url: movie.posterPath) { phase in
+                                        switch phase {
+                                        case .empty:
+                                            ProgressView()
+                                        case .success(let image):
+                                            image.resizable()
+                                                 .aspectRatio(contentMode: .fit)
+                                                 .frame(maxWidth: 100, maxHeight: 100)
+                                        case .failure:
+                                            Image(systemName: "photo")
+                                        @unknown default:
+                                            // Since the AsyncImagePhase enum isn't frozen,
+                                            // we need to add this currently unused fallback
+                                            // to handle any new cases that might be added
+                                            // in the future:
+                                            EmptyView()
+                                        }
+                                    }
+                                    Text(movie.title)
+                                }
+                            }
+                        }
+                    }
+                    .listRowBackground(Color.clear)
+                }
+                .padding(.top, 50)
+                .listStyle(.plain)
+                .overlay {
+                    if showProgressView {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle(tint: .black))
+                            .background(Color(UIColor.clear))
+                    }
+                }
+            }
+        }
+        .navigationTitle("Faves with Friends")
 		.onChange(of: searchText) { newValue in
+            showProgressView = true
 			searchTextSubject.send(searchText)
 		}
 		.onReceive(searchTextPublisher) { searchText in
@@ -76,7 +124,7 @@ struct SearchScreenView: View {
 		Task {
 			do {
 				let searchResults = try await environmentManager.movieNetworkManager.movieSearch(query: searchText)
-				
+				showProgressView = false
 				movies = searchResults.results ?? []
 				totalResults = searchResults.totalResults
 			}

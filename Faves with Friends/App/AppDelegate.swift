@@ -31,16 +31,16 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 	}
 	
 	private func setupNavigationBarAppearance() {
-//		let textColor = UIColor.white
+		let textColor = UIColor.white
 //		
-//		let appearance = UINavigationBarAppearance()
+		let appearance = UINavigationBarAppearance()
 //		appearance.configureWithOpaqueBackground()
 //		appearance.backgroundColor =  UIColor(named: "AccentColor")
-//		appearance.titleTextAttributes = [.foregroundColor: textColor]
-//		appearance.largeTitleTextAttributes = [.foregroundColor: textColor]
+		appearance.titleTextAttributes = [.foregroundColor: textColor]
+		appearance.largeTitleTextAttributes = [.foregroundColor: textColor]
 //		
-//		UINavigationBar.appearance().standardAppearance = appearance
-//		UINavigationBar.appearance().scrollEdgeAppearance = appearance
-//		UINavigationBar.appearance().compactAppearance = appearance
+		UINavigationBar.appearance().standardAppearance = appearance
+		//UINavigationBar.appearance().scrollEdgeAppearance = appearance
+		UINavigationBar.appearance().compactAppearance = appearance
 	}
 }
