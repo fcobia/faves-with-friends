@@ -24,7 +24,7 @@ struct CurvedHeaderView<Content>: View where Content: View {
 		ZStack {
 			GeometryReader { geometry in
 
-				HeaderShape(frame: geometry.frame(in: .local), maxHeight: maxContentHeight, bulgeHeight: bulgeHeight)
+				HeaderShape(maxHeight: maxContentHeight, bulgeHeight: bulgeHeight)
 					.fill(.blue)
 					.coordinateSpace(name: id)
 					.ignoresSafeArea(edges: .top)
@@ -54,21 +54,16 @@ struct CurvedHeaderView<Content>: View where Content: View {
 
 
 struct HeaderShape : Shape {
-	let frame: CGRect
 	let maxHeight: CGFloat
 	let bulgeHeight: CGFloat
 
 	func path(in rect: CGRect) -> Path {
-		print("Frame: \(frame)")
-		print("Rect: \(rect)")
-		print("Max Height: \(maxHeight)")
-
-		let minX = frame.minX
-		let midX = frame.width / 2
-		let maxX = frame.maxX
-		let minY = frame.minY
+		let minX = rect.minX
+		let midX = rect.width / 2
+		let maxX = rect.maxX
+		let minY = rect.minY
 		let maxY = maxHeight
-		
+
 		var path = Path()
 		
 		path.move(to: CGPoint(x: minX, y: maxY))
