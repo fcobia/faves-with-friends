@@ -19,6 +19,7 @@ struct Movie: Decodable, Identifiable, MovieCommon {
         case releaseDate = "release_date"
         case runtime
         case status
+        case backdropPathString = "backdrop_path"
 	}
 	
 	
@@ -30,6 +31,7 @@ struct Movie: Decodable, Identifiable, MovieCommon {
     var releaseDate: String
     let runtime: Int
     let status: String
+    let backdropPathString: String?
 	
 	// MARK: Public Computed Variables
 	var posterPath: URL? {
@@ -39,4 +41,11 @@ struct Movie: Decodable, Identifiable, MovieCommon {
 		
 		return URL(string: "https://image.tmdb.org/t/p/original\(posterPathString)")
 	}
+    
+    var backdropPath: URL? {
+        guard let backdropPathString = backdropPathString else {
+            return nil
+        }
+        return URL(string: "https://image.tmdb.org/t/p/original\(backdropPathString)")
+    }
 }
