@@ -52,6 +52,8 @@
 		01CCDB6A274F53E3008337BB /* MovieNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CCDB69274F53E3008337BB /* MovieNetworkManager.swift */; };
 		01CCDB6D274F583C008337BB /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CCDB6C274F583C008337BB /* Movie.swift */; };
 		ED03E0AA2751482D004DDEDA /* MovieSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED03E0A92751482D004DDEDA /* MovieSearchResult.swift */; };
+		ED11C84227545D5A00A181D5 /* MovieCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED11C84127545D5A00A181D5 /* MovieCommon.swift */; };
+		ED11C84427545FF000A181D5 /* MovieSearchResultObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED11C84327545FF000A181D5 /* MovieSearchResultObject.swift */; };
 		EDB9F71B27531E990029D771 /* SearchScreenRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB9F71A27531E990029D771 /* SearchScreenRowView.swift */; };
 		EDB9F71D275322A10029D771 /* AppRoundedTextFieldModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB9F71C275322A10029D771 /* AppRoundedTextFieldModifier.swift */; };
 		EDB9F71F275326D30029D771 /* ClearButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB9F71E275326D30029D771 /* ClearButtonModifier.swift */; };
@@ -123,6 +125,8 @@
 		01CCDB69274F53E3008337BB /* MovieNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieNetworkManager.swift; sourceTree = "<group>"; };
 		01CCDB6C274F583C008337BB /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		ED03E0A92751482D004DDEDA /* MovieSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchResult.swift; sourceTree = "<group>"; };
+		ED11C84127545D5A00A181D5 /* MovieCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCommon.swift; sourceTree = "<group>"; };
+		ED11C84327545FF000A181D5 /* MovieSearchResultObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchResultObject.swift; sourceTree = "<group>"; };
 		EDB9F71A27531E990029D771 /* SearchScreenRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchScreenRowView.swift; sourceTree = "<group>"; };
 		EDB9F71C275322A10029D771 /* AppRoundedTextFieldModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRoundedTextFieldModifier.swift; sourceTree = "<group>"; };
 		EDB9F71E275326D30029D771 /* ClearButtonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearButtonModifier.swift; sourceTree = "<group>"; };
@@ -249,6 +253,7 @@
 			children = (
 				01CCDB6C274F583C008337BB /* Movie.swift */,
 				ED03E0A92751482D004DDEDA /* MovieSearchResult.swift */,
+				ED11C84327545FF000A181D5 /* MovieSearchResultObject.swift */,
 			);
 			path = Movie;
 			sourceTree = "<group>";
@@ -409,6 +414,7 @@
 			isa = PBXGroup;
 			children = (
 				01CCDB48274F3E33008337BB /* UserManager.swift */,
+				ED11C84127545D5A00A181D5 /* MovieCommon.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -599,6 +605,7 @@
 				01CCDB51274F42C3008337BB /* NetworkConstants.swift in Sources */,
 				01A81A1F274F622100D47916 /* MainView.swift in Sources */,
 				EDB9F71D275322A10029D771 /* AppRoundedTextFieldModifier.swift in Sources */,
+				ED11C84227545D5A00A181D5 /* MovieCommon.swift in Sources */,
 				01CCDB62274F4F46008337BB /* MovieNetworkErrorResponse.swift in Sources */,
 				EDB9F71B27531E990029D771 /* SearchScreenRowView.swift in Sources */,
 				01A81A37274F666E00D47916 /* Environment+Palettes.swift in Sources */,
@@ -622,6 +629,7 @@
 				01A81A1B274F60AF00D47916 /* LaunchScreenView.swift in Sources */,
 				01A81A4B27505D2100D47916 /* ErrorAlertView.swift in Sources */,
 				01A81A4E2751D09C00D47916 /* SearchScreenView.swift in Sources */,
+				ED11C84427545FF000A181D5 /* MovieSearchResultObject.swift in Sources */,
 				01A81A4527504B4E00D47916 /* DisplayableErrorInfo.swift in Sources */,
 				01A81A35274F658400D47916 /* AppTextModifier.swift in Sources */,
 				01CCDB49274F3E33008337BB /* UserManager.swift in Sources */,

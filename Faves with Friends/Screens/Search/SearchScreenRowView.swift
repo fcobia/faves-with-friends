@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SearchScreenRowView: View {
     
-    var movie: Movie
+    var movie: MovieSearchResultObject
     
     var body: some View {
         VStack(alignment: .leading) {

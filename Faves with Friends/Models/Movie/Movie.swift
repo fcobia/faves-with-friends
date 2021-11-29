@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct Movie: Decodable, Identifiable {
+struct Movie: Decodable, Identifiable, MovieCommon {
 	
 	// MARK: CodingKeys
 	private enum CodingKeys: String, CodingKey {
@@ -23,13 +23,13 @@ struct Movie: Decodable, Identifiable {
 	
 	
 	// MARK: JSON Variables
-	let id: Int
-	let title: String
-    let posterPathString: String?
+	var id: Int
+	var title: String
+    var posterPathString: String?
     let overview: String
-    let releaseDate: String
-    let runtime: Int?
-    let status: String?
+    var releaseDate: String
+    let runtime: Int
+    let status: String
 	
 	// MARK: Public Computed Variables
 	var posterPath: URL? {

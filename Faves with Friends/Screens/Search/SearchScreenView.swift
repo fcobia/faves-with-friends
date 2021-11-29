@@ -27,7 +27,7 @@ struct SearchScreenView: View {
 	// MARK: State Variables
 	@State private var searchText: String 	= ""
 	@State private var totalResults: Int	= 0
-	@State private var movies: [Movie]		= []
+	@State private var movies: [MovieSearchResultObject]		= []
     @State private var showProgressView     = false
     @State private var searchType: SearchType = .All
     
