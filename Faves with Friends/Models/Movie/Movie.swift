@@ -28,8 +28,8 @@ struct Movie: Decodable, Identifiable {
     let posterPathString: String?
     let overview: String
     let releaseDate: String
-    let runtime: Int
-    let status: String
+    let runtime: Int?
+    let status: String?
 	
 	// MARK: Public Computed Variables
 	var posterPath: URL? {

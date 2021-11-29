@@ -38,7 +38,11 @@ struct SearchScreenRowView: View {
                         EmptyView()
                     }
                 }
-                Text(movie.title)
+                VStack(alignment: .leading) {
+                    Text(movie.title)
+                    Text(movie.releaseDate)
+                        .font(.footnote)
+                }
             }
         }
     }

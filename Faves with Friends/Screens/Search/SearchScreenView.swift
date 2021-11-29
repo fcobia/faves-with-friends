@@ -128,6 +128,7 @@ struct SearchScreenView: View {
 			}
 			catch let error {
 				print("Error: \(error)")
+                showProgressView = false
 				alertManager.showAlert(for: error)
 			}
 		}
