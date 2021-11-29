@@ -73,9 +73,9 @@ struct SearchScreenView: View {
 			}
 			List {
 				ForEach(movies) { movie in
-					NavigationLink(destination: Text(movie.title)) {
-						SearchScreenRowView(movie: movie)
-					}
+                    NavigationLink(destination: MovieDetailScreenView(id: movie.id)) {
+                        SearchScreenRowView(movie: movie)
+                    }
 				}
 				.listRowBackground(Color.clear)
 			}
