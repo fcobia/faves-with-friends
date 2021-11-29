@@ -25,7 +25,7 @@ struct ClearButtonModifier: ViewModifier
                     self.text = ""
                 })
                 {
-                    Image(systemName: "delete.left")
+                    Image(systemName: "xmark.circle.fill")
                         .foregroundColor(Color(UIColor.opaqueSeparator))
                         .padding()
                 }
