@@ -16,7 +16,8 @@ struct ContentView: View {
 	
 	// MARK: EnvironmentObjects
 	@EnvironmentObject var alertManager: AlertManager
-	
+	@EnvironmentObject var activityManager: ActivityManager
+
 	// MARK: State Variables
 	@State fileprivate var user: User?
 
@@ -33,7 +34,13 @@ struct ContentView: View {
 				LoginScreenView()
 			}
 		}
-		.alert(alertManager.alertTitle, isPresented: .constant(alertManager.hasErrorToDisplay), presenting: alertManager.errorToDisplay, actions: alertManager.createAlertView)
+		.alert(alertManager.alertTitle, isPresented: .constant(alertManager.hasErrorToDisplay), presenting: alertManager.errorToDisplay, actions: alertManager.alertActions, message: alertManager.alertMessage)
+		.overlay {
+			if activityManager.shouldShowActivity {
+				ProgressView()
+					.progressViewStyle(.circular)
+			}
+		}
 		.onReceive(environmentManager.userManager.userPublisher) { user in
 			self.user = user
 		}

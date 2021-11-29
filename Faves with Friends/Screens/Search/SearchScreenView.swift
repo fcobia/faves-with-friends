@@ -23,12 +23,12 @@ struct SearchScreenView: View {
 	
 	// MARK: EnvironmentObjects
 	@EnvironmentObject var alertManager: AlertManager
-	
+	@EnvironmentObject var activityManager: ActivityManager
+
 	// MARK: State Variables
 	@State private var searchText: String 	= ""
 	@State private var totalResults: Int	= 0
 	@State private var movies: [MovieSearchResultObject]		= []
-    @State private var showProgressView     = false
     @State private var searchType: SearchType = .All
     
 	// MARK: Private Computed Values
@@ -79,23 +79,11 @@ struct SearchScreenView: View {
 				}
 				.listRowBackground(Color.clear)
 			}
-			.padding(.top, 50)
+//			.padding(.top, 50)
 			.listStyle(.plain)
-			.overlay {
-				if showProgressView {
-					ProgressView()
-						.progressViewStyle(CircularProgressViewStyle(tint: .black))
-						.background(Color(UIColor.clear))
-				}
-			}
 		}
         .navigationTitle("Faves with Friends")
 		.onChange(of: searchText) { newValue in
-            if (newValue.count > 0) {
-                showProgressView = true
-            } else {
-                showProgressView = false
-            }
 			searchTextSubject.send(searchText)
 		}
 		.onReceive(searchTextPublisher) { searchText in
@@ -115,17 +103,24 @@ struct SearchScreenView: View {
 	// MARK: Private Methods
 	private func performSearch(searchText: String) {
 		Task {
+			
+			// Perform the search
 			do {
+				
+				// Show the activity view
+				activityManager.showActivity()
+
 				let searchResults = try await environmentManager.movieNetworkManager.movieSearch(query: searchText)
-				showProgressView = false
 				movies = searchResults.results ?? []
 				totalResults = searchResults.totalResults
 			}
 			catch let error {
 				print("Error: \(error)")
-                showProgressView = false
 				alertManager.showAlert(for: error)
 			}
+			
+			// Hide teh activity view
+			activityManager.hideActivity()
 		}
 	}
 }

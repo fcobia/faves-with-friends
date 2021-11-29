@@ -57,6 +57,7 @@ private struct EnvironmentModifier: ViewModifier {
 			.environment(\.preferredPalettes, palettes)
 			.environment(\.environmentManager, environmentManager)
 			.environmentObject(AlertManager())
+			.environmentObject(ActivityManager())
 	}
 }
 
