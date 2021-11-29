@@ -14,7 +14,6 @@ struct CurvedHeaderView<Content>: View where Content: View {
 	@State var maxContentHeight: CGFloat = 0
 
 	// MARK: Private Variables
-	private let id 						= UUID().uuidString
 	private let bulgeHeight: CGFloat	= 25
 	private let content: () -> Content
 
@@ -22,25 +21,21 @@ struct CurvedHeaderView<Content>: View where Content: View {
 	// MARK: SwiftUI
 	var body: some View {
 		ZStack {
-			GeometryReader { geometry in
+			
+			HeaderShape(maxHeight: maxContentHeight, bulgeHeight: bulgeHeight)
+				.fill(.blue)
+				.ignoresSafeArea(edges: .top)
 
-				HeaderShape(maxHeight: maxContentHeight, bulgeHeight: bulgeHeight)
-					.fill(.blue)
-					.coordinateSpace(name: id)
-					.ignoresSafeArea(edges: .top)
-
-				content()
-					.background(GeometryReader { geometry in
-						Rectangle()
-							.fill(Color.clear)
-							.preference(key: MaxHeightPreferenceKey.self, value: geometry.frame(in: .global).maxY)
-					})
-			}
+			content()
+				.background(GeometryReader { geometry in
+					Rectangle()
+						.fill(Color.clear)
+						.preference(key: ContentPreferenceKey.self, value: geometry.frame(in: .global).maxY)
+				})
 		}
 		.frame(height: (maxContentHeight + bulgeHeight) / 2)
-		.background(Color.red)
-		.onPreferenceChange(MaxHeightPreferenceKey.self) { maxHeight in
-			self.maxContentHeight = maxHeight
+		.onPreferenceChange(ContentPreferenceKey.self) {
+			self.maxContentHeight = $0
 		}
 	}
 	
@@ -76,10 +71,12 @@ struct HeaderShape : Shape {
 	}
 }
 
-private struct MaxHeightPreferenceKey: PreferenceKey {
-	static var defaultValue: CGFloat = 0
+private struct ContentPreferenceKey: PreferenceKey {
+	typealias Value = CGFloat
+	
+	static var defaultValue: Value = 0
 
-	static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+	static func reduce(value: inout Value, nextValue: () -> Value) {
 		let next = nextValue()
 		
 		if next > value {
