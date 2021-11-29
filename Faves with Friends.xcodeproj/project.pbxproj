@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0145A1D72754754900633B98 /* CurvedHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0145A1D62754754900633B98 /* CurvedHeaderView.swift */; };
 		01A81A12274F5DD100D47916 /* EnvironmentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A81A11274F5DD100D47916 /* EnvironmentManager.swift */; };
 		01A81A14274F5E5600D47916 /* AppEnvironmentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A81A13274F5E5600D47916 /* AppEnvironmentManager.swift */; };
 		01A81A19274F5FB600D47916 /* Environment+EnvironmentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A81A18274F5FB600D47916 /* Environment+EnvironmentManager.swift */; };
@@ -77,6 +78,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0145A1D62754754900633B98 /* CurvedHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurvedHeaderView.swift; sourceTree = "<group>"; };
 		01A81A11274F5DD100D47916 /* EnvironmentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentManager.swift; sourceTree = "<group>"; };
 		01A81A13274F5E5600D47916 /* AppEnvironmentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironmentManager.swift; sourceTree = "<group>"; };
 		01A81A18274F5FB600D47916 /* Environment+EnvironmentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Environment+EnvironmentManager.swift"; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 		01A81A4827505CE300D47916 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0145A1D62754754900633B98 /* CurvedHeaderView.swift */,
 				01A81A4927505CF100D47916 /* Errors */,
 			);
 			path = Views;
@@ -644,6 +647,7 @@
 				01A81A21274F62B500D47916 /* LoginScreenView.swift in Sources */,
 				01CCDB6D274F583C008337BB /* Movie.swift in Sources */,
 				01A81A3A274F66BC00D47916 /* Color+Palette.swift in Sources */,
+				0145A1D72754754900633B98 /* CurvedHeaderView.swift in Sources */,
 				01A81A33274F658400D47916 /* SecondaryButtonModifier.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
