@@ -34,8 +34,10 @@ struct CurvedHeaderView<Content>: View where Content: View {
 				})
 		}
 		.frame(height: (maxContentHeight + bulgeHeight) / 2)
-		.onPreferenceChange(ContentPreferenceKey.self) {
-			self.maxContentHeight = $0
+		.onPreferenceChange(ContentPreferenceKey.self) { value in
+			DispatchQueue.main.async {
+				self.maxContentHeight = value
+			}
 		}
 	}
 	
