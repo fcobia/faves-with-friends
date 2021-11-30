@@ -14,49 +14,25 @@ struct MovieDetailScreenView: View {
     
     // MARK: EnvironmentObjects
     @EnvironmentObject var alertManager: AlertManager
-    
+	@EnvironmentObject var activityManager: ActivityManager
+
+	// MARK: State Variables
+	@State private var movie: Movie? = nil
+
+	// MARK: Private Variables
     let id: Int
     
-    @State private var movie: Movie? = nil
     
+	// MARK: SwiftUI View
     var body: some View {
         VStack {
             if let movie = movie {
                 ZStack(alignment: .top) {
                     VStack(alignment: .leading) {
                         ZStack(alignment: .topLeading) {
-                            AsyncImage(url: movie.backdropPath) { phase in
-                                switch phase {
-                                case .empty:
-                                    ZStack {
-                                        Rectangle()
-                                            .fill(Color.clear)
-                                            .frame(width: 100, height: 100)
-                                        ProgressView()
-                                    }
-                                case .success(let image):
-                                    image.resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(maxWidth: .infinity, maxHeight: 300)
-                                        .ignoresSafeArea()
-                                        .overlay {
-                                            Rectangle()
-                                                .fill(Color.gray)
-                                                .opacity(0.50)
-                                                .frame(maxWidth: .infinity, maxHeight: 300)
-                                                .ignoresSafeArea()
-                                        }
-                                case .failure:
-                                    Image(systemName: "photo")
-                                        .frame(width: .infinity, height: 300)
-                                @unknown default:
-                                    // Since the AsyncImagePhase enum isn't frozen,
-                                    // we need to add this currently unused fallback
-                                    // to handle any new cases that might be added
-                                    // in the future:
-                                    EmptyView()
-                                }
-                            }
+							ImageLoadingView(url: movie.backdropPath) { image in
+								MovieDetailHeaderView(image: image)
+							}
                             VStack(alignment: .leading) {
                                 HStack {
                                     AsyncImage(url: movie.posterPath) { phase in
@@ -95,15 +71,15 @@ struct MovieDetailScreenView: View {
                         }
                     }
                 }
-            } else {
-                ProgressView()
             }
             Form {
                 Text("Form test")
             }
         }
         .onAppear() {
-            getMovieDetails(id: id)
+			if movie == nil {
+				getMovieDetails(id: id)
+			}
         }
     }
     
@@ -111,6 +87,7 @@ struct MovieDetailScreenView: View {
     private func getMovieDetails(id: Int) {
         Task {
             do {
+				activityManager.showActivity()
                 movie = try await environmentManager.movieNetworkManager.movieDetails(id: id)
                 //showProgressView = false
             }
@@ -119,13 +96,17 @@ struct MovieDetailScreenView: View {
                 //showProgressView = false
                 alertManager.showAlert(for: error)
             }
+			
+			activityManager.hideActivity()
         }
     }
 }
 
-//struct MovieDetailScreenView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        MovieDetailScreenView()
-//    }
-//}
+
+struct MovieDetailScreenView_Previews: PreviewProvider {
+    static var previews: some View {
+		MovieDetailScreenView(id: 11)
+			.modifier(ContentView_Previews.previewEnvironmentModifier)
+    }
+}
 

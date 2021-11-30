@@ -10,7 +10,7 @@ import HTTPServiceCore
 import HTTPServiceFoundation
 
 
-struct MovieHTTPService: AppNetworkService {
+struct MovieHTTPService: NetworkService {
 	
 	// MARK: - Private Variables
 	private let userManager: UserManager
