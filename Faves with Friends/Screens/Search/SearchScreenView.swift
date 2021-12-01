@@ -31,6 +31,8 @@ struct SearchScreenView: View {
 	@State private var movies: [MovieSearchResultObject]		= []
     @State private var searchType: SearchType = .All
     
+    @FocusState private var isSearchFieldFocused: Bool
+    
 	// MARK: Private Computed Values
 	private var searchTextPublisher: AnyPublisher<String,Never> {
 		searchTextSubject
@@ -55,7 +57,8 @@ struct SearchScreenView: View {
 					TextField("Search", text: $searchText)
 						.appRoundedTextField()
 						.modifier(ClearButtonModifier(text: $searchText))
-					
+                        .focused($isSearchFieldFocused)
+                    
 					Picker("", selection: $searchType) {
 						Text("All").tag(SearchType.All)
 						Text("Movies").tag(SearchType.Movies)
@@ -70,10 +73,13 @@ struct SearchScreenView: View {
 						.foregroundColor(.white)
 				}
 				.padding(.horizontal)
+                .onAppear {
+                    isSearchFieldFocused = true
+                }
 			}
 			List {
 				ForEach(movies) { movie in
-                    NavigationLink(destination: MovieDetailScreenView(id: movie.id)) {
+                    NavigationLink(destination: MovieDetailScreenView(id: movie.id, movieTitle: movie.title)) {
                         SearchScreenRowView(movie: movie)
                     }
 				}

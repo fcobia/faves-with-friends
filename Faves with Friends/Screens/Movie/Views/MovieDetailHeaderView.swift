@@ -20,15 +20,13 @@ struct MovieDetailHeaderView: View {
 
 	// MARK: SwiftUI View
     var body: some View {
-		ZStack() {
+        ZStack {
 			GeometryReader { geometry in
 
 				// Background
 				ImageLoadingView(url: movie.backdropPath, previewPhase: previewBackdropPhase) { image in
 					image.resizable()
 						.scaledToFit()
-//						.scaledToFill()
-//						.ignoresSafeArea()
 						.overlay {
 							Rectangle()
 								.fill(Color.gray)
@@ -37,10 +35,7 @@ struct MovieDetailHeaderView: View {
 				}
 				 
 				// Movie Poster
-				VStack() {
-					 
-					Spacer()
-					 
+                VStack {
 					HStack {
 						ImageLoadingView(url: movie.posterPath, previewPhase: previewPosterPhase) { image in
 							image
@@ -60,7 +55,7 @@ struct MovieDetailHeaderView: View {
 								.foregroundColor(.white)
 						}
 					}
-					.padding([.leading, .bottom], 20)
+                    .padding([.leading, .bottom, .top], 20)
 				}
 			}
 		}

@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 class AppDelegate: NSObject, UIApplicationDelegate {
 	
 	
@@ -31,16 +30,16 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 	}
 	
 	private func setupNavigationBarAppearance() {
-		let textColor = UIColor.white
+        let textColor = UIColor(.white)
 //		
 		let appearance = UINavigationBarAppearance()
 //		appearance.configureWithOpaqueBackground()
-//		appearance.backgroundColor =  UIColor(named: "AccentColor")
+        appearance.backgroundColor =  UIColor(.blue)
 		appearance.titleTextAttributes = [.foregroundColor: textColor]
 		appearance.largeTitleTextAttributes = [.foregroundColor: textColor]
-//		
+		
 		UINavigationBar.appearance().standardAppearance = appearance
-		//UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
 		UINavigationBar.appearance().compactAppearance = appearance
 	}
 }

@@ -25,26 +25,26 @@ struct MovieDetailScreenView: View {
 
 	// MARK: Private Variables
     private let id: Int
-    
+    private let movieTitle: String
     
 	// MARK: SwiftUI View
     var body: some View {
 		GeometryReader { geometry in
 			VStack {
 				if let movie = movie {
-					ZStack(alignment: .top) {
-						VStack(alignment: .leading) {
+						VStack {
 							MovieDetailHeaderView(movie: movie, previewBackdropPhase: previewBackdropPhase, previewPosterPhase: previewPosterPhase)
-								.edgesIgnoringSafeArea(.top)
-								.frame(height: geometry.size.height / 4)
+								.frame(height: geometry.size.height / 2)
 						}
-					}
 				}
 				
-				Form {
+				VStack {
 					Text("Form test")
 				}
 			}
+            .background(.background)
+            .navigationTitle(movieTitle)
+            .navigationBarTitleDisplayMode(.inline)
         }
         .onAppear() {
 			if movie == nil {
@@ -56,8 +56,9 @@ struct MovieDetailScreenView: View {
 	
 	// MARK: Init
 	
-	init(id: Int, previewBackdropPhase: AsyncImagePhase? = nil, previewPosterPhase: AsyncImagePhase? = nil) {
+    init(id: Int, movieTitle: String, previewBackdropPhase: AsyncImagePhase? = nil, previewPosterPhase: AsyncImagePhase? = nil) {
 		self.id = id
+        self.movieTitle = movieTitle
 		self.previewBackdropPhase = previewBackdropPhase
 		self.previewPosterPhase = previewPosterPhase
 	}
@@ -84,7 +85,7 @@ struct MovieDetailScreenView: View {
 
 struct MovieDetailScreenView_Previews: PreviewProvider {
     static var previews: some View {
-		MovieDetailScreenView(id: 11)
+		MovieDetailScreenView(id: 11, movieTitle: "Star Wars")
 			.modifier(ContentView_Previews.previewEnvironmentModifier)
     }
 }
