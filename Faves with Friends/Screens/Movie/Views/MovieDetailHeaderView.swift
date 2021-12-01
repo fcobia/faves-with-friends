@@ -10,30 +10,94 @@ import SwiftUI
 
 struct MovieDetailHeaderView: View {
 	
+	// MARK: Preview Support Variables
+	private let previewBackdropPhase: AsyncImagePhase?
+	private let previewPosterPhase: AsyncImagePhase?
+
 	// MARK: Private Variables
-	let image: Image
-	
+	private let movie: Movie	
+
 
 	// MARK: SwiftUI View
     var body: some View {
-		image.resizable()
-			.aspectRatio(contentMode: .fit)
-			.frame(maxWidth: .infinity, maxHeight: 300)
-			.ignoresSafeArea()
-			.overlay {
-				Rectangle()
-					.fill(Color.gray)
-					.opacity(0.50)
-					.frame(maxWidth: .infinity, maxHeight: 300)
-					.ignoresSafeArea()
+		ZStack() {
+			GeometryReader { geometry in
+
+				// Background
+				ImageLoadingView(url: movie.backdropPath, previewPhase: previewBackdropPhase) { image in
+					image.resizable()
+						.scaledToFit()
+//						.scaledToFill()
+//						.ignoresSafeArea()
+						.overlay {
+							Rectangle()
+								.fill(Color.gray)
+								.opacity(0.50)
+						}
+				}
+				 
+				// Movie Poster
+				VStack() {
+					 
+					Spacer()
+					 
+					HStack {
+						ImageLoadingView(url: movie.posterPath, previewPhase: previewPosterPhase) { image in
+							image
+								.resizable()
+								.scaledToFit()
+						}
+						.frame(height: geometry.size.height / 2)
+
+						// Movie Info
+						VStack(alignment: .leading) {
+							
+							Text(movie.title)
+								.foregroundColor(.white)
+							
+							Text(movie.releaseDate)
+								.font(.footnote)
+								.foregroundColor(.white)
+						}
+					}
+					.padding([.leading, .bottom], 20)
+				}
 			}
+		}
     }
+	
+	
+	// MARK: Init
+	
+	init(movie: Movie, previewBackdropPhase: AsyncImagePhase? = nil, previewPosterPhase: AsyncImagePhase? = nil) {
+		self.movie = movie
+		self.previewBackdropPhase = previewBackdropPhase
+		self.previewPosterPhase = previewPosterPhase
+	}
 }
 
 
 // MARK: - Preview
 struct MovieDetailHeaderView_Previews: PreviewProvider {
     static var previews: some View {
-		MovieDetailHeaderView(image: Image("MovieBackdrop"))
+		Group {
+			
+			MovieDetailHeaderView(
+				movie: PreviewMovieNetworkManager.mockMovieDetails,
+				previewBackdropPhase: .success(Image("PreviewMovieBackdrop")),
+				previewPosterPhase: .success(Image("PreviewMoviePoster")))
+			
+			MovieDetailHeaderView(
+				movie: PreviewMovieNetworkManager.mockMovieDetails,
+				previewBackdropPhase: .success(Image("PreviewMovieBackdrop")),
+				previewPosterPhase: .empty)
+			
+			MovieDetailHeaderView(
+				movie: PreviewMovieNetworkManager.mockMovieDetails,
+				previewBackdropPhase: .empty,
+				previewPosterPhase: .success(Image("PreviewMoviePoster")))
+		}
+		.frame(maxHeight: 300)
+		.previewLayout(.sizeThatFits)
     }
 }

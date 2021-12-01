@@ -28,6 +28,12 @@ final class PreviewMovieNetworkManager: MovieNetworkManager {
 		
 		return try! JSONDecoder().decode(T.self, from: json.data(using: .utf8)!)
 	}
+	
+	
+	// MARK: Static Variables
+	static var mockMovieDetails: Movie {
+		try! JSONDecoder().decode(Movie.self, from: movieDetailJSON.data(using: .utf8)!)
+	}
 }
 
 

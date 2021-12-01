@@ -10,9 +10,9 @@ import SwiftUI
 
 struct ImageLoadingView<Content>: View where Content: View {
 	
-	// MARK: Private State Variables
+	// MARK: Preview Support Variables
 	private let previewPhase: AsyncImagePhase?
-	
+
 	// MARK: URL
 	private let url: URL?
 	private let progressViewSize: CGSize
@@ -78,11 +78,10 @@ private struct LoadingView: View {
 	
 	// MARK: SwiftUI View
 	var body: some View {
-		ZStack {
-			Rectangle()
-				.fill(Color.clear)
-				.frame(width: backgroundSize.width, height: backgroundSize.height)
-			ProgressView()
+		VStack {
+			HStack {
+				ProgressView()
+			}
 		}
 	}
 }
