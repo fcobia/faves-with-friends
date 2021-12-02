@@ -9,9 +9,12 @@ import SwiftUI
 
 
 struct CurvedHeaderView<Content>: View where Content: View {
+	
+	// Environment
+	@Environment(\.preferredPalettes) var palettes
 
 	// MARK: State Variables
-	@State var maxContentHeight: CGFloat = 0
+	@State var contentRect: CGRect = .zero
 
 	// MARK: Private Variables
 	private let bulgeHeight: CGFloat	= 25
@@ -22,22 +25,22 @@ struct CurvedHeaderView<Content>: View where Content: View {
 	var body: some View {
 		ZStack {
 			
-			HeaderShape(maxHeight: maxContentHeight, bulgeHeight: bulgeHeight)
-				.fill(.blue)
+			HeaderShape(bulgeHeight: bulgeHeight)
+				.fill(palettes.color.primary)
 				.ignoresSafeArea(edges: .top)
 
 			content()
 				.background(GeometryReader { geometry in
 					Rectangle()
 						.fill(Color.clear)
-						.preference(key: ContentPreferenceKey.self, value: geometry.frame(in: .global).maxY)
+						.preference(key: ContentPreferenceKey.self, value: geometry.frame(in: .global))
 				})
 		}
-		.frame(height: (maxContentHeight + bulgeHeight) / 2)
+		.frame(height: contentRect.height)
 		.onPreferenceChange(ContentPreferenceKey.self) { value in
-			DispatchQueue.main.async {
-				self.maxContentHeight = value
-			}
+//				DispatchQueue.main.async {
+				self.contentRect = value
+//				}
 		}
 	}
 	
@@ -51,7 +54,6 @@ struct CurvedHeaderView<Content>: View where Content: View {
 
 
 struct HeaderShape : Shape {
-	let maxHeight: CGFloat
 	let bulgeHeight: CGFloat
 
 	func path(in rect: CGRect) -> Path {
@@ -59,7 +61,7 @@ struct HeaderShape : Shape {
 		let midX = rect.width / 2
 		let maxX = rect.maxX
 		let minY = rect.minY
-		let maxY = maxHeight
+		let maxY = rect.maxY - (bulgeHeight / 2)
 
 		var path = Path()
 		
@@ -74,14 +76,14 @@ struct HeaderShape : Shape {
 }
 
 private struct ContentPreferenceKey: PreferenceKey {
-	typealias Value = CGFloat
+	typealias Value = CGRect
 	
-	static var defaultValue: Value = 0
+	static var defaultValue: Value = .zero
 
 	static func reduce(value: inout Value, nextValue: () -> Value) {
 		let next = nextValue()
 		
-		if next > value {
+		if next != .zero {
 			value = next
 		}
 	}

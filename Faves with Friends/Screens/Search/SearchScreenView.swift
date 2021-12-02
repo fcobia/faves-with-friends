@@ -11,12 +11,18 @@ import Combine
 
 struct SearchScreenView: View {
 	
-	// MARK: Constants
+	// MARK: Constants and Enums
 	private enum Constants {
 		static let debounceSeconds 		= 1
 		static let minSearchTextLength	= 2
 	}
-	
+
+	enum SearchType: String {
+		case All
+		case Movies
+		case TVShows
+	}
+
 	
 	// MARK: Environment Variables
 	@Environment(\.environmentManager) private var environmentManager: EnvironmentManager
@@ -31,8 +37,6 @@ struct SearchScreenView: View {
 	@State private var movies: [MovieSearchResultObject]		= []
     @State private var searchType: SearchType = .All
     
-    @FocusState private var isSearchFieldFocused: Bool
-    
 	// MARK: Private Computed Values
 	private var searchTextPublisher: AnyPublisher<String,Never> {
 		searchTextSubject
@@ -43,21 +47,25 @@ struct SearchScreenView: View {
 	// MARK: Private Variables
 	private let searchTextSubject = PassthroughSubject<String,Never>()
 
-    enum SearchType: String {
-        case All
-        case Movies
-        case TVShows
-    }
 	
 	// MARK: SwiftUI
     var body: some View {
 		VStack {
 			CurvedHeaderView {
 				VStack {
+					VStack {
+						Text("Faves")
+							.font(.largeTitle.weight(.semibold))
+							.appAltText()
+						
+						Text("with friends")
+							.font(.footnote)
+							.appAltText()
+					}
+					
 					TextField("Search", text: $searchText)
 						.appRoundedTextField()
 						.modifier(ClearButtonModifier(text: $searchText))
-                        .focused($isSearchFieldFocused)
                     
 					Picker("", selection: $searchType) {
 						Text("All").tag(SearchType.All)
@@ -68,15 +76,15 @@ struct SearchScreenView: View {
 					.background(Color(UIColor.systemBackground)).opacity(0.8).cornerRadius(8.0)
 					.padding(.bottom)
 				   
-					Text("Result(s): \(totalResults)")
+					Text("\(totalResults) Results")
 						.font(.subheadline)
 						.foregroundColor(.white)
 				}
-				.padding(.horizontal)
-                .onAppear {
-                    isSearchFieldFocused = true
-                }
+				.padding([.horizontal, .bottom])
+//				.padding(.horizontal)
+//				.padding([.bottom, .top])
 			}
+
 			List {
 				ForEach(movies) { movie in
                     NavigationLink(destination: MovieDetailScreenView(id: movie.id, movieTitle: movie.title)) {
@@ -85,10 +93,9 @@ struct SearchScreenView: View {
 				}
 				.listRowBackground(Color.clear)
 			}
-//			.padding(.top, 50)
 			.listStyle(.plain)
 		}
-        .navigationTitle("Faves with Friends")
+        .navigationBarHidden(true)
 		.onChange(of: searchText) { newValue in
 			searchTextSubject.send(searchText)
 		}

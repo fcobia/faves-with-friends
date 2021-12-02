@@ -14,6 +14,8 @@
 		0145A1EA2756D80500633B98 /* PreviewMovieNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0145A1E92756D80500633B98 /* PreviewMovieNetworkManager.swift */; };
 		0145A1ED2756DE9500633B98 /* MovieDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0145A1EC2756DE9500633B98 /* MovieDetailHeaderView.swift */; };
 		0145A1EF2756E15700633B98 /* ImageLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0145A1EE2756E15700633B98 /* ImageLoadingView.swift */; };
+		0145A1FD2758915500633B98 /* AppAltTextModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0145A1FC2758915500633B98 /* AppAltTextModifier.swift */; };
+		0145A2032758965600633B98 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 0145A2052758965600633B98 /* Localizable.stringsdict */; };
 		01A81A12274F5DD100D47916 /* EnvironmentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A81A11274F5DD100D47916 /* EnvironmentManager.swift */; };
 		01A81A14274F5E5600D47916 /* AppEnvironmentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A81A13274F5E5600D47916 /* AppEnvironmentManager.swift */; };
 		01A81A19274F5FB600D47916 /* Environment+EnvironmentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A81A18274F5FB600D47916 /* Environment+EnvironmentManager.swift */; };
@@ -92,6 +94,8 @@
 		0145A1E92756D80500633B98 /* PreviewMovieNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewMovieNetworkManager.swift; sourceTree = "<group>"; };
 		0145A1EC2756DE9500633B98 /* MovieDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailHeaderView.swift; sourceTree = "<group>"; };
 		0145A1EE2756E15700633B98 /* ImageLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoadingView.swift; sourceTree = "<group>"; };
+		0145A1FC2758915500633B98 /* AppAltTextModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAltTextModifier.swift; sourceTree = "<group>"; };
+		0145A2042758965600633B98 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		01A81A11274F5DD100D47916 /* EnvironmentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentManager.swift; sourceTree = "<group>"; };
 		01A81A13274F5E5600D47916 /* AppEnvironmentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironmentManager.swift; sourceTree = "<group>"; };
 		01A81A18274F5FB600D47916 /* Environment+EnvironmentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Environment+EnvironmentManager.swift"; sourceTree = "<group>"; };
@@ -260,6 +264,7 @@
 			isa = PBXGroup;
 			children = (
 				01A81A2F274F658400D47916 /* AppTextModifier.swift */,
+				0145A1FC2758915500633B98 /* AppAltTextModifier.swift */,
 			);
 			path = Text;
 			sourceTree = "<group>";
@@ -398,6 +403,7 @@
 				01A81A1C274F618000D47916 /* AppDelegate.swift */,
 				01CCDB19274F3BF5008337BB /* Assets.xcassets */,
 				01A81A3B274F66EE00D47916 /* Color Palettes.xcassets */,
+				0145A2052758965600633B98 /* Localizable.stringsdict */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -624,6 +630,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				01CCDB1D274F3BF5008337BB /* Preview Assets.xcassets in Resources */,
+				0145A2032758965600633B98 /* Localizable.stringsdict in Resources */,
 				01CCDB1A274F3BF5008337BB /* Assets.xcassets in Resources */,
 				01A81A3C274F66EE00D47916 /* Color Palettes.xcassets in Resources */,
 			);
@@ -671,6 +678,7 @@
 				01CCDB66274F513E008337BB /* MovieHTTPServiceErrorMapper.swift in Sources */,
 				01A81A1D274F618000D47916 /* AppDelegate.swift in Sources */,
 				01A81A3F274F67C500D47916 /* ColorPalettes.swift in Sources */,
+				0145A1FD2758915500633B98 /* AppAltTextModifier.swift in Sources */,
 				01A81A14274F5E5600D47916 /* AppEnvironmentManager.swift in Sources */,
 				EDB9F71F275326D30029D771 /* ClearButtonModifier.swift in Sources */,
 				0145A1DB2754791100633B98 /* ActivityManager.swift in Sources */,
@@ -735,6 +743,17 @@
 			targetProxy = 01CCDB2D274F3BF6008337BB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		0145A2052758965600633B98 /* Localizable.stringsdict */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0145A2042758965600633B98 /* en */,
+			);
+			name = Localizable.stringsdict;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		01CCDB34274F3BF6008337BB /* Debug */ = {

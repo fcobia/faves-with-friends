@@ -28,7 +28,6 @@ struct MainView: View {
 				NavigationView {
 					SearchScreenView()
 				}
-                .accentColor(.white)
 				.tabItem {
 					Image(systemName: "magnifyingglass.circle")
                     Text("Search")
