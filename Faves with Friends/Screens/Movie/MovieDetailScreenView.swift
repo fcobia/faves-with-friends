@@ -18,6 +18,7 @@ struct MovieDetailScreenView: View {
 
 	// MARK: State Variables
 	@State private var movie: Movie? = nil
+    @State private var watched = false
 	
 	// MARK: Preview Support Variables
 	private let previewBackdropPhase: AsyncImagePhase?
@@ -32,15 +33,18 @@ struct MovieDetailScreenView: View {
 		GeometryReader { geometry in
 			VStack {
 				if let movie = movie {
-						VStack {
-							MovieDetailHeaderView(movie: movie, previewBackdropPhase: previewBackdropPhase, previewPosterPhase: previewPosterPhase)
-								.frame(height: geometry.size.height / 2)
-						}
-				}
-				
-				VStack {
-					Text("Form test")
-				}
+                    VStack {
+                        MovieDetailHeaderView(movie: movie, previewBackdropPhase: previewBackdropPhase, previewPosterPhase: previewPosterPhase)
+                            .frame(height: geometry.size.height / 3)
+                    }.background(.yellow)
+                    ScrollView {
+                        VStack {
+                            Toggle("Mark as watched:", isOn: $watched)
+                                .padding(.horizontal)
+                            MovieDetailsView(movie: movie)
+                        }
+                    }
+                }
 			}
             .background(.background)
             .navigationTitle(movieTitle)

@@ -36,13 +36,14 @@ struct MovieDetailHeaderView: View {
 				 
 				// Movie Poster
                 VStack {
+                    Spacer()
 					HStack {
 						ImageLoadingView(url: movie.posterPath, previewPhase: previewPosterPhase) { image in
 							image
 								.resizable()
 								.scaledToFit()
 						}
-						.frame(height: geometry.size.height / 2)
+                        .frame(height: geometry.size.height / 1.5)
 
 						// Movie Info
 						VStack(alignment: .leading) {
@@ -56,6 +57,7 @@ struct MovieDetailHeaderView: View {
 						}
 					}
                     .padding([.leading, .bottom, .top], 20)
+                    Spacer()
 				}
 			}
 		}
