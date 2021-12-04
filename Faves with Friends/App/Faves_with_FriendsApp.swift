@@ -18,14 +18,15 @@ struct Faves_with_FriendsApp: App {
 	@State private var palettes				= Palettes.standard
 	@State private var environmentManager	= AppEnvironmentManager.createDefault()
 	
+    let favesViewModel = FaveViewModel()
 	
 	// MARK: SwiftUI
     var body: some Scene {
         WindowGroup {
-			
 			if hasLaunched {
 				ContentView()
 					.modifier(EnvironmentModifier(palettes: palettes, environmentManager: environmentManager))
+                    .environmentObject(favesViewModel)
 			}
 			else {
 				LaunchScreenView(hasLaunched: $hasLaunched)

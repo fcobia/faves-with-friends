@@ -75,7 +75,7 @@ struct MovieDetailsView: View {
                 }
             }
         }
-        .padding(.leading)
+        .padding([.leading, .bottom])
     }
 }
 

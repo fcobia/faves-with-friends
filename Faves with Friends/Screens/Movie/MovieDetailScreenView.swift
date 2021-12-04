@@ -9,17 +9,25 @@ import SwiftUI
 
 struct MovieDetailScreenView: View {
     
+    enum ListType: String {
+        case Watchlist
+        case Watched
+    }
+    
     // MARK: Environment Variables
     @Environment(\.environmentManager) private var environmentManager: EnvironmentManager
     
     // MARK: EnvironmentObjects
     @EnvironmentObject var alertManager: AlertManager
 	@EnvironmentObject var activityManager: ActivityManager
+    @EnvironmentObject var favesViewModel: FaveViewModel
 
 	// MARK: State Variables
 	@State private var movie: Movie? = nil
     @State private var watched = false
-	
+	@State private var showingConfirmationDialog = false
+    @State private var list: ListType = .Watchlist
+    
 	// MARK: Preview Support Variables
 	private let previewBackdropPhase: AsyncImagePhase?
 	private let previewPosterPhase: AsyncImagePhase?
@@ -41,6 +49,24 @@ struct MovieDetailScreenView: View {
                         VStack {
                             Toggle("Mark as watched:", isOn: $watched)
                                 .padding(.horizontal)
+                            Button {
+                                showingConfirmationDialog.toggle()
+                            } label: {
+                                Image(systemName: "plus.circle.fill")
+                                    .font(.largeTitle)
+                            }
+                            .confirmationDialog("Add to list", isPresented: $showingConfirmationDialog) {
+                                Button("To Watch") {
+                                    list = .Watchlist
+                                    favesViewModel.addToToWatchList(movie: movie)
+                                }
+                                Button("Watched") {
+                                    list = .Watched
+                                    favesViewModel.addToWatchedList(movie: movie)
+                                }
+                            } message: {
+                                Text("Add to list")
+                            }
                             MovieDetailsView(movie: movie)
                         }
                     }
