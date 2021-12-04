@@ -33,12 +33,17 @@ struct RatingView: View {
                 .appText()
             HStack {
                 ForEach((1...5), id: \.self) { index in
-                    Image(systemName: index <= rating.rawValue ? "star.fill" : "star")
-                        .font(.largeTitle)
-                        .foregroundColor(index <= rating.rawValue ? Color.yellow : Color.gray)
-                        .onTapGesture {
-                            rating = Ratings(rawValue: index)!
+                    if ((index - 1) <= rating.rawValue) {
+                        if (rating.rawValue.isMultiple(of: 2) && rating.rawValue > (index - 1)) {
+                            Image(systemName: "star.leadinghalf.filled")
+                                .foregroundColor(.yellow)
+                        } else {
+                            Image(systemName: "star.fill")
                         }
+                    } else {
+                        Image(systemName: "star")
+                            .foregroundColor(.gray)
+                    }
                 }
             }
         }
@@ -51,7 +56,27 @@ struct RatingView_Previews: PreviewProvider {
     }
 }
 
+//ForEach((1...5), id: \.self) { index in
+//    if ((index - 1) <= rating.rawValue) {
+//        if (rating.rawValue.isMultiple(of: 2) && ????) {
+//            Image(systemName: "star.leadinghalf.filled")
+//                .foregroundColor(.yellow)
+//        } else {
+//            Image(systemName: "star.fill")
+//        }
+//    } else {
+//        Image(systemName: "star")
+//            .foregroundColor(.gray)
+//    }
+//}
 
+
+//Image(systemName: (index - 1) <= rating.rawValue ? "star.fill" : "star")
+//    .font(.largeTitle)
+//    .foregroundColor((index - 1) <= rating.rawValue ? Color.yellow : Color.gray)
+//    .onTapGesture {
+//        rating = Ratings(rawValue: index-1)!
+//    }
 
 //Image(systemName: starOnFull == true ? "star.fill" : "star")
 //    .font(.largeTitle)
