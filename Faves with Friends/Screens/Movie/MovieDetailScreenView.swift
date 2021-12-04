@@ -67,6 +67,8 @@ struct MovieDetailScreenView: View {
                             } message: {
                                 Text("Add to list")
                             }
+                            RatingView()
+                                .padding()
                             MovieDetailsView(movie: movie)
                         }
                     }
