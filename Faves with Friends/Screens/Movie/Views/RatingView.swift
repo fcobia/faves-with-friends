@@ -23,7 +23,7 @@ struct RatingView: View {
         case Phenomenal = 5.0
     }
     
-    @Binding var rating: Double
+    @Binding var rating: Double?
     
     @State private var starSize: CGSize = .zero
     
@@ -53,12 +53,13 @@ struct RatingView: View {
         VStack(alignment: .center, spacing: 5) {
             if label.isEmpty == false {
                 Text(label)
-                if let ratingName = Ratings(rawValue: rating) {
+                if let rating = rating, let ratingName = Ratings(rawValue: rating) {
                     Text(String(describing: ratingName))
                 }
             }
             ZStack {
                 HStack {
+                    let rating = rating ?? 0
                     ForEach(0..<Int(rating), id: \.self) { _ in
                         fullStar
                     }

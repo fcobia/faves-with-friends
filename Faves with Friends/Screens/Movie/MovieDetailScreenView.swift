@@ -27,7 +27,7 @@ struct MovieDetailScreenView: View {
     @State private var watched = false
 	@State private var showingConfirmationDialog = false
     @State private var list: ListType = .Watchlist
-    @State private var rating: Double = 3.5
+    @State private var rating: Double?
     
 	// MARK: Preview Support Variables
 	private let previewBackdropPhase: AsyncImagePhase?
