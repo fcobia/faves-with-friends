@@ -9,40 +9,88 @@ import SwiftUI
 
 struct RatingView: View {
     
-    enum Ratings: Int {
-        case Abysmal = 0
-        case Awful
-        case Bad
-        case Poor
-        case Medicore
-        case Fair
-        case Good
-        case Great
-        case Excellent
-        case Amazin
-        case Phenomenal
+    enum Ratings: Double {
+        case Abysmal = 0.0
+        case Awful = 0.5
+        case Bad = 1.0
+        case Poor = 1.5
+        case Medicore = 2.0
+        case Fair = 2.5
+        case Good = 3.0
+        case Great = 3.5
+        case Excellent = 4.0
+        case Amazin = 4.5
+        case Phenomenal = 5.0
     }
     
-    @State private var rating: Ratings = .Medicore
+    @Binding var rating: Double
     
-    // to fill a star half way I can maybe set the foreground color of a star.fil to a grdient that is half yellow and half clear etc
+    @State private var starSize: CGSize = .zero
+    
+    var label = "My Rating"
+    var maximumRating = 5
+    
+    var fullStar: some View {
+        Image(systemName: "star.fill")
+            .star(size: starSize)
+            .foregroundColor(Color.yellow)
+    }
+    
+    var halfStar: some View {
+        Image(systemName: "star.leadinghalf.fill")
+            .star(size: starSize)
+            .foregroundColor(Color.yellow)
+    }
+    
+    var emptyStar: some View {
+        Image(systemName: "star")
+            .star(size: starSize)
+            .foregroundColor(Color.gray)
+    }
+    
     
     var body: some View {
         VStack(alignment: .center, spacing: 5) {
-            Text("My rating")
-                .appText()
-            HStack {
-                ForEach((1...5), id: \.self) { index in
-                    if ((index - 1) <= rating.rawValue) {
-                        if (rating.rawValue.isMultiple(of: 2) && rating.rawValue > (index - 1)) {
-                            Image(systemName: "star.leadinghalf.filled")
-                                .foregroundColor(.yellow)
-                        } else {
-                            Image(systemName: "star.fill")
-                        }
-                    } else {
-                        Image(systemName: "star")
-                            .foregroundColor(.gray)
+            if label.isEmpty == false {
+                Text(label)
+            }
+            ZStack {
+                HStack {
+                    ForEach(0..<Int(rating), id: \.self) { _ in
+                        fullStar
+                    }
+                    
+                    if (rating != floor(rating)) {
+                        halfStar
+                    }
+                    
+                    ForEach(0..<Int(Double(maximumRating) - rating), id: \.self) { _ in
+                        emptyStar
+                    }
+                }
+                .onPreferenceChange(StarSizeKey.self) { size in
+                    starSize = size
+                }
+                
+                HStack {
+                    ForEach(0..<maximumRating, id: \.self) { idx in
+                        Color.clear
+                            .frame(width: starSize.width, height: starSize.height)
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                if idx == 0 {
+                                    if rating == 1 {
+                                        rating = 0.5
+                                    } else if rating == 0.5 {
+                                        rating = 0
+                                    } else {
+                                        rating = 1
+                                    }
+                                } else {
+                                    let i = Double(idx) + 1
+                                    rating = (rating == i) ? i - 0.5 : i
+                                }
+                            }
                     }
                 }
             }
@@ -50,61 +98,29 @@ struct RatingView: View {
     }
 }
 
-struct RatingView_Previews: PreviewProvider {
-    static var previews: some View {
-        RatingView()
+fileprivate extension Image {
+    func star(size: CGSize) -> some View {
+        return self
+            .font(.title)
+            .background(
+                GeometryReader { proxy in
+                    Color.clear.preference(key: StarSizeKey.self, value: proxy.size)
+                }
+            )
+            .frame(width: size.width, height: size.height)
     }
 }
 
-//ForEach((1...5), id: \.self) { index in
-//    if ((index - 1) <= rating.rawValue) {
-//        if (rating.rawValue.isMultiple(of: 2) && ????) {
-//            Image(systemName: "star.leadinghalf.filled")
-//                .foregroundColor(.yellow)
-//        } else {
-//            Image(systemName: "star.fill")
-//        }
-//    } else {
-//        Image(systemName: "star")
-//            .foregroundColor(.gray)
-//    }
-//}
+struct StarSizeKey: PreferenceKey {
+    static let defaultValue: CGSize = .zero
+    static func reduce(value: inout CGSize, nextValue: () -> CGSize) {
+        let next = nextValue()
+        value = CGSize(width: max(value.width, next.width), height: max(value.height, next.height))
+    }
+}
 
-
-//Image(systemName: (index - 1) <= rating.rawValue ? "star.fill" : "star")
-//    .font(.largeTitle)
-//    .foregroundColor((index - 1) <= rating.rawValue ? Color.yellow : Color.gray)
-//    .onTapGesture {
-//        rating = Ratings(rawValue: index-1)!
-//    }
-
-//Image(systemName: starOnFull == true ? "star.fill" : "star")
-//    .font(.largeTitle)
-//    .foregroundColor(starOnFull == true ? Color.yellow : Color.gray)
-//    .onTapGesture {
-//        starOnFull.toggle()
-//}
-//Image(systemName: starOnFull == true ? "star.fill" : "star")
-//    .font(.largeTitle)
-//    .foregroundColor(starOnFull == true ? Color.yellow : Color.gray)
-//    .onTapGesture {
-//        starOnFull.toggle()
-//}
-//Image(systemName: starOnFull == true ? "star.fill" : "star")
-//    .font(.largeTitle)
-//    .foregroundColor(starOnFull == true ? Color.yellow : Color.gray)
-//    .onTapGesture {
-//        starOnFull.toggle()
-//}
-//Image(systemName: starOnFull == true ? "star.fill" : "star")
-//    .font(.largeTitle)
-//    .foregroundColor(starOnFull == true ? Color.yellow : Color.gray)
-//    .onTapGesture {
-//        starOnFull.toggle()
-//}
-//Image(systemName: starOnFull == true ? "star.fill" : "star")
-//    .font(.largeTitle)
-//    .foregroundColor(starOnFull == true ? Color.yellow : Color.gray)
-//    .onTapGesture {
-//        starOnFull.toggle()
-//}
+struct RatingView_Previews: PreviewProvider {
+    static var previews: some View {
+        RatingView(rating: .constant(4))
+    }
+}
