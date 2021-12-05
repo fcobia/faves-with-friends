@@ -19,7 +19,7 @@ struct RatingView: View {
         case Good = 3.0
         case Great = 3.5
         case Excellent = 4.0
-        case Amazin = 4.5
+        case Amazing = 4.5
         case Phenomenal = 5.0
     }
     
@@ -53,6 +53,9 @@ struct RatingView: View {
         VStack(alignment: .center, spacing: 5) {
             if label.isEmpty == false {
                 Text(label)
+                if let ratingName = Ratings(rawValue: rating) {
+                    Text(String(describing: ratingName))
+                }
             }
             ZStack {
                 HStack {
@@ -121,6 +124,6 @@ struct StarSizeKey: PreferenceKey {
 
 struct RatingView_Previews: PreviewProvider {
     static var previews: some View {
-        RatingView(rating: .constant(4))
+        RatingView(rating: .constant(3.5))
     }
 }
