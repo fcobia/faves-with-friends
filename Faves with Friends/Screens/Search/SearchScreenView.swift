@@ -34,7 +34,7 @@ struct SearchScreenView: View {
 	// MARK: State Variables
 	@State private var searchText: String 	= ""
 	@State private var totalResults: Int	= 0
-	@State private var movies: [MovieSearchResultObject]		= []
+	@State private var movies: [SimpleMovie]		= []
     @State private var searchType: SearchType = .All
     
 	// MARK: Private Computed Values
@@ -81,8 +81,6 @@ struct SearchScreenView: View {
 						.foregroundColor(.white)
 				}
 				.padding([.horizontal, .bottom])
-//				.padding(.horizontal)
-//				.padding([.bottom, .top])
 			}
 
 			List {

@@ -47,12 +47,26 @@ extension SimpleHTTPServicePath {
 // MARK: - Service Tasks
 extension SimpleHTTPJSONServiceTask {
 	
+	// Task Convenience Methods
+	
 	static fileprivate func details(id: Int) -> SimpleHTTPJSONServiceTask<Movie> {
-		return .init(path: .details.addingPath("\(id)"), httpMethod: .get())
+		return .init(path: .details.addingPath("\(id)"), httpMethod: .get(), jsonDecoder: movieJSONDecoder)
 	}
 	
 	static fileprivate func movieSearch(query: String) -> SimpleHTTPJSONServiceTask<MovieSearchResult> {
 		let query = URLQueryItem(name: "query", value: query)
-		return .init(path: .movieSearch, httpMethod: .get([query]))
+		return .init(path: .movieSearch, httpMethod: .get([query]), jsonDecoder: movieJSONDecoder)
 	}
 }
+
+
+// Private Static Variables
+private let movieJSONDecoder: JSONDecoder = {
+	let df = DateFormatter()
+	df.dateFormat = "yyyy-MM-dd"
+
+	let decoder = JSONDecoder()
+	decoder.dateDecodingStrategy = .formatted(DateFormatters.dateOnly)
+	
+	return decoder
+}()

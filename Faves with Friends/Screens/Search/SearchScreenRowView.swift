@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SearchScreenRowView: View {
     
-    var movie: MovieSearchResultObject
+    var movie: SimpleMovie
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -40,7 +40,7 @@ struct SearchScreenRowView: View {
                 }
                 VStack(alignment: .leading) {
                     Text(movie.title)
-                    Text(movie.releaseDate)
+                    Text(DateFormatters.dateOnly.string(from: movie.releaseDate))
                         .font(.footnote)
                 }
             }

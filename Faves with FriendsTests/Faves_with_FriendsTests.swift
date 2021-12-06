@@ -21,7 +21,7 @@ class Faves_with_FriendsTests: XCTestCase {
 		let userManager = TemporaryUserManager()
 		let httpService = MovieHTTPService(url: URL(string: "https://api.themoviedb.org")!, userManager: userManager, retryCount: 0)
 		
-		movieNetworkManager = MovieNetworkManager(movieNetworkService: httpService)
+		movieNetworkManager = AppMovieNetworkManager(movieNetworkService: httpService)
     }
 	
 	override func tearDownWithError() throws {
@@ -38,7 +38,7 @@ class Faves_with_FriendsTests: XCTestCase {
     }
     
     func testMovieSearch() async throws {
-        let movies = try await movieNetworkManager.movieSearch(query: "Star Wars Jedi")
+        let movies = try await movieNetworkManager.movieSearch(query: "Star Wars")
         print(movies)
         XCTAssert(movies.results?.count ?? 0 > 0)
     }

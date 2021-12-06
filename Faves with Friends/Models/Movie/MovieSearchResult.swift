@@ -23,5 +23,5 @@ struct MovieSearchResult: Decodable {
 	let page: Int
 	let totalPages: Int
 	let totalResults: Int
-    let results: [MovieSearchResultObject]?
+    let results: [SimpleMovie]?
 }

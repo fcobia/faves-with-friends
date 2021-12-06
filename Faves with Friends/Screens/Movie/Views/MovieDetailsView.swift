@@ -30,7 +30,7 @@ struct MovieDetailsView: View {
                 Text("Release Date:")
                     .fontWeight(.semibold)
                     .appText()
-                Text(movie.releaseDate)
+                Text(DateFormatters.dateOnly.string(from: movie.releaseDate))
                     .font(.subheadline)
                     .appText()
             }

@@ -51,7 +51,7 @@ struct MovieDetailHeaderView: View {
 							Text(movie.title)
 								.foregroundColor(.white)
 							
-							Text(movie.releaseDate)
+							Text(DateFormatters.dateOnly.string(from: movie.releaseDate))
 								.font(.footnote)
 								.foregroundColor(.white)
 						}
