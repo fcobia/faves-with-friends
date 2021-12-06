@@ -10,10 +10,22 @@ import SwiftUI
 
 struct ImageLoadingView<Content>: View where Content: View {
 	
+	// MARK Style Enum
+	enum Style {
+		case placeholder(Image?)
+		case localProgress
+		case globalProgress
+	}
+	
+	
+	// MARK: EnvironmentObjects
+	@EnvironmentObject var activityManager: ActivityManager
+
 	// MARK: Preview Support Variables
 	private let previewPhase: AsyncImagePhase?
 
 	// MARK: URL
+	private let style: Style
 	private let url: URL?
 	private let progressViewSize: CGSize
 	private let content: (Image) -> Content
@@ -39,7 +51,7 @@ struct ImageLoadingView<Content>: View where Content: View {
 		switch phase {
 				
 			case .empty:
-				return AnyView(LoadingView(backgroundSize: progressViewSize))
+				return AnyView(LocalLoadingView(backgroundSize: progressViewSize))
 				
 			case .success(let image):
 				return AnyView(content(image))
@@ -56,21 +68,57 @@ struct ImageLoadingView<Content>: View where Content: View {
 			}
 	}
 	
+	private func loadingView() -> some View {
+		switch style {
+				
+			case .placeholder(let placeholder):
+				return AnyView(placeholderLoadingView(placeholder ?? Image(systemName: "photo")))
+				
+			case .localProgress:
+				return AnyView(LocalLoadingView(backgroundSize: progressViewSize))
+				
+			case .globalProgress:
+				return AnyView(showGlobalLoadingView())
+		}
+	}
+				 
+	private func placeholderLoadingView(_ image: Image) -> some View {
+		image
+			.resizable()
+	}
+	
+	private func showGlobalLoadingView() -> some View {
+		Task {
+			activityManager.showActivity()
+		}
+		
+		return EmptyView()
+	}
+	
+	private func hideGlobalLoadingView() {
+		if case .globalProgress = style {
+			Task {
+				activityManager.hideActivity()
+			}
+		}
+	}
+
 	
 	// MARK: Init
 	
-	init(url: URL?, progressViewSize: CGSize = .init(width: 100, height: 100), previewPhase: AsyncImagePhase? = nil, @ViewBuilder content: @escaping (Image) -> Content) {
+	init(url: URL?, style: Style = .localProgress, progressViewSize: CGSize = .init(width: 100, height: 100), previewPhase: AsyncImagePhase? = nil, @ViewBuilder content: @escaping (Image) -> Content) {
 		self.url = url
 		self.progressViewSize = progressViewSize
 		self.content = content
 		
+		self.style = style
 		self.previewPhase = previewPhase
 	}
 }
 
 
 // MARK: Private View Classes
-private struct LoadingView: View {
+private struct LocalLoadingView: View {
 	
 	// Variables
 	let backgroundSize: CGSize
@@ -79,10 +127,17 @@ private struct LoadingView: View {
 	// MARK: SwiftUI View
 	var body: some View {
 		VStack {
+			Spacer()
 			HStack {
+				Spacer()
 				ProgressView()
+					.tint(.white)
+					.scaleEffect(1.5)
+				Spacer()
 			}
+			Spacer()
 		}
+		.background(Color.black.opacity(0.3))
 	}
 }
 
@@ -92,7 +147,7 @@ private struct FailureView: View {
 	// MARK: SwiftUI View
 	var body: some View {
 		Image(systemName: "photo")
-			.frame(width: .infinity, height: 300)
+			.resizable()
 	}
 }
 
@@ -102,13 +157,13 @@ struct ImageLoadingView_Previews: PreviewProvider {
     static var previews: some View {
 		Group {
 			
-			ImageLoadingView(url: URL(string: "https://www.test.com")!, previewPhase: .success(Image("MovieBackdrop"))) { image in
+			ImageLoadingView(url: URL(string: "https://www.test.com")!, previewPhase: .success(Image("PreviewMovieBackdrop"))) { image in
 				image
 			}
 			
 			Group {
 
-				LoadingView(backgroundSize: .init(width: 100, height: 100))
+				LocalLoadingView(backgroundSize: .init(width: 100, height: 100))
 					.previewDisplayName("Loading")
 				
 				FailureView()

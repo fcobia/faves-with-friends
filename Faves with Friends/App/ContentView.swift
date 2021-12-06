@@ -38,7 +38,10 @@ struct ContentView: View {
 		.overlay {
 			if activityManager.shouldShowActivity {
 				ProgressView()
-					.progressViewStyle(.circular)
+					.tint(.white)
+					.scaleEffect(2.5)
+					.background(Color.black.opacity(0.3))
+
 			}
 		}
 		.onReceive(environmentManager.userManager.userPublisher) { user in

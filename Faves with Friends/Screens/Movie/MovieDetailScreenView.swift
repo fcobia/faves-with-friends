@@ -45,7 +45,7 @@ struct MovieDetailScreenView: View {
                     VStack {
                         MovieDetailHeaderView(movie: movie, previewBackdropPhase: previewBackdropPhase, previewPosterPhase: previewPosterPhase)
                             .frame(height: geometry.size.height / 3)
-                    }.background(.yellow)
+                    }
                     ScrollView {
                         VStack {
                             Toggle("Mark as watched:", isOn: $watched)

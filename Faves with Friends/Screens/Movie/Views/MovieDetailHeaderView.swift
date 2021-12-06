@@ -24,7 +24,7 @@ struct MovieDetailHeaderView: View {
 			GeometryReader { geometry in
 
 				// Background
-				ImageLoadingView(url: movie.backdropPath, previewPhase: previewBackdropPhase) { image in
+				ImageLoadingView(url: movie.backdropPath, style: .globalProgress, previewPhase: previewBackdropPhase) { image in
 					image.resizable()
 						.scaledToFit()
 						.overlay {
@@ -38,7 +38,7 @@ struct MovieDetailHeaderView: View {
                 VStack {
                     Spacer()
 					HStack {
-						ImageLoadingView(url: movie.posterPath, previewPhase: previewPosterPhase) { image in
+						ImageLoadingView(url: movie.posterPath, style: .globalProgress, previewPhase: previewPosterPhase) { image in
 							image
 								.resizable()
 								.scaledToFit()
