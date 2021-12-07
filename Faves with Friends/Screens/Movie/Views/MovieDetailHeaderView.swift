@@ -51,9 +51,11 @@ struct MovieDetailHeaderView: View {
 							Text(movie.title)
 								.foregroundColor(.white)
 							
-							Text(DateFormatters.dateOnly.string(from: movie.releaseDate))
-								.font(.footnote)
-								.foregroundColor(.white)
+							if let releaseDate = movie.releaseDate {
+								Text(DateFormatters.dateOnly.string(from: releaseDate))
+									.font(.footnote)
+									.foregroundColor(.white)
+							}
 						}
 					}
                     .padding([.leading, .bottom, .top], 20)

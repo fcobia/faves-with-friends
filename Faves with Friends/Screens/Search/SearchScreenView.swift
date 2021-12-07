@@ -34,7 +34,7 @@ struct SearchScreenView: View {
 	// MARK: State Variables
 	@State private var searchText: String 	= ""
 	@State private var totalResults: Int	= 0
-	@State private var movies: [SimpleMovie]		= []
+	@State private var movies: [MovieSearch]		= []
     @State private var searchType: SearchType = .All
     
 	// MARK: Private Computed Values
@@ -122,7 +122,7 @@ struct SearchScreenView: View {
 				activityManager.showActivity()
 
 				let searchResults = try await environmentManager.movieNetworkManager.movieSearch(query: searchText)
-				movies = searchResults.results ?? []
+				movies = searchResults.results.compactMap({ $0 as? MovieSearch })
 				totalResults = searchResults.totalResults
 			}
 			catch let error {

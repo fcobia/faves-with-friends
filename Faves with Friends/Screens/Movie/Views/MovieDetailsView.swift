@@ -30,17 +30,22 @@ struct MovieDetailsView: View {
                 Text("Release Date:")
                     .fontWeight(.semibold)
                     .appText()
-                Text(DateFormatters.dateOnly.string(from: movie.releaseDate))
-                    .font(.subheadline)
-                    .appText()
+				if let releaseDate = movie.releaseDate {
+					Text(DateFormatters.dateOnly.string(from: releaseDate))
+						.font(.subheadline)
+						.appText()
+				}
             }
             VStack(alignment: .leading, spacing: 10) {
                 Text("Runtime:")
                     .fontWeight(.semibold)
                     .appText()
-                Text(String(movie.runtime) + " minutes")
-                    .font(.subheadline)
-                    .appText()
+				
+				if let runtime = movie.runtime {
+					Text(String(runtime) + " minutes")
+						.font(.subheadline)
+						.appText()
+				}
             }
             VStack(alignment: .leading, spacing: 10) {
                 Text("Status:")
@@ -54,9 +59,12 @@ struct MovieDetailsView: View {
                 Text("Overview:")
                     .fontWeight(.semibold)
                     .appText()
-                Text(movie.overview)
-                    .font(.subheadline)
-                    .appText()
+				
+				if let overview = movie.overview {
+					Text(overview)
+						.font(.subheadline)
+						.appText()
+				}
             }
             VStack(alignment: .leading, spacing: 10) {
                 HStack {

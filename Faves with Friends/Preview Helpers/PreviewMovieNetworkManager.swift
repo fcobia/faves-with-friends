@@ -16,7 +16,7 @@ final class PreviewMovieNetworkManager: MovieNetworkManager {
 		return await loadJSON(movieDetailJSON, withDelay: 100)
 	}
 	
-	func movieSearch(query: String) async throws -> MovieSearchResult {
+	func movieSearch(query: String) async throws -> MovieSearchResults {
 		return await loadJSON(movieSearchJSON, withDelay: 100)
 	}
 	

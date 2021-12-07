@@ -8,7 +8,8 @@
 import Foundation
 
 
-struct Movie: Codable, Identifiable, MovieCommon {
+struct Movie: Codable, MovieCommon {
+	
 	    
 	// MARK: CodingKeys
 	private enum CodingKeys: String, CodingKey {
@@ -30,8 +31,8 @@ struct Movie: Codable, Identifiable, MovieCommon {
 	let posterPathString: String?
 	let backdropPathString: String?
 	let releaseDate: Date?
-	let overview: String
-    let runtime: Int
+	let overview: String?
+    let runtime: Int?
     let status: String
     let genres: [Genre]
     
@@ -42,9 +43,9 @@ struct Movie: Codable, Identifiable, MovieCommon {
         try container.encode(id, forKey: .id)
         try container.encode(title, forKey: .title)
         try container.encode(posterPathString, forKey: .posterPathString)
-        try container.encode(overview, forKey: .overview)
+        try container.encodeIfPresent(overview, forKey: .overview)
         try container.encode(releaseDate, forKey: .releaseDate)
-        try container.encode(runtime, forKey: .runtime)
+        try container.encodeIfPresent(runtime, forKey: .runtime)
         try container.encode(status, forKey: .status)
         try container.encode(backdropPathString, forKey: .backdropPathString)
         try container.encode(genres, forKey: .genres)

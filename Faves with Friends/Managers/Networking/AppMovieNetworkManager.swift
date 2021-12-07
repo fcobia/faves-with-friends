@@ -29,7 +29,7 @@ final class AppMovieNetworkManager: MovieNetworkManager {
 		return try await movieNetworkService.fetch(.details(id: id))
 	}
 	
-	public func movieSearch(query: String) async throws -> MovieSearchResult {
+	public func movieSearch(query: String) async throws -> MovieSearchResults {
 		return try await movieNetworkService.fetch(.movieSearch(query: query))
 	}
 }
@@ -53,7 +53,7 @@ extension SimpleHTTPJSONServiceTask {
 		return .init(path: .details.addingPath("\(id)"), httpMethod: .get(), jsonDecoder: movieJSONDecoder)
 	}
 	
-	static fileprivate func movieSearch(query: String) -> SimpleHTTPJSONServiceTask<MovieSearchResult> {
+	static fileprivate func movieSearch(query: String) -> SimpleHTTPJSONServiceTask<MovieSearchResults> {
 		let query = URLQueryItem(name: "query", value: query)
 		return .init(path: .movieSearch, httpMethod: .get([query]), jsonDecoder: movieJSONDecoder)
 	}
@@ -61,12 +61,12 @@ extension SimpleHTTPJSONServiceTask {
 
 
 // Private Static Variables
-private let movieJSONDecoder: JSONDecoder = {
+private var movieJSONDecoder: JSONDecoder {
 	let df = DateFormatter()
 	df.dateFormat = "yyyy-MM-dd"
 
 	let decoder = JSONDecoder()
-	decoder.dateDecodingStrategy = .formatted(DateFormatters.dateOnly)
+	decoder.dateDecodingStrategy = .formatted(df)
 	
 	return decoder
-}()
+}

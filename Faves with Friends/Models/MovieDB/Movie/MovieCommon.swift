@@ -7,14 +7,10 @@
 
 import Foundation
 
-protocol MovieCommon {
+protocol MovieCommon: Video {
 	
     // MARK: JSON Variables
-    var id: Int{ get }
-    var title: String { get }
-    var posterPathString: String? { get }
 	var backdropPathString: String? { get }
-    var releaseDate: Date? { get }
 	
 	var posterPath: URL? { get }
 	var backdropPath: URL? { get }
@@ -22,14 +18,6 @@ protocol MovieCommon {
 
 
 extension MovieCommon {
-	
-	var posterPath: URL? {
-		guard let posterPathString = posterPathString else {
-			return nil
-		}
-		
-		return URL(string: "https://image.tmdb.org/t/p/original\(posterPathString)")
-	}
 	
 	var backdropPath: URL? {
 		guard let backdropPathString = backdropPathString else {
