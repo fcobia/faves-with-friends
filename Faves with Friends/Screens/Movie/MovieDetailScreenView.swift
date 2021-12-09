@@ -28,6 +28,7 @@ struct MovieDetailScreenView: View {
 	@State private var showingConfirmationDialog = false
     @State private var list: ListType = .Watchlist
     @State private var rating: Double?
+    @State private var ratingEnabled = false
     
 	// MARK: Preview Support Variables
 	private let previewBackdropPhase: AsyncImagePhase?
@@ -50,6 +51,9 @@ struct MovieDetailScreenView: View {
                         VStack {
                             Toggle("Mark as watched:", isOn: $watched)
                                 .padding(.horizontal)
+                                .onChange(of: watched) { _isOn in
+                                    ratingEnabled.toggle()
+                                }
                             Button {
                                 showingConfirmationDialog.toggle()
                             } label: {
@@ -59,17 +63,24 @@ struct MovieDetailScreenView: View {
                             .confirmationDialog("Add to list", isPresented: $showingConfirmationDialog) {
                                 Button("To Watch") {
                                     list = .Watchlist
-                                    favesViewModel.addToToWatchList(movie: movie)
+                                    favesViewModel.addToToWatchList(WatchListItem(videoId: movie.id, rating: rating))
                                 }
                                 Button("Watched") {
                                     list = .Watched
-                                    favesViewModel.addToWatchedList(movie: movie)
+                                    favesViewModel.addToWatchedList(WatchListItem(videoId: movie.id, rating: rating))
                                 }
                             } message: {
                                 Text("Add to list")
                             }
                             RatingView(rating: $rating)
+                                .allowsHitTesting(ratingEnabled)
                                 .padding()
+                                .onAppear {
+                                    if let index = favesViewModel.watchedList.firstIndex(where: { $0.videoId == movie.id }) {
+                                        rating = favesViewModel.watchedList[index].rating
+                                        watched = true
+                                    }
+                                }
                             MovieDetailsView(movie: movie)
                         }
                     }

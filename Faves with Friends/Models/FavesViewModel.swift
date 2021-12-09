@@ -9,7 +9,8 @@ import Foundation
 
 class FaveViewModel: ObservableObject {
     
-    @Published var toWatchList = [Movie]() {
+    
+    @Published var toWatchList = [WatchListItem]() {
         didSet {
             //first turn the array into nsdata so we can save it in userdefaults
             let encoder = JSONEncoder()
@@ -21,7 +22,7 @@ class FaveViewModel: ObservableObject {
             }
         }
     }
-    @Published var watchedList = [Movie]() {
+    @Published var watchedList = [WatchListItem]() {
         didSet {
             //first turn the array into nsdata so we can save it in userdefaults
             let encoder = JSONEncoder()
@@ -34,13 +35,45 @@ class FaveViewModel: ObservableObject {
         }
     }
     
-    func addToToWatchList(movie: Movie) {
-        toWatchList.append(movie)
+    
+    //TODO: will need to check if movie is already in list and if so remove it and add new entry as rating may have changed?
+    func addToToWatchList(_ watchListItem: WatchListItem) {
+        toWatchList.append(watchListItem)
     }
     
-    func addToWatchedList(movie: Movie) {
-        watchedList.append(movie)
+    func addToWatchedList(_ watchListItem: WatchListItem) {
+        watchedList.append(watchListItem)
         
     }
     
+    init() {
+        if let data = UserDefaults.standard.data(forKey: "ToWatchList") {
+            let decoder = JSONDecoder()
+            do {
+                let toWatchList = try decoder.decode([WatchListItem].self, from: data)
+                self.toWatchList = toWatchList
+            } catch {
+                print("error decoding array")
+            }
+        } else {
+            toWatchList = [WatchListItem]()
+        }
+        if let data = UserDefaults.standard.data(forKey: "WatchedList") {
+            let decoder = JSONDecoder()
+            do {
+                let watchedList = try decoder.decode([WatchListItem].self, from: data)
+                self.watchedList = watchedList
+            } catch {
+                print("error decoding array")
+            }
+        } else {
+            watchedList = [WatchListItem]()
+        }
+    }
+    
+}
+
+struct WatchListItem: Codable {
+    let videoId: Int
+    let rating: Double?
 }
