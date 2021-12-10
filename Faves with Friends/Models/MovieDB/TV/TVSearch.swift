@@ -13,7 +13,7 @@ struct TVSearch: TVCommon, SearchResult {
 	// MARK: Coding Keys
 	private enum CodingKeys: String, CodingKey {
 		case id
-		case posterPathString	= "poster_apth"
+		case posterPathString	= "poster_path"
 		case overview
 		case name
 		case firstAirDate		= "first_air_date"
@@ -40,7 +40,7 @@ struct TVSearch: TVCommon, SearchResult {
 	
 	// MARK: SearchResult Computed Variables
 	var type: SearchResultType {
-		.people
+		.tv
 	}
 	
 	var image: URL? {

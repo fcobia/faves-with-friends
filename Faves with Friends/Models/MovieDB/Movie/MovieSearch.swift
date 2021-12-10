@@ -32,7 +32,7 @@ struct MovieSearch: Decodable, MovieCommon, SearchResult {
 	
 	// MARK: SearchResult Computed Variables
 	var type: SearchResultType {
-		.people
+		.movie
 	}
 	
 	var name: String {
@@ -55,7 +55,19 @@ struct MovieSearch: Decodable, MovieCommon, SearchResult {
 		title = try container.decode(String.self, forKey: .title)
 		posterPathString = try container.decodeIfPresent(String.self, forKey: .posterPathString)
 		backdropPathString = try container.decodeIfPresent(String.self, forKey: .backdropPathString)
-		releaseDate = try container.decodeIfPresent(Date.self, forKey: .releaseDate)
 		overview = try container.decodeIfPresent(String.self, forKey: .overview)
+
+		// Found a movie with an empty string for a date
+		do {
+			releaseDate = try container.decodeIfPresent(Date.self, forKey: .releaseDate)
+		}
+		catch let error {
+			if try container.decodeIfPresent(String.self, forKey: .releaseDate) == "" {
+				releaseDate = nil
+			}
+			else {
+				throw error
+			}
+		}
 	}
 }

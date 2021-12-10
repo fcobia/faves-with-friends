@@ -17,12 +17,6 @@ struct SearchScreenView: View {
 		static let minSearchTextLength	= 2
 	}
 
-	enum SearchType: String {
-		case All
-		case Movies
-		case TVShows
-	}
-
 	
 	// MARK: Environment Variables
 	@Environment(\.environmentManager) private var environmentManager: EnvironmentManager
@@ -32,10 +26,10 @@ struct SearchScreenView: View {
 	@EnvironmentObject var activityManager: ActivityManager
 
 	// MARK: State Variables
-	@State private var searchText: String 	= ""
-	@State private var totalResults: Int	= 0
-	@State private var movies: [MovieSearch]		= []
-    @State private var searchType: SearchType = .All
+	@State private var searchText: String 		= ""
+	@State private var totalResults: Int		= 0
+	@State private var results: [SearchResult]	= []
+	@State private var searchType: SearchType	= .all
     
 	// MARK: Private Computed Values
 	private var searchTextPublisher: AnyPublisher<String,Never> {
@@ -68,9 +62,9 @@ struct SearchScreenView: View {
 						.modifier(ClearButtonModifier(text: $searchText))
                     
 					Picker("", selection: $searchType) {
-						Text("All").tag(SearchType.All)
-						Text("Movies").tag(SearchType.Movies)
-						Text("TV Shows").tag(SearchType.TVShows)
+						ForEach(SearchType.allCases) { type in
+							Text(type.rawValue).tag(type)
+						}
 					}
 					.pickerStyle(SegmentedPickerStyle())
 					.background(Color(UIColor.systemBackground)).opacity(0.8).cornerRadius(8.0)
@@ -84,9 +78,9 @@ struct SearchScreenView: View {
 			}
 
 			List {
-				ForEach(movies) { movie in
-                    NavigationLink(destination: MovieDetailScreenView(id: movie.id, movieTitle: movie.title)) {
-                        SearchScreenRowView(movie: movie)
+				ForEach(results, id: \.id) { searchResult in
+					NavigationLink(destination: { destination(for: searchResult) }) {
+                        SearchScreenRowView(searchResult: searchResult)
                     }
 				}
 				.listRowBackground(Color.clear)
@@ -95,24 +89,43 @@ struct SearchScreenView: View {
 		}
         .navigationBarHidden(true)
 		.onChange(of: searchText) { newValue in
+			searchTextSubject.send(newValue)
+		}
+		.onChange(of: searchType) { _ in
 			searchTextSubject.send(searchText)
 		}
 		.onReceive(searchTextPublisher) { searchText in
-			
-			// Did we get a long enough string
-			if searchText.count > Constants.minSearchTextLength {
-				performSearch(searchText: searchText)
-			}
-			else {
-				movies = []
-				totalResults = 0
-			}
+			performSearch(searchText: searchText)
 		}
     }
 	
 	
 	// MARK: Private Methods
+	private func destination(for searchResult: SearchResult) -> some View {
+		switch searchResult.type {
+				
+			case .movie:
+				return AnyView(MovieDetailScreenView(id: searchResult.id, movieTitle: searchResult.name))
+				
+			case .tv:
+				return AnyView(EmptyView())
+				
+			case .person:
+				return AnyView(EmptyView())
+		}
+	}
+	
 	private func performSearch(searchText: String) {
+	
+		// Did we get a long enough string
+		guard searchText.count > Constants.minSearchTextLength else {
+			results = []
+			totalResults = 0
+			
+			return
+		}
+
+		// Perform the search asynchronously
 		Task {
 			
 			// Perform the search
@@ -121,8 +134,8 @@ struct SearchScreenView: View {
 				// Show the activity view
 				activityManager.showActivity()
 
-				let searchResults = try await environmentManager.movieNetworkManager.movieSearch(query: searchText)
-				movies = searchResults.results.compactMap({ $0 as? MovieSearch })
+				let searchResults = try await environmentManager.movieNetworkManager.search(query: searchText, type: searchType)
+				results = searchResults.results
 				totalResults = searchResults.totalResults
 			}
 			catch let error {

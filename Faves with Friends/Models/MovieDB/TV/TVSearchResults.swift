@@ -1,14 +1,14 @@
 //
-//  MovieSearchResults.swift
+//  TVSearchResults.swift
 //  Faves with Friends
 //
-//  Created by Frank Cobia on 12/7/21.
+//  Created by Frank Cobia on 12/9/21.
 //
 
 import Foundation
 
 
-struct MovieSearchResults: MovieDBSearchResults {
+struct TVSearchResults: MovieDBSearchResults {
 
 	// MARK: CodingKeys
 	private enum CodingKeys: String, CodingKey {
@@ -17,7 +17,7 @@ struct MovieSearchResults: MovieDBSearchResults {
 		case totalResults	= "total_results"
 		case results
 	}
-	
+
 	
 	// MARK: JSON Variables
 	let page: Int
@@ -36,6 +36,6 @@ struct MovieSearchResults: MovieDBSearchResults {
 		totalResults = try container.decode(Int.self, forKey: .totalResults)
 		
 		// Loop through the results
-		self.results = try container.decodeIfPresent([MovieSearch].self, forKey: .results) ?? []
+		self.results = try container.decodeIfPresent([TVSearch].self, forKey: .results) ?? []
 	}
 }

@@ -1,5 +1,5 @@
 //
-//  PeopleCommon.swift
+//  PersonCommon.swift
 //  Faves with Friends
 //
 //  Created by Frank Cobia on 12/6/21.
@@ -8,7 +8,7 @@
 import Foundation
 
 
-protocol PeopleCommon: Identifiable {
+protocol PersonCommon: Identifiable {
 	
 	// MARK: JSON Variables
 	var id: Int { get }
@@ -17,7 +17,7 @@ protocol PeopleCommon: Identifiable {
 }
 
 
-extension PeopleCommon {
+extension PersonCommon {
 	
 	var profilePath: URL? {
 		guard let profilePathString = profilePathString else {

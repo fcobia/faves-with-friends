@@ -38,7 +38,7 @@ class Faves_with_FriendsTests: XCTestCase {
     }
     
     func testMovieSearch() async throws {
-        let movies = try await movieNetworkManager.movieSearch(query: "Star Wars")
+        let movies = try await movieNetworkManager.search(query: "Star Wars")
         print(movies)
         XCTAssert(movies.results.count > 0)
     }

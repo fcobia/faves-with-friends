@@ -1,5 +1,5 @@
 //
-//  PeopleSearch.swift
+//  PersonSearch.swift
 //  Faves with Friends
 //
 //  Created by Frank Cobia on 12/6/21.
@@ -26,7 +26,7 @@ struct PersonSearch: PersonCommon, SearchResult {
 
 	// MARK: SearchResult Computed Variables
 	var type: SearchResultType {
-		.people
+		.person
 	}
 	
 	var image: URL? {

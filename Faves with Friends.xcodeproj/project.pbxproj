@@ -12,12 +12,16 @@
 		0119205B275F15D200F3C02F /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0119205A275F15D200F3C02F /* Video.swift */; };
 		0119205E275F19DC00F3C02F /* TVCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0119205D275F19DC00F3C02F /* TVCommon.swift */; };
 		01192060275F1AC400F3C02F /* TVSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0119205F275F1AC400F3C02F /* TVSearch.swift */; };
-		01192063275F1CD800F3C02F /* PeopleCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01192062275F1CD800F3C02F /* PeopleCommon.swift */; };
-		01192065275F204D00F3C02F /* PeopleSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01192064275F204D00F3C02F /* PeopleSearch.swift */; };
+		01192063275F1CD800F3C02F /* PersonCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01192062275F1CD800F3C02F /* PersonCommon.swift */; };
+		01192065275F204D00F3C02F /* PersonSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01192064275F204D00F3C02F /* PersonSearch.swift */; };
 		01192068275F235D00F3C02F /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01192067275F235D00F3C02F /* SearchResult.swift */; };
 		0119206A275F249E00F3C02F /* SearchResultType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01192069275F249E00F3C02F /* SearchResultType.swift */; };
 		0119206C275F338200F3C02F /* MovieSearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0119206B275F338200F3C02F /* MovieSearchResults.swift */; };
 		0119206E275F342100F3C02F /* MovieDBSearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0119206D275F342100F3C02F /* MovieDBSearchResults.swift */; };
+		011920702762FADD00F3C02F /* SearchType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0119206F2762FADD00F3C02F /* SearchType.swift */; };
+		011920722762FEB800F3C02F /* TVSearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011920712762FEB700F3C02F /* TVSearchResults.swift */; };
+		011920742762FF6600F3C02F /* PersonSearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011920732762FF6600F3C02F /* PersonSearchResults.swift */; };
+		011920772763039D00F3C02F /* MovieDBConstnts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011920762763039D00F3C02F /* MovieDBConstnts.swift */; };
 		0145A1D72754754900633B98 /* CurvedHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0145A1D62754754900633B98 /* CurvedHeaderView.swift */; };
 		0145A1D9275477B100633B98 /* StringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0145A1D8275477B100633B98 /* StringConstants.swift */; };
 		0145A1DB2754791100633B98 /* ActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0145A1DA2754791100633B98 /* ActivityManager.swift */; };
@@ -106,12 +110,16 @@
 		0119205A275F15D200F3C02F /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		0119205D275F19DC00F3C02F /* TVCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVCommon.swift; sourceTree = "<group>"; };
 		0119205F275F1AC400F3C02F /* TVSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVSearch.swift; sourceTree = "<group>"; };
-		01192062275F1CD800F3C02F /* PeopleCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleCommon.swift; sourceTree = "<group>"; };
-		01192064275F204D00F3C02F /* PeopleSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleSearch.swift; sourceTree = "<group>"; };
+		01192062275F1CD800F3C02F /* PersonCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonCommon.swift; sourceTree = "<group>"; };
+		01192064275F204D00F3C02F /* PersonSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonSearch.swift; sourceTree = "<group>"; };
 		01192067275F235D00F3C02F /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		01192069275F249E00F3C02F /* SearchResultType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultType.swift; sourceTree = "<group>"; };
 		0119206B275F338200F3C02F /* MovieSearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchResults.swift; sourceTree = "<group>"; };
 		0119206D275F342100F3C02F /* MovieDBSearchResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDBSearchResults.swift; sourceTree = "<group>"; };
+		0119206F2762FADD00F3C02F /* SearchType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchType.swift; sourceTree = "<group>"; };
+		011920712762FEB700F3C02F /* TVSearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVSearchResults.swift; sourceTree = "<group>"; };
+		011920732762FF6600F3C02F /* PersonSearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonSearchResults.swift; sourceTree = "<group>"; };
+		011920762763039D00F3C02F /* MovieDBConstnts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDBConstnts.swift; sourceTree = "<group>"; };
 		0145A1D62754754900633B98 /* CurvedHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurvedHeaderView.swift; sourceTree = "<group>"; };
 		0145A1D8275477B100633B98 /* StringConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringConstants.swift; sourceTree = "<group>"; };
 		0145A1DA2754791100633B98 /* ActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityManager.swift; sourceTree = "<group>"; };
@@ -211,11 +219,12 @@
 			children = (
 				0119206D275F342100F3C02F /* MovieDBSearchResults.swift */,
 				ED03E0A92751482D004DDEDA /* MultiSearchResults.swift */,
-				0119206B275F338200F3C02F /* MovieSearchResults.swift */,
 				01192055275DBC6600F3C02F /* Genre.swift */,
 				0119205A275F15D200F3C02F /* Video.swift */,
 				01192067275F235D00F3C02F /* SearchResult.swift */,
 				01192069275F249E00F3C02F /* SearchResultType.swift */,
+				0119206F2762FADD00F3C02F /* SearchType.swift */,
+				011920762763039D00F3C02F /* MovieDBConstnts.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -223,6 +232,7 @@
 		0119205C275F19CB00F3C02F /* TV */ = {
 			isa = PBXGroup;
 			children = (
+				011920712762FEB700F3C02F /* TVSearchResults.swift */,
 				0119205D275F19DC00F3C02F /* TVCommon.swift */,
 				0119205F275F1AC400F3C02F /* TVSearch.swift */,
 			);
@@ -232,8 +242,9 @@
 		01192061275F1C9600F3C02F /* People */ = {
 			isa = PBXGroup;
 			children = (
-				01192062275F1CD800F3C02F /* PeopleCommon.swift */,
-				01192064275F204D00F3C02F /* PeopleSearch.swift */,
+				01192062275F1CD800F3C02F /* PersonCommon.swift */,
+				01192064275F204D00F3C02F /* PersonSearch.swift */,
+				011920732762FF6600F3C02F /* PersonSearchResults.swift */,
 			);
 			path = People;
 			sourceTree = "<group>";
@@ -247,6 +258,14 @@
 				01A81A4227504AD900D47916 /* Movie */,
 			);
 			path = MovieDB;
+			sourceTree = "<group>";
+		};
+		011920752763023200F3C02F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EDB9F71A27531E990029D771 /* SearchScreenRowView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		0145A1E82756D7CA00633B98 /* Preview Helpers */ = {
@@ -363,6 +382,7 @@
 		01A81A4227504AD900D47916 /* Movie */ = {
 			isa = PBXGroup;
 			children = (
+				0119206B275F338200F3C02F /* MovieSearchResults.swift */,
 				ED11C84127545D5A00A181D5 /* MovieCommon.swift */,
 				01CCDB6C274F583C008337BB /* Movie.swift */,
 				ED11C84327545FF000A181D5 /* MovieSearch.swift */,
@@ -400,8 +420,8 @@
 		01A81A4C2751D08400D47916 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				011920752763023200F3C02F /* Views */,
 				01A81A4D2751D09C00D47916 /* SearchScreenView.swift */,
-				EDB9F71A27531E990029D771 /* SearchScreenRowView.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -751,8 +771,11 @@
 				01A81A23274F63A800D47916 /* Environment+User.swift in Sources */,
 				0145A1EF2756E15700633B98 /* ImageLoadingView.swift in Sources */,
 				01A81A4727504C9A00D47916 /* DisplayableErrorInfoButton.swift in Sources */,
+				011920772763039D00F3C02F /* MovieDBConstnts.swift in Sources */,
 				01CCDB5E274F4DC0008337BB /* MovieErrorCodes.swift in Sources */,
 				01CCDB66274F513E008337BB /* MovieHTTPServiceErrorMapper.swift in Sources */,
+				011920742762FF6600F3C02F /* PersonSearchResults.swift in Sources */,
+				011920722762FEB800F3C02F /* TVSearchResults.swift in Sources */,
 				01A81A1D274F618000D47916 /* AppDelegate.swift in Sources */,
 				01A81A3F274F67C500D47916 /* ColorPalettes.swift in Sources */,
 				0145A1FD2758915500633B98 /* AppAltTextModifier.swift in Sources */,
@@ -783,15 +806,16 @@
 				ED11C84B275AF21E00A181D5 /* FavesViewModel.swift in Sources */,
 				01CCDB55274F4449008337BB /* TemporaryUserManager.swift in Sources */,
 				01CCDB60274F4EF2008337BB /* MovieNetworkErrorInfo.swift in Sources */,
-				01192063275F1CD800F3C02F /* PeopleCommon.swift in Sources */,
+				01192063275F1CD800F3C02F /* PersonCommon.swift in Sources */,
 				0145A1D9275477B100633B98 /* StringConstants.swift in Sources */,
 				01CCDB16274F3BF4008337BB /* Faves_with_FriendsApp.swift in Sources */,
 				01A81A21274F62B500D47916 /* LoginScreenView.swift in Sources */,
 				01CCDB6D274F583C008337BB /* Movie.swift in Sources */,
+				011920702762FADD00F3C02F /* SearchType.swift in Sources */,
 				01A81A3A274F66BC00D47916 /* Color+Palette.swift in Sources */,
 				0145A1D72754754900633B98 /* CurvedHeaderView.swift in Sources */,
 				0119206E275F342100F3C02F /* MovieDBSearchResults.swift in Sources */,
-				01192065275F204D00F3C02F /* PeopleSearch.swift in Sources */,
+				01192065275F204D00F3C02F /* PersonSearch.swift in Sources */,
 				0145A1E72756D70C00633B98 /* AppMovieNetworkManager.swift in Sources */,
 				01A81A33274F658400D47916 /* SecondaryButtonModifier.swift in Sources */,
 				ED11C8472754686600A181D5 /* MovieDetailScreenView.swift in Sources */,

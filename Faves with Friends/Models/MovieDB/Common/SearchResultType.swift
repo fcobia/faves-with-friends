@@ -11,5 +11,5 @@ import Foundation
 enum SearchResultType {
 	case movie
 	case tv
-	case people
+	case person
 }

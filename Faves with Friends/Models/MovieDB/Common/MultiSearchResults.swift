@@ -17,7 +17,7 @@ struct MultiSearchResults: MovieDBSearchResults {
 		case totalResults	= "total_results"
 		case results
 	}
-	
+
 	
 	// MARK: JSON Variables
 	let page: Int
@@ -64,7 +64,7 @@ private struct Intermediate: Decodable {
 				value = try TVSearch(from: decoder)
 				
 			case "person":
-				value = try PeopleSearch(from: decoder)
+				value = try PersonSearch(from: decoder)
 				
 			default:
 				throw DecodingError.dataCorrupted(.init(codingPath: decoder.codingPath, debugDescription: "Unknown search result type: \(mediaType)", underlyingError: nil))

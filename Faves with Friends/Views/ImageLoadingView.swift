@@ -137,6 +137,7 @@ private struct LocalLoadingView: View {
 			}
 			Spacer()
 		}
+		.frame(width: backgroundSize.width, height: backgroundSize.height)
 		.background(Color.black.opacity(0.3))
 	}
 }
