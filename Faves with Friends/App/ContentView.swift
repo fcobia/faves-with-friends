@@ -40,6 +40,8 @@ struct ContentView: View {
 				ProgressView()
 					.tint(.white)
 					.scaleEffect(2.5)
+					.ignoresSafeArea()
+					.frame(maxWidth: .infinity, maxHeight: .infinity)
 					.background(Color.black.opacity(0.3))
 
 			}

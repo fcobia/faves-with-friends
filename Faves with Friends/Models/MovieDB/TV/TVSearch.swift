@@ -50,4 +50,29 @@ struct TVSearch: TVCommon, SearchResult {
 	var date: Date? {
 		firstAirDate
 	}
+	
+	
+	// MARK: Decoder
+	
+	init(from decoder: Decoder) throws {
+		let container = try decoder.container(keyedBy: CodingKeys.self)
+		
+		id = try container.decode(Int.self, forKey: .id)
+		name = try container.decode(String.self, forKey: .name)
+		posterPathString = try container.decodeIfPresent(String.self, forKey: .posterPathString)
+		overview = try container.decodeIfPresent(String.self, forKey: .overview)
+
+		// Found a movie with an empty string for a date
+		do {
+			firstAirDate = try container.decodeIfPresent(Date.self, forKey: .firstAirDate)
+		}
+		catch let error {
+			if try container.decodeIfPresent(String.self, forKey: .firstAirDate) == "" {
+				firstAirDate = nil
+			}
+			else {
+				throw error
+			}
+		}
+	}
 }
