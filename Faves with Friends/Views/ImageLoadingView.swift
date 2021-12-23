@@ -38,8 +38,13 @@ struct ImageLoadingView<Content>: View where Content: View {
 			view(for: previewPhase)
 		}
 		else {
-			AsyncImage(url: url) { phase in
-				view(for: phase)
+			if let url = url {
+				AsyncImage(url: url) { phase in
+					view(for: phase)
+				}
+			}
+			else {
+				view(for: .failure(LocalError.nilImage))
 			}
 		}
     }
@@ -57,7 +62,7 @@ struct ImageLoadingView<Content>: View where Content: View {
 				return AnyView(content(image))
 				
 			case .failure:
-				return AnyView(FailureView())
+				return AnyView(FailureView(backgroundSize: progressViewSize))
 				
 			@unknown default:
 				// Since the AsyncImagePhase enum isn't frozen,
@@ -145,11 +150,21 @@ private struct LocalLoadingView: View {
 
 private struct FailureView: View {
 	
+	// Variables
+	let backgroundSize: CGSize
+
+	
 	// MARK: SwiftUI View
 	var body: some View {
 		Image(systemName: "photo")
 			.resizable()
+			.opacity(0.4)
+			.frame(width: backgroundSize.width, height: backgroundSize.height)
 	}
+}
+
+private enum LocalError: Error {
+	case nilImage
 }
 
 
@@ -167,7 +182,7 @@ struct ImageLoadingView_Previews: PreviewProvider {
 				LocalLoadingView(backgroundSize: .init(width: 100, height: 100))
 					.previewDisplayName("Loading")
 				
-				FailureView()
+				FailureView(backgroundSize: .init(width: 100, height: 100))
 					.previewDisplayName("Failure")
 			}
 			.frame(width: 300, height: 300)

@@ -10,6 +10,11 @@ import SwiftUI
 
 struct SearchScreenRowView: View {
 	
+	// MARK: Constants
+	private enum Constants {
+		static let imageSize = CGSize(width: 75, height: 100)
+	}
+	
 	// MARK: Preview Support Variables
 	private let previewImagePhase: AsyncImagePhase?
 
@@ -21,10 +26,10 @@ struct SearchScreenRowView: View {
     var body: some View {
 		HStack {
 			
-			ImageLoadingView(url: searchResult.image, style: .localProgress, progressViewSize: CGSize(width: 100, height: 100), previewPhase: previewImagePhase) { image in
+			ImageLoadingView(url: searchResult.image, style: .localProgress, progressViewSize: Constants.imageSize, previewPhase: previewImagePhase) { image in
 				image.resizable()
 					 .aspectRatio(contentMode: .fit)
-					 .frame(maxWidth: 100, maxHeight: 100)
+					 .frame(maxWidth: Constants.imageSize.width, maxHeight: Constants.imageSize.height)
 			}
 
 			VStack(alignment: .leading) {
