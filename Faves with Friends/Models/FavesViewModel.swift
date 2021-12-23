@@ -73,7 +73,11 @@ class FaveViewModel: ObservableObject {
     
 }
 
-struct WatchListItem: Codable {
+struct WatchListItem: Codable, Identifiable {
+    var id = UUID()
     let videoId: Int
     let rating: Double?
+    let type: VideoType?
+    let title: String?
+    let moviePosterURL: URL?
 }
