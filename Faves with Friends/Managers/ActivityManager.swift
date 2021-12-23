@@ -8,7 +8,6 @@
 import Foundation
 
 
-@MainActor
 final class ActivityManager: ObservableObject {
 	
 	// MARK: Public Computed Variables

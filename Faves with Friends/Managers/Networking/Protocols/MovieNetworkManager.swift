@@ -13,5 +13,5 @@ import HTTPServiceFoundation
 protocol MovieNetworkManager {
 
 	func movieDetails(id: Int) async throws -> Movie
-    func search(query: String, type: SearchType) async throws -> MovieDBSearchResults
+    func search(query: String, type: SearchType, page: Int) async throws -> MovieDBSearchResults
 }

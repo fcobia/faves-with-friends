@@ -16,7 +16,7 @@ final class PreviewMovieNetworkManager: MovieNetworkManager {
 		return await loadJSON(movieDetailJSON, withDelay: 100)
 	}
 	
-	func search(query: String, type: SearchType) async throws -> MovieDBSearchResults {
+	func search(query: String, type: SearchType, page: Int) async throws -> MovieDBSearchResults {
 		let result: MultiSearchResults = await loadJSON(multiSearchJSON, withDelay: 100)
 		
 		return result
