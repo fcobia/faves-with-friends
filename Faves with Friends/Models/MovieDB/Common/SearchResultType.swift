@@ -8,7 +8,7 @@
 import Foundation
 
 
-enum SearchResultType {
+enum SearchResultType: String {
 	case movie
 	case tv
 	case person

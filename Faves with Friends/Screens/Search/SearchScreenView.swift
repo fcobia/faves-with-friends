@@ -16,10 +16,10 @@ struct SearchScreenView: View {
 	
 	// MARK: EnvironmentObjects
 	@EnvironmentObject var alertManager: AlertManager
-	@EnvironmentObject var activityManager: ActivityManager
 	
 	// MARK: Private Observable Objects
-	@ObservedObject private var dataSource = SearchResultsDataSource()
+	@ObservedObject private var dataSource 		= SearchResultsDataSource()
+	@ObservedObject private var activityManager	= ActivityManager()
 
 	
 	// MARK: SwiftUI
@@ -60,12 +60,23 @@ struct SearchScreenView: View {
 			if let results = dataSource.results {
 				if results.isEmpty == false {
 					List {
-						ForEach(results, id: \.id) { searchResult in
+						ForEach(results, id: \.equalityId) { searchResult in
 							NavigationLink(destination: { destination(for: searchResult) }) {
-								SearchScreenRowView(searchResult: searchResult)
+								HStack {
+									SearchScreenRowView(searchResult: searchResult)
+										.onAppear {
+											dataSource.fetchIfNecessary(searchResult)
+										}
+									
+									Text("\(results.firstIndex(where: { $0.equalityId == searchResult.equalityId }) ?? 0)")
+								}
 							}
 						}
 						.listRowBackground(Color.clear)
+						
+						if activityManager.shouldShowActivity {
+							LoadingRowView()
+						}
 					}
 					.listStyle(.plain)
 				}
@@ -79,8 +90,14 @@ struct SearchScreenView: View {
 				}
 			}
 			else {
+				
+				if activityManager.shouldShowActivity {
+					LoadingRowView()
+				}
+				else {
 					Text("")
 						.frame(maxHeight: .infinity)
+				}
 			}
 		}
         .navigationBarHidden(true)

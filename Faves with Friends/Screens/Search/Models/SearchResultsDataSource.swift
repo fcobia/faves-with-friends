@@ -42,8 +42,10 @@ final class SearchResultsDataSource: ObservableObject {
 	
 	// MARK: Public Read-Only Published Variables
 	@Published private(set) var results: [SearchResult]?	= nil
-	@Published private(set)	var totalResults: Int			= 0
-	
+
+	// MARK: Public Read-Only Variables
+	private(set) var totalResults: Int	= 0
+
 	// MARK: Init Variables
 	private var alertManager: AlertManager!
 	private var activityManager: ActivityManager!
@@ -52,7 +54,11 @@ final class SearchResultsDataSource: ObservableObject {
 	// MARK: Private Variables
 	private let searchTextSubject 						= PassthroughSubject<String,Never>()
 	private var searchTextCancellable: AnyCancellable?	= nil
-	
+	private var resultIds: Set<String>					= []
+	private var nextPage: Int							= 0
+	private var totalPages: Int							= 0
+	private var nextFetchIndex: Int						= 0
+
 	
 	// MARK: Init
 	
@@ -73,12 +79,30 @@ final class SearchResultsDataSource: ObservableObject {
 		self.movieNetworkManager = movieNetworkManager
 	}
 	
+	func fetchIfNecessary(_ item: SearchResult) {
+		
+		// Make sure we are not fetching
+		guard activityManager.shouldShowActivity == false else { return }
+		
+		// Check the index
+		let itemId = item.equalityId
+		guard let currentIndex = results?.firstIndex(where: {$0.equalityId == itemId }) else { return }
+		
+		// Perform the search if necessary
+		if currentIndex >= nextFetchIndex {
+			performSearch(searchText: searchText)
+		}
+	}
+	
 	
 	// MARK: Private Functions
 	
 	private func clearSearchResults() {
 		results = nil
+		nextPage = 0
 		totalResults = 0
+		totalPages = 0
+		nextFetchIndex = 0
 	}
 	
 	private func resetSearch() {
@@ -95,6 +119,9 @@ final class SearchResultsDataSource: ObservableObject {
 			
 			return
 		}
+		
+		// Make sure there are more pages
+		guard nextPage == 0 || nextPage < totalPages else { return }
 
 		// Perform the search asynchronously
 		Task {
@@ -105,17 +132,48 @@ final class SearchResultsDataSource: ObservableObject {
 				// Show the activity view
 				activityManager.showActivity()
 
-				let searchResults = try await movieNetworkManager.search(query: searchText, type: searchType, page: 1)
-				results = searchResults.results
+				// Perform the search
+				print("Fetching \(nextPage) of \(totalPages)")
+				let searchResults = try await movieNetworkManager.search(query: searchText, type: searchType, page: nextPage)
+				print("\tFinished \(searchResults.results.count)")
+				
+				// Take total counts
 				totalResults = searchResults.totalResults
+				totalPages = searchResults.totalPages
+				
+				// Remove duplicate results
+				let filteredResults = searchResults.results.filter({ resultIds.contains($0.equalityId) == false })
+				
+				// Set the results
+				if let results = results {
+					self.results = results + filteredResults
+				}
+				else {
+					results = filteredResults
+				}
+				
+				// Calculate the next fetch index
+				if nextPage < totalPages {
+					nextFetchIndex = (results?.count ?? 0) - Int(Double(filteredResults.count) * 0.25)
+				}
+				else {
+					nextFetchIndex = totalResults + 1
+				}
+				
+				// Keep track of the results already loaded
+				filteredResults.forEach({ resultIds.insert($0.equalityId) })
+				
+				// Increment the current page number
+				nextPage += 1
+				
+				// Hide the activity view
+				print("\tHiding activity")
+				activityManager.hideActivity()
 			}
 			catch let error {
 				print("Error: \(error)")
 				alertManager.showAlert(for: error)
 			}
-			
-			// Hide teh activity view
-			activityManager.hideActivity()
 		}
 	}
 }

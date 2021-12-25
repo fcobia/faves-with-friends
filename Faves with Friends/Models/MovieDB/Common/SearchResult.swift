@@ -16,4 +16,13 @@ protocol SearchResult: Decodable {
 	var name: String { get }
 	var image: URL? { get }
 	var date: Date? { get }
+	var equalityId: String { get }
+}
+
+
+extension SearchResult {
+	
+	var equalityId: String {
+		return "\(type.rawValue)~\(id)"
+	}
 }
