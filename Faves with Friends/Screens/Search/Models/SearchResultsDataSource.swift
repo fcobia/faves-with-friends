@@ -52,6 +52,7 @@ final class SearchResultsDataSource: ObservableObject {
 	private var movieNetworkManager: MovieNetworkManager!
 
 	// MARK: Private Variables
+	private let loadingCoordinator						= LoadingCoordinator()
 	private let searchTextSubject 						= PassthroughSubject<String,Never>()
 	private var searchTextCancellable: AnyCancellable?	= nil
 	private var resultIds: Set<String>					= []
@@ -80,9 +81,6 @@ final class SearchResultsDataSource: ObservableObject {
 	}
 	
 	func fetchIfNecessary(_ item: SearchResult) {
-		
-		// Make sure we are not fetching
-		guard activityManager.shouldShowActivity == false else { return }
 		
 		// Check the index
 		let itemId = item.equalityId
@@ -129,13 +127,14 @@ final class SearchResultsDataSource: ObservableObject {
 			// Perform the search
 			do {
 				
+				// Make sure we do not load two at once
+				guard await loadingCoordinator.startLoading() == true else { return }
+				
 				// Show the activity view
 				activityManager.showActivity()
 
 				// Perform the search
-				print("Fetching \(nextPage) of \(totalPages)")
 				let searchResults = try await movieNetworkManager.search(query: searchText, type: searchType, page: nextPage)
-				print("\tFinished \(searchResults.results.count)")
 				
 				// Take total counts
 				totalResults = searchResults.totalResults
@@ -167,13 +166,32 @@ final class SearchResultsDataSource: ObservableObject {
 				nextPage += 1
 				
 				// Hide the activity view
-				print("\tHiding activity")
 				activityManager.hideActivity()
+				
+				// Finish the loading
+				await loadingCoordinator.endLoading()
 			}
 			catch let error {
 				print("Error: \(error)")
 				alertManager.showAlert(for: error)
 			}
 		}
+	}
+}
+
+
+private actor LoadingCoordinator {
+	private var isLoading: Bool = false
+	
+	func startLoading() -> Bool {
+		guard isLoading == false else { return false }
+		
+		isLoading = true
+		
+		return true
+	}
+	
+	func endLoading() {
+		isLoading = false
 	}
 }
