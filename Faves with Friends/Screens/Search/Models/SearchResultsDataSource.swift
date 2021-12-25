@@ -34,7 +34,11 @@ final class SearchResultsDataSource: ObservableObject {
 			searchTextSubject.send(searchText)
 		}
 	}
-	@Published var searchType: SearchType		= .all
+	@Published var searchType: SearchType		= .all {
+		didSet {
+			resetSearch()
+		}
+	}
 	
 	// MARK: Public Read-Only Published Variables
 	@Published private(set) var results: [SearchResult]?	= nil
@@ -72,12 +76,22 @@ final class SearchResultsDataSource: ObservableObject {
 	
 	// MARK: Private Functions
 	
+	private func clearSearchResults() {
+		results = nil
+		totalResults = 0
+	}
+	
+	private func resetSearch() {
+		clearSearchResults()
+		
+		performSearch(searchText: searchText)
+	}
+	
 	private func performSearch(searchText: String) {
 	
 		// Did we get a long enough string
 		guard searchText.count > Constants.minSearchTextLength else {
-			results = []
-			totalResults = 0
+			clearSearchResults()
 			
 			return
 		}
