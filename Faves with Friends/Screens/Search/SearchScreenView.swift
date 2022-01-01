@@ -67,8 +67,6 @@ struct SearchScreenView: View {
 										.onAppear {
 											dataSource.fetchIfNecessary(searchResult)
 										}
-									
-									Text("\(results.firstIndex(where: { $0.equalityId == searchResult.equalityId }) ?? 0)")
 								}
 							}
 						}

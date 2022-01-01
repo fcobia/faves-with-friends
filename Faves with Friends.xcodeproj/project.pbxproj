@@ -33,6 +33,7 @@
 		0145A2032758965600633B98 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 0145A2052758965600633B98 /* Localizable.stringsdict */; };
 		018C19922774237600840E21 /* SearchResultsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018C19912774237600840E21 /* SearchResultsDataSource.swift */; };
 		018C19942777C9E800840E21 /* LoadingRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018C19932777C9E800840E21 /* LoadingRowView.swift */; };
+		018C199A277C057400840E21 /* ViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018C1999277C057400840E21 /* ViewDataSource.swift */; };
 		01A81A12274F5DD100D47916 /* EnvironmentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A81A11274F5DD100D47916 /* EnvironmentManager.swift */; };
 		01A81A14274F5E5600D47916 /* AppEnvironmentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A81A13274F5E5600D47916 /* AppEnvironmentManager.swift */; };
 		01A81A19274F5FB600D47916 /* Environment+EnvironmentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A81A18274F5FB600D47916 /* Environment+EnvironmentManager.swift */; };
@@ -133,6 +134,7 @@
 		0145A2042758965600633B98 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		018C19912774237600840E21 /* SearchResultsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsDataSource.swift; sourceTree = "<group>"; };
 		018C19932777C9E800840E21 /* LoadingRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingRowView.swift; sourceTree = "<group>"; };
+		018C1999277C057400840E21 /* ViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDataSource.swift; sourceTree = "<group>"; };
 		01A81A11274F5DD100D47916 /* EnvironmentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentManager.swift; sourceTree = "<group>"; };
 		01A81A13274F5E5600D47916 /* AppEnvironmentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironmentManager.swift; sourceTree = "<group>"; };
 		01A81A18274F5FB600D47916 /* Environment+EnvironmentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Environment+EnvironmentManager.swift"; sourceTree = "<group>"; };
@@ -297,6 +299,14 @@
 				018C19912774237600840E21 /* SearchResultsDataSource.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		018C1998277C055900840E21 /* Base Classes */ = {
+			isa = PBXGroup;
+			children = (
+				018C1999277C057400840E21 /* ViewDataSource.swift */,
+			);
+			path = "Base Classes";
 			sourceTree = "<group>";
 		};
 		01A81A15274F5F7C00D47916 /* Extensions */ = {
@@ -533,6 +543,7 @@
 			children = (
 				0145A1E62756D70C00633B98 /* AppMovieNetworkManager.swift */,
 				01CCDB50274F42C3008337BB /* NetworkConstants.swift */,
+				018C1998277C055900840E21 /* Base Classes */,
 				01CCDB68274F52EB008337BB /* Protocols */,
 				01CCDB67274F5212008337BB /* Movie */,
 			);
@@ -812,6 +823,7 @@
 				0145A1ED2756DE9500633B98 /* MovieDetailHeaderView.swift in Sources */,
 				01CCDB4F274F3F01008337BB /* MovieHTTPServiceNetworkConnector.swift in Sources */,
 				01CCDB18274F3BF4008337BB /* ContentView.swift in Sources */,
+				018C199A277C057400840E21 /* ViewDataSource.swift in Sources */,
 				01A81A4127504A8100D47916 /* AlertManager.swift in Sources */,
 				0119206C275F338200F3C02F /* MovieSearchResults.swift in Sources */,
 				01A81A19274F5FB600D47916 /* Environment+EnvironmentManager.swift in Sources */,
