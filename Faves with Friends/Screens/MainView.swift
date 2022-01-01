@@ -35,7 +35,7 @@ struct MainView: View {
 				
 				// Tab 2
 				NavigationView {
-					Text("My List")
+					MyListScreenView()
 				}
 				.tabItem {
 					Image(systemName: "list.bullet.circle")
@@ -43,7 +43,7 @@ struct MainView: View {
 				}
                 
                 NavigationView {
-                    Text("Your Ratings")
+                    MyRatingsScreenView()
                 }
                 .tabItem {
                     Image(systemName: "star.circle")

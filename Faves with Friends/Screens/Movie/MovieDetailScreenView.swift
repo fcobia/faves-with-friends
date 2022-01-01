@@ -19,41 +19,52 @@ struct MovieDetailScreenView: View {
     
     // MARK: EnvironmentObjects
     @EnvironmentObject var alertManager: AlertManager
-	@EnvironmentObject var activityManager: ActivityManager
+    @EnvironmentObject var activityManager: ActivityManager
     @EnvironmentObject var favesViewModel: FaveViewModel
-
-	// MARK: State Variables
-	@State private var movie: Movie? = nil
+    
+    // MARK: State Variables
+    @State private var movie: Movie? = nil
     @State private var watched = false
-	@State private var showingConfirmationDialog = false
+    @State private var showingConfirmationDialog = false
     @State private var list: ListType = .Watchlist
     @State private var rating: Double?
     @State private var ratingEnabled = false
     
-	// MARK: Preview Support Variables
-	private let previewBackdropPhase: AsyncImagePhase?
-	private let previewPosterPhase: AsyncImagePhase?
-
-	// MARK: Private Variables
+    // MARK: Preview Support Variables
+    private let previewBackdropPhase: AsyncImagePhase?
+    private let previewPosterPhase: AsyncImagePhase?
+    
+    // MARK: Private Variables
     private let id: Int
     private let movieTitle: String
     
-	// MARK: SwiftUI View
+    // MARK: SwiftUI View
     var body: some View {
-		GeometryReader { geometry in
-			VStack {
-				if let movie = movie {
+        GeometryReader { geometry in
+            VStack {
+                if let movie = movie {
                     VStack {
                         MovieDetailHeaderView(movie: movie, previewBackdropPhase: previewBackdropPhase, previewPosterPhase: previewPosterPhase)
                             .frame(height: geometry.size.height / 3)
                     }
                     ScrollView {
                         VStack {
-                            Toggle("Mark as watched:", isOn: $watched)
-                                .padding(.horizontal)
-                                .onChange(of: watched) { _isOn in
-                                    ratingEnabled.toggle()
+                            HStack {
+                                VStack(alignment: .leading) {
+                                    HStack(alignment: .center, spacing: 5) {
+                                        Text("Watched:")
+                                            .appText()
+                                            .padding(.trailing)
+                                        Toggle("Watched:", isOn: $watched)
+                                            .labelsHidden()
+                                            .onChange(of: watched) { _isOn in
+                                                ratingEnabled.toggle()
+                                            }
+                                    }
                                 }
+                                Spacer()
+                            }
+                            .padding(.horizontal)
                             Button {
                                 showingConfirmationDialog.toggle()
                             } label: {
@@ -63,11 +74,11 @@ struct MovieDetailScreenView: View {
                             .confirmationDialog("Add to list", isPresented: $showingConfirmationDialog) {
                                 Button("To Watch") {
                                     list = .Watchlist
-                                    favesViewModel.addToToWatchList(WatchListItem(videoId: movie.id, rating: rating))
+                                    favesViewModel.addToToWatchList(WatchListItem(videoId: movie.id, rating: rating, type: .movie, title: movie.title, moviePosterURL: movie.posterPath))
                                 }
                                 Button("Watched") {
                                     list = .Watched
-                                    favesViewModel.addToWatchedList(WatchListItem(videoId: movie.id, rating: rating))
+                                    favesViewModel.addToWatchedList(WatchListItem(videoId: movie.id, rating: rating, type: .movie, title: movie.title, moviePosterURL: movie.posterPath))
                                 }
                             } message: {
                                 Text("Add to list")
@@ -85,33 +96,33 @@ struct MovieDetailScreenView: View {
                         }
                     }
                 }
-			}
+            }
             .background(.background)
             .navigationTitle(movieTitle)
             .navigationBarTitleDisplayMode(.inline)
         }
         .onAppear() {
-			if movie == nil {
-				getMovieDetails(id: id)
-			}
+            if movie == nil {
+                getMovieDetails(id: id)
+            }
         }
     }
-	
-	
-	// MARK: Init
-	
+    
+    
+    // MARK: Init
+    
     init(id: Int, movieTitle: String, previewBackdropPhase: AsyncImagePhase? = nil, previewPosterPhase: AsyncImagePhase? = nil) {
-		self.id = id
+        self.id = id
         self.movieTitle = movieTitle
-		self.previewBackdropPhase = previewBackdropPhase
-		self.previewPosterPhase = previewPosterPhase
-	}
+        self.previewBackdropPhase = previewBackdropPhase
+        self.previewPosterPhase = previewPosterPhase
+    }
     
     // MARK: Private Methods
     private func getMovieDetails(id: Int) {
         Task {
             do {
-				activityManager.showActivity()
+                activityManager.showActivity()
                 movie = try await environmentManager.movieNetworkManager.movieDetails(id: id)
                 //showProgressView = false
             }
@@ -120,8 +131,8 @@ struct MovieDetailScreenView: View {
                 //showProgressView = false
                 alertManager.showAlert(for: error)
             }
-			
-			activityManager.hideActivity()
+            
+            activityManager.hideActivity()
         }
     }
 }
@@ -129,8 +140,8 @@ struct MovieDetailScreenView: View {
 
 struct MovieDetailScreenView_Previews: PreviewProvider {
     static var previews: some View {
-		MovieDetailScreenView(id: 11, movieTitle: "Star Wars")
-			.modifier(ContentView_Previews.previewEnvironmentModifier)
+        MovieDetailScreenView(id: 11, movieTitle: "Star Wars")
+            .modifier(ContentView_Previews.previewEnvironmentModifier)
     }
 }
 
