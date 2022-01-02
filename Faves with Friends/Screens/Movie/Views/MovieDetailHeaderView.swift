@@ -82,17 +82,17 @@ struct MovieDetailHeaderView_Previews: PreviewProvider {
 		Group {
 			
 			MovieDetailHeaderView(
-				movie: PreviewMovieNetworkManager.mockMovieDetails,
+				movie: MockMovieDetailJSON.parsed(),
 				previewBackdropPhase: .success(Image("PreviewMovieBackdrop")),
 				previewPosterPhase: .success(Image("PreviewMoviePoster")))
 			
 			MovieDetailHeaderView(
-				movie: PreviewMovieNetworkManager.mockMovieDetails,
+				movie: MockMovieDetailJSON.parsed(),
 				previewBackdropPhase: .success(Image("PreviewMovieBackdrop")),
 				previewPosterPhase: .empty)
 			
 			MovieDetailHeaderView(
-				movie: PreviewMovieNetworkManager.mockMovieDetails,
+				movie: MockMovieDetailJSON.parsed(),
 				previewBackdropPhase: .empty,
 				previewPosterPhase: .success(Image("PreviewMoviePoster")))
 		}

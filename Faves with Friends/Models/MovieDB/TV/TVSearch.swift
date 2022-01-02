@@ -10,10 +10,12 @@ import Foundation
 
 struct TVSearch: TVCommon, SearchResult {
 	
+	
 	// MARK: Coding Keys
 	private enum CodingKeys: String, CodingKey {
 		case id
 		case posterPathString	= "poster_path"
+		case backdropPathString	= "backdrop_path"
 		case overview
 		case name
 		case firstAirDate		= "first_air_date"
@@ -23,6 +25,7 @@ struct TVSearch: TVCommon, SearchResult {
 	// MARK: JSON Variables
 	let id: Int
 	let posterPathString: String?
+	let backdropPathString: String?
 	let overview: String?
 	let name: String
 	let firstAirDate: Date?
@@ -60,6 +63,7 @@ struct TVSearch: TVCommon, SearchResult {
 		id = try container.decode(Int.self, forKey: .id)
 		name = try container.decode(String.self, forKey: .name)
 		posterPathString = try container.decodeIfPresent(String.self, forKey: .posterPathString)
+		backdropPathString = try container.decodeIfPresent(String.self, forKey: .backdropPathString)
 		overview = try container.decodeIfPresent(String.self, forKey: .overview)
 
 		// Found a movie with an empty string for a date

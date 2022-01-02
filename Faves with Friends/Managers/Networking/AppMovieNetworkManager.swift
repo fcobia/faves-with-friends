@@ -23,11 +23,7 @@ final class AppMovieNetworkManager: MovieNetworkManager {
 	}
 	
 	
-	// MARK: Public Methods
-	
-	public func movieDetails(id: Int) async throws -> Movie {
-		return try await movieNetworkService.fetch(.details(id: id))
-	}
+	// MARK: Search
 	
 	public func search(query: String, type: SearchType, page: Int) async throws -> MovieDBSearchResults {
 		let pageToUse = page + 1
@@ -47,6 +43,32 @@ final class AppMovieNetworkManager: MovieNetworkManager {
 				return try await movieNetworkService.fetch(.personSearch(query: query, page: pageToUse))
 		}
 	}
+
+
+	// MARK: Movie
+
+	public func movieDetails(id: Int) async throws -> Movie {
+		return try await movieNetworkService.fetch(.movieDetails(id: id))
+	}
+
+	func movieRecommendations(id: Int, page: Int) async throws -> MovieSearchResults {
+		let pageToUse = page + 1
+		
+		return try await movieNetworkService.fetch(.movieRecommendations(id: id, page: pageToUse))
+	}
+
+	
+	// MARK: TV
+
+	public func tvDetails(id: Int) async throws -> TV {
+		return try await movieNetworkService.fetch(.tvDetails(id: id))
+	}
+
+	func tvRecommendations(id: Int, page: Int) async throws -> TVSearchResults {
+		let pageToUse = page + 1
+		
+		return try await movieNetworkService.fetch(.tvRecommendations(id: id, page: pageToUse))
+	}
 }
 
 
@@ -54,22 +76,26 @@ final class AppMovieNetworkManager: MovieNetworkManager {
 extension SimpleHTTPServicePath {
 	static private let basePath = "/3/"
 	
-	static fileprivate let details			= SimpleHTTPServicePath("\(basePath)movie")
+	// Search
 	static fileprivate let multiSearch    	= SimpleHTTPServicePath("\(basePath)search/multi")
 	static fileprivate let movieSearch    	= SimpleHTTPServicePath("\(basePath)search/movie")
 	static fileprivate let tvSearch			= SimpleHTTPServicePath("\(basePath)search/tv")
 	static fileprivate let personSearch		= SimpleHTTPServicePath("\(basePath)search/person")
+	
+	// Movie
+	static fileprivate let movieDetails			= SimpleHTTPServicePath("\(basePath)movie")
+	static fileprivate let movieRecommendations	= SimpleHTTPServicePath("\(basePath)movie/{id}/recommendations")
+	
+	// TV
+	static fileprivate let tvDetails			= SimpleHTTPServicePath("\(basePath)tv")
+	static fileprivate let tvRecommendations	= SimpleHTTPServicePath("\(basePath)tv/{id}/recommendations")
 }
 
 
 // MARK: - Service Tasks
 extension SimpleHTTPJSONServiceTask {
 	
-	// Task Convenience Methods
-	
-	static fileprivate func details(id: Int) -> SimpleHTTPJSONServiceTask<Movie> {
-		return .init(path: .details.addingPath("\(id)"), httpMethod: .get(), jsonDecoder: MovieDBConstnts.movieDBJSONDecoder)
-	}
+	// Search
 	
 	static fileprivate func multiSearch(query: String, page: Int) -> SimpleHTTPJSONServiceTask<MultiSearchResults> {
 		let query = [
@@ -101,5 +127,35 @@ extension SimpleHTTPJSONServiceTask {
 			URLQueryItem(name: "page", value: page.description),
 		]
 		return .init(path: .personSearch, httpMethod: .get(query), jsonDecoder: MovieDBConstnts.movieDBJSONDecoder)
+	}
+
+	
+	// Movie
+	
+	static fileprivate func movieDetails(id: Int) -> SimpleHTTPJSONServiceTask<Movie> {
+		return .init(path: .movieDetails.addingPath("\(id)"), httpMethod: .get(), jsonDecoder: MovieDBConstnts.movieDBJSONDecoder)
+	}
+	
+	static fileprivate func movieRecommendations(id: Int, page: Int) -> SimpleHTTPJSONServiceTask<MovieSearchResults> {
+		let query = [
+			URLQueryItem(name: "page", value: page.description),
+		]
+
+		return .init(path: .movieRecommendations.substituting(values: ["id": id]), httpMethod: .get(query), jsonDecoder: MovieDBConstnts.movieDBJSONDecoder)
+	}
+	
+	
+	// TV
+	
+	static fileprivate func tvDetails(id: Int) -> SimpleHTTPJSONServiceTask<TV> {
+		return .init(path: .tvDetails.addingPath("\(id)"), httpMethod: .get(), jsonDecoder: MovieDBConstnts.movieDBJSONDecoder)
+	}
+
+	static fileprivate func tvRecommendations(id: Int, page: Int) -> SimpleHTTPJSONServiceTask<TVSearchResults> {
+		let query = [
+			URLQueryItem(name: "page", value: page.description),
+		]
+
+		return .init(path: .tvRecommendations.substituting(values: ["id": id]), httpMethod: .get(query), jsonDecoder: MovieDBConstnts.movieDBJSONDecoder)
 	}
 }

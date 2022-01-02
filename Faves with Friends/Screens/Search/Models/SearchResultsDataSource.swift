@@ -27,6 +27,7 @@ final class SearchResultsDataSource: ViewDataSource {
 	@Published var searchType: SearchType		= .all {
 		didSet {
 			resetSearch()
+			initiateFetch()
 		}
 	}
 
@@ -42,6 +43,15 @@ final class SearchResultsDataSource: ViewDataSource {
 		
 		searchTextCancellable = searchTextSubject
 			.debounce(for: .seconds(Constants.debounceSeconds), scheduler: DispatchQueue.main)
+			.filter({ [weak self] text in
+				if text.isEmpty || text.count < Constants.minSearchTextLength {
+					self?.resetSearch()
+					
+					return false
+				}
+				
+				return true
+			})
 			.sink(receiveValue: { [weak self] text in
 				self?.initiateFetch()
 			})

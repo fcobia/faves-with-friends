@@ -10,7 +10,6 @@ import Foundation
 
 struct Movie: Codable, MovieCommon {
 	
-	    
 	// MARK: CodingKeys
 	private enum CodingKeys: String, CodingKey {
 		case id

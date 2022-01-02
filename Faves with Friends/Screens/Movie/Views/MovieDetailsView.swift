@@ -13,6 +13,9 @@ struct MovieDetailsView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
+			
+			RecommendedMoviesView(movieId: movie.id)
+			
             VStack(alignment: .leading, spacing: 10) {
                 Text("Title:")
                     .fontWeight(.semibold)

@@ -56,9 +56,13 @@ struct SearchScreenView: View {
 				}
 				.padding([.horizontal, .bottom])
 			}
-
-			if let results = dataSource.results {
-				if results.isEmpty == false {
+			
+			DataSourceView(
+				dataSource: dataSource,
+				activityManager: activityManager,
+				alertManager: alertManager,
+				movieNetworkManager: environmentManager.movieNetworkManager,
+				fetchesOnLoad: false) { results in
 					List {
 						ForEach(results, id: \.equalityId) { searchResult in
 							NavigationLink(destination: { destination(for: searchResult) }) {
@@ -71,14 +75,9 @@ struct SearchScreenView: View {
 							}
 						}
 						.listRowBackground(Color.clear)
-						
-						if activityManager.shouldShowActivity {
-							LoadingRowView()
-						}
 					}
 					.listStyle(.plain)
-				}
-				else {
+				} noResultsContents: {
 					HStack {
 						Spacer()
 						Text("No Results")
@@ -86,22 +85,8 @@ struct SearchScreenView: View {
 					}
 					.frame(maxHeight: .infinity)
 				}
-			}
-			else {
-				
-				if activityManager.shouldShowActivity {
-					LoadingRowView()
-				}
-				else {
-					Text("")
-						.frame(maxHeight: .infinity)
-				}
-			}
 		}
         .navigationBarHidden(true)
-		.onAppear {
-			dataSource.inject(alertManager: alertManager, activityManager: activityManager, movieNetworkManager: environmentManager.movieNetworkManager)
-		}
     }
 	
 	
@@ -113,7 +98,7 @@ struct SearchScreenView: View {
 				return AnyView(MovieDetailScreenView(id: searchResult.id, movieTitle: searchResult.name))
 				
 			case .tv:
-				return AnyView(EmptyView())
+				return AnyView(TVDetailScreenView(id: searchResult.id, title: searchResult.name))
 				
 			case .person:
 				return AnyView(EmptyView())

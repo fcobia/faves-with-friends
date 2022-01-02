@@ -75,8 +75,6 @@ class ViewDataSource: ObservableObject {
 	
 	func resetSearch() {
 		clearSearchResults()
-		
-		initiateFetch()
 	}
 	
 	func initiateFetch() {
@@ -146,6 +144,7 @@ class ViewDataSource: ObservableObject {
 	
 	private func clearSearchResults() {
 		results = nil
+		resultIds = []
 		nextPage = 0
 		totalResults = 0
 		totalPages = 0

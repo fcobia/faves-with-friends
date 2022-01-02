@@ -61,11 +61,11 @@ struct SearchScreenRowView_Previews: PreviewProvider {
 		Group {
 			
 			SearchScreenRowView(
-				searchResult: PreviewMovieNetworkManager.mockMultiSearch.results.first!,
+				searchResult: MockMultiSearchJSON.parsed().results.first!,
 				previewImagePhase: .success(Image("PreviewMoviePoster")))
 			
 			SearchScreenRowView(
-				searchResult: PreviewMovieNetworkManager.mockMultiSearch.results.first!,
+				searchResult: MockMultiSearchJSON.parsed().results.first!,
 				previewImagePhase: .empty)
 		}
 		.frame(width: 360)
