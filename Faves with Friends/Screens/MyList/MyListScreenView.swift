@@ -22,7 +22,14 @@ struct MyListScreenView: View {
         List {
             ForEach(favesViewModel.toWatchList, id: \.id) { watchListItem in
                 NavigationLink(destination: { destination(for: watchListItem) }) {
-                    MyListScreenRowView(watchListItem: watchListItem)
+                    MyListScreenRowView(previewImagePhase: nil,  watchListItem: watchListItem)
+                }
+                .swipeActions {
+                    Button(role: .destructive) {
+                        favesViewModel.removeFromToWatchList(watchListItem)
+                    } label: {
+                        Label("Delete", systemImage: "minus.circle")
+                    }
                 }
             }
             .listRowBackground(Color.clear)

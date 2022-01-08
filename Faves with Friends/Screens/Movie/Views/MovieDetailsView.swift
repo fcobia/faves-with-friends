@@ -14,8 +14,6 @@ struct MovieDetailsView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
 			
-			RecommendedMoviesView(movieId: movie.id)
-			
             VStack(alignment: .leading, spacing: 10) {
                 Text("Title:")
                     .fontWeight(.semibold)
@@ -84,6 +82,15 @@ struct MovieDetailsView: View {
                     }
                     .listRowBackground(Color.clear)
                 }
+            }
+            
+            Divider()
+            
+            VStack {
+                Text("Recommended")
+                    .bold()
+                    .appText()
+                RecommendedMoviesView(movieId: movie.id)
             }
         }
         .padding([.leading, .bottom])

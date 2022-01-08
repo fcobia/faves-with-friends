@@ -21,7 +21,14 @@ struct MyRatingsScreenView: View {
         List {
             ForEach(favesViewModel.watchedList, id: \.id) { watchListItem in
                 NavigationLink(destination: { destination(for: watchListItem) }) {
-                    MyRatingsScreenRowView(watchListItem: watchListItem)
+                    MyRatingsScreenRowView(previewImagePhase: nil, watchListItem: watchListItem)
+                }
+                .swipeActions {
+                    Button(role: .destructive) {
+                        favesViewModel.removeFromWatchedList(watchListItem)
+                    } label: {
+                        Label("Delete", systemImage: "minus.circle")
+                    }
                 }
             }
             .listRowBackground(Color.clear)

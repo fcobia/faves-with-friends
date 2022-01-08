@@ -46,6 +46,18 @@ class FaveViewModel: ObservableObject {
         
     }
     
+    func removeFromToWatchList(_ watchListItem: WatchListItem) {
+        if let videoIndex = toWatchList.firstIndex(where: { $0.videoId == watchListItem.videoId }) {
+            toWatchList.remove(at: videoIndex)
+        }
+    }
+    
+    func removeFromWatchedList(_ watchListItem: WatchListItem) {
+        if let videoIndex = watchedList.firstIndex(where: { $0.videoId == watchListItem.videoId }) {
+            watchedList.remove(at: videoIndex)
+        }
+    }
+    
     init() {
         if let data = UserDefaults.standard.data(forKey: "ToWatchList") {
             let decoder = JSONDecoder()

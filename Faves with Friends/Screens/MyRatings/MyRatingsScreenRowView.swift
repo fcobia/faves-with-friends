@@ -8,6 +8,14 @@
 import SwiftUI
 
 struct MyRatingsScreenRowView: View {
+    // MARK: Constants
+    private enum Constants {
+        static let imageSize = CGSize(width: 75, height: 100)
+    }
+    
+    // MARK: Preview Support Variables
+    let previewImagePhase: AsyncImagePhase?
+    
     // MARK: Environment Variables
     @Environment(\.environmentManager) private var environmentManager: EnvironmentManager
     
@@ -21,10 +29,27 @@ struct MyRatingsScreenRowView: View {
     @State private var video: Movie?
     
     var body: some View {
-        Text(video?.title ?? "")
-            .onAppear {
-                getMovieDetails(id: watchListItem.videoId)
+        HStack {
+            ImageLoadingView(url: video?.posterPath, style: .localProgress, progressViewSize: Constants.imageSize, previewPhase: previewImagePhase) { image in
+                image.resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(maxWidth: Constants.imageSize.width, maxHeight: Constants.imageSize.height)
             }
+            
+            VStack(alignment: .leading) {
+                Text(video?.title ?? "")
+                
+                if let releaseDate = video?.releaseDate {
+                    Text(DateFormatters.dateOnly.string(from: releaseDate))
+                        .font(.footnote)
+                }
+            }
+            
+            Spacer()
+        }
+        .onAppear {
+            getMovieDetails(id: watchListItem.videoId)
+        }
     }
     
     // MARK: Private Methods

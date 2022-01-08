@@ -9,44 +9,61 @@ import SwiftUI
 
 
 struct RecommendationResultView: View {
-	
-	// MARK: Constants
-	private enum Constants {
-		static let imageSize = CGSize(width: 75, height: 100)
-	}
-
-	// Private Variables
-	private let searchResult: SearchResult
-	
-	
-	// MARK: SwiftUI View
-    var body: some View {
-		VStack {
-			
-			ImageLoadingView(url: searchResult.image, style: .localProgress, progressViewSize: Constants.imageSize) { image in
-				image.resizable()
-					 .aspectRatio(contentMode: .fit)
-					 .frame(maxWidth: Constants.imageSize.width, maxHeight: Constants.imageSize.height)
-			}
-
-			VStack(alignment: .leading) {
-				Text(searchResult.name)
-				
-				if let video = searchResult as? Video, let releaseDate = video.releaseDate {
-					Text(DateFormatters.dateOnly.string(from: releaseDate))
-						.font(.footnote)
-				}
-			}
-			
-			Spacer()
-		}
+    
+    // MARK: Constants
+    private enum Constants {
+        static let imageSize = CGSize(width: 75, height: 100)
     }
-	
-	
-	// MARK: Init
-	init(searchResult: SearchResult) {
-		self.searchResult = searchResult
-	}
+    
+    // Private Variables
+    private let searchResult: SearchResult
+    
+    
+    // MARK: SwiftUI View
+    var body: some View {
+        VStack {
+            NavigationLink(destination: { destination(for: searchResult) }) {
+                ImageLoadingView(url: searchResult.image, style: .localProgress, progressViewSize: Constants.imageSize) { image in
+                    image.resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(maxWidth: Constants.imageSize.width, maxHeight: Constants.imageSize.height)
+                }
+            }
+            
+            .listRowBackground(Color.clear)
+            
+            //			VStack(alignment: .leading) {
+            //				Text(searchResult.name)
+            //
+            //				if let video = searchResult as? Video, let releaseDate = video.releaseDate {
+            //					Text(DateFormatters.dateOnly.string(from: releaseDate))
+            //						.font(.footnote)
+            //				}
+            //			}
+            
+            Spacer()
+        }
+    }
+    
+    // MARK: Private Methods
+    private func destination(for searchResult: SearchResult) -> some View {
+        switch searchResult.type {
+            
+        case .movie:
+            return AnyView(MovieDetailScreenView(id: searchResult.id, movieTitle: searchResult.name))
+            
+        case .tv:
+            return AnyView(TVDetailScreenView(id: searchResult.id, title: searchResult.name))
+            
+        case .person:
+            return AnyView(EmptyView())
+        }
+    }
+    
+    // MARK: Init
+    init(searchResult: SearchResult) {
+        self.searchResult = searchResult
+    }
 }
 
 
