@@ -27,7 +27,10 @@ final class SearchResultsDataSource: ViewDataSource {
 	@Published var searchType: SearchType		= .all {
 		didSet {
 			resetSearch()
-			initiateFetch()
+			
+			if shouldSearch(text: searchText) {
+				initiateFetch()
+			}
 		}
 	}
 
@@ -44,13 +47,7 @@ final class SearchResultsDataSource: ViewDataSource {
 		searchTextCancellable = searchTextSubject
 			.debounce(for: .seconds(Constants.debounceSeconds), scheduler: DispatchQueue.main)
 			.filter({ [weak self] text in
-				if text.isEmpty || text.count < Constants.minSearchTextLength {
-					self?.resetSearch()
-					
-					return false
-				}
-				
-				return true
+				return self?.shouldSearch(text: text) ?? false
 			})
 			.sink(receiveValue: { [weak self] text in
 				self?.initiateFetch()
@@ -62,5 +59,18 @@ final class SearchResultsDataSource: ViewDataSource {
 	
 	override func performFetch(page: Int) async throws -> MovieDBSearchResults {
 		try await self.movieNetworkManager.search(query: self.searchText, type: self.searchType, page: page)
+	}
+	
+	
+	// MARK: Private Functions
+	
+	private func shouldSearch(text: String) -> Bool {
+		if text.isEmpty || text.count < Constants.minSearchTextLength {
+			self.resetSearch()
+			
+			return false
+		}
+		
+		return true
 	}
 }
