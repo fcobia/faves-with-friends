@@ -39,8 +39,11 @@ struct SearchScreenView: View {
 					
 					TextField("Search", text: $dataSource.searchText)
 						.appRoundedTextField()
+                        .foregroundColor(.black)
 						.modifier(ClearButtonModifier(text: $dataSource.searchText))
-                    
+                        .onAppear {
+                            UITextField.appearance().backgroundColor = .white
+                        }
 					Picker("", selection: $dataSource.searchType) {
 						ForEach(SearchType.allCases) { type in
 							Text(type.rawValue).tag(type)
