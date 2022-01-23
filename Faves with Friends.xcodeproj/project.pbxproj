@@ -102,6 +102,8 @@
 		ED259E1227751C2300C3D1CF /* MyListScreenRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED259E1127751C2300C3D1CF /* MyListScreenRowView.swift */; };
 		ED259E162775262900C3D1CF /* MyRatingsScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED259E152775262900C3D1CF /* MyRatingsScreenView.swift */; };
 		ED259E182775264300C3D1CF /* MyRatingsScreenRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED259E172775264300C3D1CF /* MyRatingsScreenRowView.swift */; };
+		ED887027279DF39D0089228E /* WatchingListScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED887026279DF39D0089228E /* WatchingListScreenView.swift */; };
+		ED887029279DF3FB0089228E /* WatchingListScreenRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED887028279DF3FB0089228E /* WatchingListScreenRowView.swift */; };
 		EDB9F71B27531E990029D771 /* SearchScreenRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB9F71A27531E990029D771 /* SearchScreenRowView.swift */; };
 		EDB9F71D275322A10029D771 /* AppRoundedTextFieldModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB9F71C275322A10029D771 /* AppRoundedTextFieldModifier.swift */; };
 		EDB9F71F275326D30029D771 /* ClearButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB9F71E275326D30029D771 /* ClearButtonModifier.swift */; };
@@ -223,6 +225,8 @@
 		ED259E1127751C2300C3D1CF /* MyListScreenRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyListScreenRowView.swift; sourceTree = "<group>"; };
 		ED259E152775262900C3D1CF /* MyRatingsScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRatingsScreenView.swift; sourceTree = "<group>"; };
 		ED259E172775264300C3D1CF /* MyRatingsScreenRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRatingsScreenRowView.swift; sourceTree = "<group>"; };
+		ED887026279DF39D0089228E /* WatchingListScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchingListScreenView.swift; sourceTree = "<group>"; };
+		ED887028279DF3FB0089228E /* WatchingListScreenRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchingListScreenRowView.swift; sourceTree = "<group>"; };
 		EDB9F71A27531E990029D771 /* SearchScreenRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchScreenRowView.swift; sourceTree = "<group>"; };
 		EDB9F71C275322A10029D771 /* AppRoundedTextFieldModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRoundedTextFieldModifier.swift; sourceTree = "<group>"; };
 		EDB9F71E275326D30029D771 /* ClearButtonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearButtonModifier.swift; sourceTree = "<group>"; };
@@ -615,6 +619,7 @@
 		01CCDB43274F3D31008337BB /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				ED887025279DF3670089228E /* Watching */,
 				ED259E142775260800C3D1CF /* MyRatings */,
 				01B0E1512782570900503979 /* TV */,
 				ED11C8452754683600A181D5 /* Movie */,
@@ -743,6 +748,15 @@
 				ED259E172775264300C3D1CF /* MyRatingsScreenRowView.swift */,
 			);
 			path = MyRatings;
+			sourceTree = "<group>";
+		};
+		ED887025279DF3670089228E /* Watching */ = {
+			isa = PBXGroup;
+			children = (
+				ED887026279DF39D0089228E /* WatchingListScreenView.swift */,
+				ED887028279DF3FB0089228E /* WatchingListScreenRowView.swift */,
+			);
+			path = Watching;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -909,6 +923,7 @@
 				01A81A4727504C9A00D47916 /* DisplayableErrorInfoButton.swift in Sources */,
 				011920772763039D00F3C02F /* MovieDBConstnts.swift in Sources */,
 				01CCDB5E274F4DC0008337BB /* MovieErrorCodes.swift in Sources */,
+				ED887029279DF3FB0089228E /* WatchingListScreenRowView.swift in Sources */,
 				01CCDB66274F513E008337BB /* MovieHTTPServiceErrorMapper.swift in Sources */,
 				011920742762FF6600F3C02F /* PersonSearchResults.swift in Sources */,
 				ED259E0E277514F200C3D1CF /* MyListScreenView.swift in Sources */,
@@ -973,6 +988,7 @@
 				ED259E162775262900C3D1CF /* MyRatingsScreenView.swift in Sources */,
 				01192056275DBC6600F3C02F /* Genre.swift in Sources */,
 				0119205E275F19DC00F3C02F /* TVCommon.swift in Sources */,
+				ED887027279DF39D0089228E /* WatchingListScreenView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1146,7 +1162,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Faves with Friends/Preview Content\"";
-				DEVELOPMENT_TEAM = HS542V5MUB;
+				DEVELOPMENT_TEAM = DE78Q3DZSQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Faves-with-Friends-Info.plist";
@@ -1176,7 +1192,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Faves with Friends/Preview Content\"";
-				DEVELOPMENT_TEAM = HS542V5MUB;
+				DEVELOPMENT_TEAM = DE78Q3DZSQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Faves-with-Friends-Info.plist";

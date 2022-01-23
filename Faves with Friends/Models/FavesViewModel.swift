@@ -34,16 +34,49 @@ class FaveViewModel: ObservableObject {
             }
         }
     }
+    @Published var watchingList = [WatchListItem]() {
+        didSet {
+            //first turn the array into nsdata so we can save it in userdefaults
+            let encoder = JSONEncoder()
+            do {
+                let data = try encoder.encode(watchingList)
+                UserDefaults.standard.set(data, forKey: "WatchingList")
+            } catch {
+                print("could not encode for some reason")
+            }
+        }
+    }
     
     
     //TODO: will need to check if movie is already in list and if so remove it and add new entry as rating may have changed?
     func addToToWatchList(_ watchListItem: WatchListItem) {
-        toWatchList.append(watchListItem)
+        //make sure not already in list and if not add it
+        if toWatchList.firstIndex(where: { $0.videoId == watchListItem.videoId }) != nil {
+            toWatchList.append(watchListItem)
+        }
+        //remove from other list now
+        removeFromWatchedList(watchListItem)
+        removeFromWatchingList(watchListItem)
     }
     
     func addToWatchedList(_ watchListItem: WatchListItem) {
-        watchedList.append(watchListItem)
-        
+        //make sure not already in list and if not add it
+        if watchedList.firstIndex(where: { $0.videoId == watchListItem.videoId }) != nil {
+            watchedList.append(watchListItem)
+        }
+        //remove from other list
+        removeFromToWatchList(watchListItem)
+        removeFromWatchingList(watchListItem)
+    }
+    
+    func addToWatchingList(_ watchListItem: WatchListItem) {
+        //make sure not already in list and if not add it
+        if watchingList.firstIndex(where: { $0.videoId == watchListItem.videoId }) != nil {
+            watchingList.append(watchListItem)
+        }
+        //remove from other list
+        removeFromWatchedList(watchListItem)
+        removeFromToWatchList(watchListItem)
     }
     
     func removeFromToWatchList(_ watchListItem: WatchListItem) {
@@ -55,6 +88,12 @@ class FaveViewModel: ObservableObject {
     func removeFromWatchedList(_ watchListItem: WatchListItem) {
         if let videoIndex = watchedList.firstIndex(where: { $0.videoId == watchListItem.videoId }) {
             watchedList.remove(at: videoIndex)
+        }
+    }
+    
+    func removeFromWatchingList(_ watchListItem: WatchListItem) {
+        if let videoIndex = watchingList.firstIndex(where: { $0.videoId == watchListItem.videoId }) {
+            watchingList.remove(at: videoIndex)
         }
     }
     
@@ -81,6 +120,18 @@ class FaveViewModel: ObservableObject {
         } else {
             watchedList = [WatchListItem]()
         }
+        if let data = UserDefaults.standard.data(forKey: "WatchingList") {
+            let decoder = JSONDecoder()
+            do {
+                let watchingList = try decoder.decode([WatchListItem].self, from: data)
+                self.watchingList = watchingList
+            } catch {
+                print("error decoding array")
+            }
+        } else {
+            watchingList = [WatchListItem]()
+        }
+
     }
     
 }

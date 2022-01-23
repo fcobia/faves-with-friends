@@ -34,7 +34,7 @@ struct MyRatingsScreenView: View {
             .listRowBackground(Color.clear)
         }
         .listStyle(.plain)
-        .navigationTitle("My Ratings")
+        .navigationTitle("Watched List")
     }
     
     // MARK: Private Methods

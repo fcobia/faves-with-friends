@@ -39,15 +39,23 @@ struct MainView: View {
 				}
 				.tabItem {
 					Image(systemName: "list.bullet.circle")
-                    Text("My List")
+                    Text("To Watch")
 				}
+                
+                NavigationView {
+                    WatchingListScreenView()
+                }
+                .tabItem {
+                    Image(systemName: "tv.circle")
+                    Text("Watching")
+                }
                 
                 NavigationView {
                     MyRatingsScreenView()
                 }
                 .tabItem {
                     Image(systemName: "star.circle")
-                    Text("My Ratings")
+                    Text("Watched")
                 }
                 
                 NavigationView {

@@ -1,14 +1,13 @@
 //
-//  MyListScreenView.swift
+//  WatchingListScreenView.swift
 //  Faves with Friends
 //
-//  Created by CHRIS RINER on 12/23/21.
+//  Created by CHRIS RINER on 1/23/22.
 //
 
 import SwiftUI
 
-struct MyListScreenView: View {
-    
+struct WatchingListScreenView: View {
     // MARK: Environment Variables
     @Environment(\.environmentManager) private var environmentManager: EnvironmentManager
     
@@ -20,13 +19,13 @@ struct MyListScreenView: View {
     
     var body: some View {
         List {
-            ForEach(favesViewModel.toWatchList, id: \.id) { watchListItem in
+            ForEach(favesViewModel.watchingList, id: \.id) { watchListItem in
                 NavigationLink(destination: { destination(for: watchListItem) }) {
-                    MyListScreenRowView(previewImagePhase: nil,  watchListItem: watchListItem)
+                    WatchingListScreenRowView(previewImagePhase: nil,  watchListItem: watchListItem)
                 }
                 .swipeActions {
                     Button(role: .destructive) {
-                        favesViewModel.removeFromToWatchList(watchListItem)
+                        favesViewModel.removeFromWatchingList(watchListItem)
                     } label: {
                         Label("Delete", systemImage: "minus.circle")
                     }
@@ -35,7 +34,7 @@ struct MyListScreenView: View {
             .listRowBackground(Color.clear)
         }
         .listStyle(.plain)
-        .navigationTitle("To Watch List")
+        .navigationTitle("Watching List")
     }
     
     // MARK: Private Methods
@@ -54,8 +53,8 @@ struct MyListScreenView: View {
     }
 }
 
-struct MyListView_Previews: PreviewProvider {
+struct WatchingListScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        MyListScreenView()
+        WatchingListScreenView()
     }
 }
