@@ -69,6 +69,9 @@
 		01B0E14E278254D500503979 /* RecommendedTVView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B0E14D278254D500503979 /* RecommendedTVView.swift */; };
 		01B0E1502782554600503979 /* TVRecommendationsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B0E14F2782554600503979 /* TVRecommendationsDataSource.swift */; };
 		01B0E1532782572800503979 /* TVDetailScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B0E1522782572800503979 /* TVDetailScreenView.swift */; };
+		01B2911F27A238DD009A2CDC /* Credits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B2911E27A238DD009A2CDC /* Credits.swift */; };
+		01B2912127A23CB3009A2CDC /* CastAndCrewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B2912027A23CB3009A2CDC /* CastAndCrewView.swift */; };
+		01B2912527A24AF8009A2CDC /* Collection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B2912427A24AF8009A2CDC /* Collection+Extensions.swift */; };
 		01CCDB16274F3BF4008337BB /* Faves_with_FriendsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CCDB15274F3BF4008337BB /* Faves_with_FriendsApp.swift */; };
 		01CCDB18274F3BF4008337BB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CCDB17274F3BF4008337BB /* ContentView.swift */; };
 		01CCDB1A274F3BF5008337BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01CCDB19274F3BF5008337BB /* Assets.xcassets */; };
@@ -189,6 +192,9 @@
 		01B0E14D278254D500503979 /* RecommendedTVView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedTVView.swift; sourceTree = "<group>"; };
 		01B0E14F2782554600503979 /* TVRecommendationsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVRecommendationsDataSource.swift; sourceTree = "<group>"; };
 		01B0E1522782572800503979 /* TVDetailScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVDetailScreenView.swift; sourceTree = "<group>"; };
+		01B2911E27A238DD009A2CDC /* Credits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credits.swift; sourceTree = "<group>"; };
+		01B2912027A23CB3009A2CDC /* CastAndCrewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastAndCrewView.swift; sourceTree = "<group>"; };
+		01B2912427A24AF8009A2CDC /* Collection+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extensions.swift"; sourceTree = "<group>"; };
 		01CCDB12274F3BF4008337BB /* Faves with Friends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Faves with Friends.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		01CCDB15274F3BF4008337BB /* Faves_with_FriendsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Faves_with_FriendsApp.swift; sourceTree = "<group>"; };
 		01CCDB17274F3BF4008337BB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -281,6 +287,7 @@
 				011920762763039D00F3C02F /* MovieDBConstnts.swift */,
 				ED259E0F27751A4900C3D1CF /* VideoType.swift */,
 				010D9E2027812A43008804E7 /* Gender.swift */,
+				01B2911E27A238DD009A2CDC /* Credits.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -364,6 +371,7 @@
 		01A81A15274F5F7C00D47916 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				01B2912327A24A4D009A2CDC /* Standard */,
 				01A81A16274F5F8500D47916 /* SwiftUI */,
 			);
 			path = Extensions;
@@ -520,6 +528,7 @@
 				01B0E14C278253B300503979 /* Subviews */,
 				01B0E1422782333300503979 /* RecommendedMoviesView.swift */,
 				01B0E14D278254D500503979 /* RecommendedTVView.swift */,
+				01B2912027A23CB3009A2CDC /* CastAndCrewView.swift */,
 			);
 			path = Recommendations;
 			sourceTree = "<group>";
@@ -538,6 +547,21 @@
 				01B0E1522782572800503979 /* TVDetailScreenView.swift */,
 			);
 			path = TV;
+			sourceTree = "<group>";
+		};
+		01B2912227A249FB009A2CDC /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		01B2912327A24A4D009A2CDC /* Standard */ = {
+			isa = PBXGroup;
+			children = (
+				01B2912427A24AF8009A2CDC /* Collection+Extensions.swift */,
+			);
+			path = Standard;
 			sourceTree = "<group>";
 		};
 		01CCDB09274F3BF4008337BB = {
@@ -564,6 +588,7 @@
 			isa = PBXGroup;
 			children = (
 				01CCDB52274F4385008337BB /* Faves-with-Friends-Info.plist */,
+				01B2912227A249FB009A2CDC /* Utilities */,
 				01CCDB43274F3D31008337BB /* Screens */,
 				01A81A4827505CE300D47916 /* Views */,
 				01CCDB6B274F57EB008337BB /* Models */,
@@ -946,6 +971,7 @@
 				01A81A4B27505D2100D47916 /* ErrorAlertView.swift in Sources */,
 				010D9E2627822A8B008804E7 /* MockMovieDetailJSON.swift in Sources */,
 				01A81A4E2751D09C00D47916 /* SearchScreenView.swift in Sources */,
+				01B2912527A24AF8009A2CDC /* Collection+Extensions.swift in Sources */,
 				ED11C84427545FF000A181D5 /* MovieSearch.swift in Sources */,
 				ED11C84D275AF7B900A181D5 /* RatingView.swift in Sources */,
 				01A81A4527504B4E00D47916 /* DisplayableErrorInfo.swift in Sources */,
@@ -955,12 +981,14 @@
 				0145A1ED2756DE9500633B98 /* MovieDetailHeaderView.swift in Sources */,
 				01CCDB4F274F3F01008337BB /* MovieHTTPServiceNetworkConnector.swift in Sources */,
 				01CCDB18274F3BF4008337BB /* ContentView.swift in Sources */,
+				01B2912127A23CB3009A2CDC /* CastAndCrewView.swift in Sources */,
 				018C199A277C057400840E21 /* ViewDataSource.swift in Sources */,
 				01A81A4127504A8100D47916 /* AlertManager.swift in Sources */,
 				01B0E14E278254D500503979 /* RecommendedTVView.swift in Sources */,
 				0119206C275F338200F3C02F /* MovieSearchResults.swift in Sources */,
 				01A81A19274F5FB600D47916 /* Environment+EnvironmentManager.swift in Sources */,
 				01A81A32274F658400D47916 /* AppSecureFieldModifier.swift in Sources */,
+				01B2911F27A238DD009A2CDC /* Credits.swift in Sources */,
 				01192060275F1AC400F3C02F /* TVSearch.swift in Sources */,
 				ED11C84B275AF21E00A181D5 /* FavesViewModel.swift in Sources */,
 				01B0E1502782554600503979 /* TVRecommendationsDataSource.swift in Sources */,

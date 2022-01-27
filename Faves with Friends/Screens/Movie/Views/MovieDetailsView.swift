@@ -83,9 +83,13 @@ struct MovieDetailsView: View {
                     .listRowBackground(Color.clear)
                 }
             }
-            
-            Divider()
-            
+			
+			Divider()
+			
+			CastAndCrewView(type: .movie, id: movie.id)
+			
+			Divider()
+
             VStack {
                 Text("Recommended")
                     .bold()

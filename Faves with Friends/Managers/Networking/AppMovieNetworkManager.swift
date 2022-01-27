@@ -57,6 +57,10 @@ final class AppMovieNetworkManager: MovieNetworkManager {
 		return try await movieNetworkService.fetch(.movieRecommendations(id: id, page: pageToUse))
 	}
 
+	func movieCredits(id: Int) async throws -> Credits {
+		return try await movieNetworkService.fetch(.movieCredits(id: id))
+	}
+
 	
 	// MARK: TV
 
@@ -68,6 +72,10 @@ final class AppMovieNetworkManager: MovieNetworkManager {
 		let pageToUse = page + 1
 		
 		return try await movieNetworkService.fetch(.tvRecommendations(id: id, page: pageToUse))
+	}
+
+	func tvCredits(id: Int) async throws -> Credits {
+		return try await movieNetworkService.fetch(.tvCredits(id: id))
 	}
 }
 
@@ -85,10 +93,12 @@ extension SimpleHTTPServicePath {
 	// Movie
 	static fileprivate let movieDetails			= SimpleHTTPServicePath("\(basePath)movie")
 	static fileprivate let movieRecommendations	= SimpleHTTPServicePath("\(basePath)movie/{id}/recommendations")
-	
+	static fileprivate let movieCredits			= SimpleHTTPServicePath("\(basePath)movie/{id}/credits")
+
 	// TV
 	static fileprivate let tvDetails			= SimpleHTTPServicePath("\(basePath)tv")
 	static fileprivate let tvRecommendations	= SimpleHTTPServicePath("\(basePath)tv/{id}/recommendations")
+	static fileprivate let tvCredits			= SimpleHTTPServicePath("\(basePath)tv/{id}/credits")
 }
 
 
@@ -144,6 +154,10 @@ extension SimpleHTTPJSONServiceTask {
 		return .init(path: .movieRecommendations.substituting(values: ["id": id]), httpMethod: .get(query), jsonDecoder: MovieDBConstnts.movieDBJSONDecoder)
 	}
 	
+	static fileprivate func movieCredits(id: Int) -> SimpleHTTPJSONServiceTask<Credits> {
+		return .init(path: .movieCredits.substituting(values: ["id": id]), httpMethod: .get(), jsonDecoder: MovieDBConstnts.movieDBJSONDecoder)
+	}
+
 	
 	// TV
 	
@@ -157,5 +171,9 @@ extension SimpleHTTPJSONServiceTask {
 		]
 
 		return .init(path: .tvRecommendations.substituting(values: ["id": id]), httpMethod: .get(query), jsonDecoder: MovieDBConstnts.movieDBJSONDecoder)
+	}
+	
+	static fileprivate func tvCredits(id: Int) -> SimpleHTTPJSONServiceTask<Credits> {
+		return .init(path: .tvCredits.substituting(values: ["id": id]), httpMethod: .get(), jsonDecoder: MovieDBConstnts.movieDBJSONDecoder)
 	}
 }
