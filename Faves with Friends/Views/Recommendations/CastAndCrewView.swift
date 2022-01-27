@@ -82,7 +82,12 @@ struct CastAndCrewView: View {
 		}
 		.task {
 			do {
-				credits = try await environmentManager.movieNetworkManager.movieCredits(id: id)
+				switch type {
+					case .movie:
+						credits = try await environmentManager.movieNetworkManager.movieCredits(id: id)
+					case .tv:
+						credits = try await environmentManager.movieNetworkManager.tvCredits(id: id)
+				}
 			}
 			catch let error {
 				print("Got error fetching cast & crew: \(error)")
