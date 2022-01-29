@@ -60,6 +60,12 @@ final class AppMovieNetworkManager: MovieNetworkManager {
 	func movieCredits(id: Int) async throws -> Credits {
 		return try await movieNetworkService.fetch(.movieCredits(id: id))
 	}
+	
+	func movieWhereToWatch(id: Int) async throws -> WhereToWatch? {
+		let search = try await movieNetworkService.fetch(.movieWhereToWatch(id: id))
+		
+		return search.result
+	}
 
 	
 	// MARK: TV
@@ -76,6 +82,12 @@ final class AppMovieNetworkManager: MovieNetworkManager {
 
 	func tvCredits(id: Int) async throws -> Credits {
 		return try await movieNetworkService.fetch(.tvCredits(id: id))
+	}
+	
+	func tvWhereToWatch(id: Int) async throws -> WhereToWatch? {
+		let search = try await movieNetworkService.fetch(.tvWhereToWatch(id: id))
+		
+		return search.result
 	}
 }
 
@@ -94,11 +106,13 @@ extension SimpleHTTPServicePath {
 	static fileprivate let movieDetails			= SimpleHTTPServicePath("\(basePath)movie")
 	static fileprivate let movieRecommendations	= SimpleHTTPServicePath("\(basePath)movie/{id}/recommendations")
 	static fileprivate let movieCredits			= SimpleHTTPServicePath("\(basePath)movie/{id}/credits")
+	static fileprivate let movieWhereToWatch	= SimpleHTTPServicePath("\(basePath)movie/{id}/watch/providers")
 
 	// TV
 	static fileprivate let tvDetails			= SimpleHTTPServicePath("\(basePath)tv")
 	static fileprivate let tvRecommendations	= SimpleHTTPServicePath("\(basePath)tv/{id}/recommendations")
 	static fileprivate let tvCredits			= SimpleHTTPServicePath("\(basePath)tv/{id}/credits")
+	static fileprivate let tvWhereToWatch		= SimpleHTTPServicePath("\(basePath)tv/{id}/watch/providers")
 }
 
 
@@ -157,6 +171,10 @@ extension SimpleHTTPJSONServiceTask {
 	static fileprivate func movieCredits(id: Int) -> SimpleHTTPJSONServiceTask<Credits> {
 		return .init(path: .movieCredits.substituting(values: ["id": id]), httpMethod: .get(), jsonDecoder: MovieDBConstnts.movieDBJSONDecoder)
 	}
+	
+	static fileprivate func movieWhereToWatch(id: Int) -> SimpleHTTPJSONServiceTask<WhereToWatchSearch> {
+		return .init(path: .movieWhereToWatch.substituting(values: ["id": id]), httpMethod: .get(), jsonDecoder: MovieDBConstnts.movieDBJSONDecoder)
+	}
 
 	
 	// TV
@@ -175,5 +193,9 @@ extension SimpleHTTPJSONServiceTask {
 	
 	static fileprivate func tvCredits(id: Int) -> SimpleHTTPJSONServiceTask<Credits> {
 		return .init(path: .tvCredits.substituting(values: ["id": id]), httpMethod: .get(), jsonDecoder: MovieDBConstnts.movieDBJSONDecoder)
+	}
+	
+	static fileprivate func tvWhereToWatch(id: Int) -> SimpleHTTPJSONServiceTask<WhereToWatchSearch> {
+		return .init(path: .tvWhereToWatch.substituting(values: ["id": id]), httpMethod: .get(), jsonDecoder: MovieDBConstnts.movieDBJSONDecoder)
 	}
 }

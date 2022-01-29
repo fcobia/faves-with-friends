@@ -27,6 +27,10 @@
 		011920722762FEB800F3C02F /* TVSearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011920712762FEB700F3C02F /* TVSearchResults.swift */; };
 		011920742762FF6600F3C02F /* PersonSearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011920732762FF6600F3C02F /* PersonSearchResults.swift */; };
 		011920772763039D00F3C02F /* MovieDBConstnts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011920762763039D00F3C02F /* MovieDBConstnts.swift */; };
+		014151E827A5F13A00562FB9 /* WhereToWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014151E727A5F13A00562FB9 /* WhereToWatch.swift */; };
+		014151EA27A5F1E600562FB9 /* WhereToWatchEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014151E927A5F1E600562FB9 /* WhereToWatchEntry.swift */; };
+		014151EE27A5F9D200562FB9 /* JSONDynamicKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014151ED27A5F9D200562FB9 /* JSONDynamicKey.swift */; };
+		014151F027A5FF0B00562FB9 /* WhereToWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014151EF27A5FF0B00562FB9 /* WhereToWatchView.swift */; };
 		0145A1D72754754900633B98 /* CurvedHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0145A1D62754754900633B98 /* CurvedHeaderView.swift */; };
 		0145A1D9275477B100633B98 /* StringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0145A1D8275477B100633B98 /* StringConstants.swift */; };
 		0145A1DB2754791100633B98 /* ActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0145A1DA2754791100633B98 /* ActivityManager.swift */; };
@@ -150,6 +154,10 @@
 		011920712762FEB700F3C02F /* TVSearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVSearchResults.swift; sourceTree = "<group>"; };
 		011920732762FF6600F3C02F /* PersonSearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonSearchResults.swift; sourceTree = "<group>"; };
 		011920762763039D00F3C02F /* MovieDBConstnts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDBConstnts.swift; sourceTree = "<group>"; };
+		014151E727A5F13A00562FB9 /* WhereToWatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhereToWatch.swift; sourceTree = "<group>"; };
+		014151E927A5F1E600562FB9 /* WhereToWatchEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhereToWatchEntry.swift; sourceTree = "<group>"; };
+		014151ED27A5F9D200562FB9 /* JSONDynamicKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDynamicKey.swift; sourceTree = "<group>"; };
+		014151EF27A5FF0B00562FB9 /* WhereToWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhereToWatchView.swift; sourceTree = "<group>"; };
 		0145A1D62754754900633B98 /* CurvedHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurvedHeaderView.swift; sourceTree = "<group>"; };
 		0145A1D8275477B100633B98 /* StringConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringConstants.swift; sourceTree = "<group>"; };
 		0145A1DA2754791100633B98 /* ActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityManager.swift; sourceTree = "<group>"; };
@@ -288,6 +296,8 @@
 				ED259E0F27751A4900C3D1CF /* VideoType.swift */,
 				010D9E2027812A43008804E7 /* Gender.swift */,
 				01B2911E27A238DD009A2CDC /* Credits.swift */,
+				014151E727A5F13A00562FB9 /* WhereToWatch.swift */,
+				014151E927A5F1E600562FB9 /* WhereToWatchEntry.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -485,12 +495,14 @@
 		01A81A4827505CE300D47916 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				01B0E1492782533C00503979 /* Recommendations */,
 				0145A1D62754754900633B98 /* CurvedHeaderView.swift */,
+				01B2912027A23CB3009A2CDC /* CastAndCrewView.swift */,
 				0145A1EE2756E15700633B98 /* ImageLoadingView.swift */,
+				01B0E1492782533C00503979 /* Recommendations */,
 				01A81A4927505CF100D47916 /* Errors */,
 				01B0E144278235EA00503979 /* DataSourceView.swift */,
 				01B0E146278249A500503979 /* Data Sources */,
+				014151EF27A5FF0B00562FB9 /* WhereToWatchView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -528,7 +540,6 @@
 				01B0E14C278253B300503979 /* Subviews */,
 				01B0E1422782333300503979 /* RecommendedMoviesView.swift */,
 				01B0E14D278254D500503979 /* RecommendedTVView.swift */,
-				01B2912027A23CB3009A2CDC /* CastAndCrewView.swift */,
 			);
 			path = Recommendations;
 			sourceTree = "<group>";
@@ -552,6 +563,7 @@
 		01B2912227A249FB009A2CDC /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				014151ED27A5F9D200562FB9 /* JSONDynamicKey.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -934,6 +946,7 @@
 				01CCDB62274F4F46008337BB /* MovieNetworkErrorResponse.swift in Sources */,
 				01B0E145278235EA00503979 /* DataSourceView.swift in Sources */,
 				EDB9F71B27531E990029D771 /* SearchScreenRowView.swift in Sources */,
+				014151F027A5FF0B00562FB9 /* WhereToWatchView.swift in Sources */,
 				01B0E148278249D100503979 /* MovieRecommendationsDataSource.swift in Sources */,
 				01A81A37274F666E00D47916 /* Environment+Palettes.swift in Sources */,
 				01A81A30274F658400D47916 /* Palettes.swift in Sources */,
@@ -956,6 +969,8 @@
 				01A81A1D274F618000D47916 /* AppDelegate.swift in Sources */,
 				01A81A3F274F67C500D47916 /* ColorPalettes.swift in Sources */,
 				0145A1FD2758915500633B98 /* AppAltTextModifier.swift in Sources */,
+				014151EA27A5F1E600562FB9 /* WhereToWatchEntry.swift in Sources */,
+				014151E827A5F13A00562FB9 /* WhereToWatch.swift in Sources */,
 				01A81A14274F5E5600D47916 /* AppEnvironmentManager.swift in Sources */,
 				0119205B275F15D200F3C02F /* Video.swift in Sources */,
 				EDB9F71F275326D30029D771 /* ClearButtonModifier.swift in Sources */,
@@ -989,6 +1004,7 @@
 				01A81A19274F5FB600D47916 /* Environment+EnvironmentManager.swift in Sources */,
 				01A81A32274F658400D47916 /* AppSecureFieldModifier.swift in Sources */,
 				01B2911F27A238DD009A2CDC /* Credits.swift in Sources */,
+				014151EE27A5F9D200562FB9 /* JSONDynamicKey.swift in Sources */,
 				01192060275F1AC400F3C02F /* TVSearch.swift in Sources */,
 				ED11C84B275AF21E00A181D5 /* FavesViewModel.swift in Sources */,
 				01B0E1502782554600503979 /* TVRecommendationsDataSource.swift in Sources */,

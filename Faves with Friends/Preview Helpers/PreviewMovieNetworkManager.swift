@@ -30,6 +30,10 @@ final class PreviewMovieNetworkManager: MovieNetworkManager {
 		fatalError("Not implemented")
 	}
 
+	func movieWhereToWatch(id: Int) async throws -> WhereToWatch? {
+		fatalError("Not implemented")
+	}
+
 
 	// MARK: - TV
 	func tvDetails(id: Int) async throws -> TV {
@@ -41,6 +45,10 @@ final class PreviewMovieNetworkManager: MovieNetworkManager {
 	}
 	
 	func tvCredits(id: Int) async throws -> Credits {
+		fatalError("Not implemented")
+	}
+	
+	func tvWhereToWatch(id: Int) async throws -> WhereToWatch? {
 		fatalError("Not implemented")
 	}
 }

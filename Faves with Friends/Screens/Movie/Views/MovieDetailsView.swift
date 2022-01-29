@@ -84,18 +84,24 @@ struct MovieDetailsView: View {
                 }
             }
 			
-			Divider()
-			
-			CastAndCrewView(type: .movie, id: movie.id)
-			
-			Divider()
+			Group {
+				Divider()
+				
+				CastAndCrewView(type: .movie, id: movie.id)
+				
+				Divider()
+				
+				WhereToWatchView(type: .movie, id: movie.id)
+				
+				Divider()
 
-            VStack {
-                Text("Recommended")
-                    .bold()
-                    .appText()
-                RecommendedMoviesView(movieId: movie.id)
-            }
+				VStack {
+					Text("Recommended")
+						.bold()
+						.appText()
+					RecommendedMoviesView(movieId: movie.id)
+				}
+			}
         }
         .padding([.leading, .bottom])
     }
