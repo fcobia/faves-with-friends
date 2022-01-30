@@ -16,7 +16,8 @@ struct SearchScreenView: View {
 	
 	// MARK: EnvironmentObjects
 	@EnvironmentObject var alertManager: AlertManager
-	
+    @EnvironmentObject var favesViewModel: FaveViewModel
+    
 	// MARK: Private Observable Objects
 	@ObservedObject private var dataSource 		= SearchResultsDataSource()
 	@ObservedObject private var activityManager	= ActivityManager()
@@ -76,6 +77,19 @@ struct SearchScreenView: View {
 										}
 								}
 							}
+                            .swipeActions {
+                                Button {
+                                    favesViewModel.addToWatchingList(WatchListItem(videoId: searchResult.id, rating: nil, type: .movie, title: searchResult.name, moviePosterURL: searchResult.image))
+                                } label: {
+                                    Label("Add to Watching", systemImage: "tv.circle")
+                                }
+                                Button {
+                                    favesViewModel.addToToWatchList(WatchListItem(videoId: searchResult.id, rating: nil, type: .movie, title: searchResult.name, moviePosterURL: searchResult.image))
+                                } label: {
+                                    Label("Add to To Watch", systemImage: "list.bullet.circle")
+                                }
+                                .tint(.indigo)
+                            }
 						}
 						.listRowBackground(Color.clear)
 					}

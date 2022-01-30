@@ -51,7 +51,7 @@ class FaveViewModel: ObservableObject {
     //TODO: will need to check if movie is already in list and if so remove it and add new entry as rating may have changed?
     func addToToWatchList(_ watchListItem: WatchListItem) {
         //make sure not already in list and if not add it
-        if toWatchList.firstIndex(where: { $0.videoId == watchListItem.videoId }) != nil {
+        if toWatchList.firstIndex(where: { $0.videoId == watchListItem.videoId }) == nil {
             toWatchList.append(watchListItem)
         }
         //remove from other list now
@@ -61,7 +61,7 @@ class FaveViewModel: ObservableObject {
     
     func addToWatchedList(_ watchListItem: WatchListItem) {
         //make sure not already in list and if not add it
-        if watchedList.firstIndex(where: { $0.videoId == watchListItem.videoId }) != nil {
+        if watchedList.firstIndex(where: { $0.videoId == watchListItem.videoId }) == nil {
             watchedList.append(watchListItem)
         }
         //remove from other list
@@ -71,7 +71,7 @@ class FaveViewModel: ObservableObject {
     
     func addToWatchingList(_ watchListItem: WatchListItem) {
         //make sure not already in list and if not add it
-        if watchingList.firstIndex(where: { $0.videoId == watchListItem.videoId }) != nil {
+        if watchingList.firstIndex(where: { $0.videoId == watchListItem.videoId }) == nil {
             watchingList.append(watchListItem)
         }
         //remove from other list
