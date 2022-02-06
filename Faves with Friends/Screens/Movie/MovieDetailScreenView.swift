@@ -91,7 +91,7 @@ struct MovieDetailScreenView: View {
                                 }
                             }
                             .padding(.horizontal)
-                            RatingView(rating: $rating)
+                            StarRatingView($rating, size: 36)
                                 .allowsHitTesting(ratingEnabled)
                                 .padding()
                                 .onAppear {
