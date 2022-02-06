@@ -9,7 +9,6 @@ import Foundation
 
 
 struct Credits: Decodable {
-	
-	let cast: [PersonSearch]
-	let crew: [PersonSearch]
+	let cast: [MovieCastCreditEntry]
+	let crew: [MovieCrewCreditEntry]
 }

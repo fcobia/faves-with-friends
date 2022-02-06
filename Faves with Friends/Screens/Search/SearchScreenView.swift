@@ -118,7 +118,7 @@ struct SearchScreenView: View {
 				return AnyView(TVDetailScreenView(id: searchResult.id, title: searchResult.name))
 				
 			case .person:
-				return AnyView(EmptyView())
+				return AnyView(PersonDetailScreenView(id: searchResult.id, title: searchResult.name))
 		}
 	}
 }

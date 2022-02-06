@@ -22,7 +22,7 @@ struct CastAndCrewView: View {
 	}
 
 	// MARK: State Variables
-	@State private var credits: Credits?
+	@State private var credits: CastAndCrewEntries?
 	
 	// MARK: Init Variables
 	private let type: CreditsType
@@ -37,7 +37,7 @@ struct CastAndCrewView: View {
 					Text("Cast")
 					ScrollView(.horizontal, showsIndicators: true) {
 						LazyHStack {
-							ForEach(credits.cast.withoutDuplicates) { cast in
+							ForEach(credits.cast.removeDuplicates(keyPath: \.id), id: \.id) { cast in
 								VStack {
 									ImageLoadingView(
 										url: cast.image,
@@ -47,7 +47,8 @@ struct CastAndCrewView: View {
 												.aspectRatio(contentMode: .fit)
 												.frame(maxWidth: Constants.imageSize.width, maxHeight: Constants.imageSize.height)
 										}
-									Text(cast.name)
+									Text(cast.name ?? "")
+									Text(cast.character ?? "")
 								}
 							}
 						}
@@ -59,7 +60,7 @@ struct CastAndCrewView: View {
 					Text("Crew")
 					ScrollView(.horizontal, showsIndicators: true) {
 						LazyHStack {
-							ForEach(credits.crew.withoutDuplicates) { crew in
+							ForEach(credits.crew.removeDuplicates(keyPath: \.id), id: \.id) { crew in
 								VStack {
 									ImageLoadingView(
 										url: crew.image,
@@ -69,7 +70,8 @@ struct CastAndCrewView: View {
 												.aspectRatio(contentMode: .fit)
 												.frame(maxWidth: Constants.imageSize.width, maxHeight: Constants.imageSize.height)
 										}
-									Text(crew.name)
+									Text(crew.name ?? "")
+									Text(crew.job ?? "")
 								}
 							}
 						}
@@ -84,15 +86,30 @@ struct CastAndCrewView: View {
 			do {
 				switch type {
 					case .movie:
-						credits = try await environmentManager.movieNetworkManager.movieCredits(id: id)
+						let data = try await environmentManager.movieNetworkManager.movieCredits(id: id)
+						credits = CastAndCrewEntries(data)
+
 					case .tv:
-						credits = try await environmentManager.movieNetworkManager.tvCredits(id: id)
+						let data = try await environmentManager.movieNetworkManager.tvCredits(id: id)
+						credits = CastAndCrewEntries(data)
+
+					case .personMovie:
+						let data = try await environmentManager.movieNetworkManager.peopleMovieCredits(id: id)
+						credits = CastAndCrewEntries(data)
+
+					case .personTV:
+						let data = try await environmentManager.movieNetworkManager.peopleTVCredits(id: id)
+						credits = CastAndCrewEntries(data)
+
+					case .personCombined:
+						let data = try await environmentManager.movieNetworkManager.peopleCombinedCredits(id: id)
+						credits = CastAndCrewEntries(data)
 				}
 			}
 			catch let error {
 				print("Got error fetching cast & crew: \(error)")
 				alertManager.showAlert(for: error)
-				credits = Credits(cast: [], crew: [])
+				credits = CastAndCrewEntries()
 			}
 		}
     }
@@ -111,6 +128,29 @@ extension CastAndCrewView {
 	enum CreditsType {
 		case movie
 		case tv
+		case personMovie
+		case personTV
+		case personCombined
+	}
+}
+
+private struct CastAndCrewEntries {
+	let cast: [CastCreditEntry]
+	let crew: [CrewCreditEntry]
+	
+	init() {
+		self.cast = []
+		self.crew = []
+	}
+	
+	init(_ data: Credits) {
+		self.cast = data.cast
+		self.crew = data.crew
+	}
+	
+	init(_ data: PersonCredits) {
+		self.cast = data.cast
+		self.crew = data.crew
 	}
 }
 
