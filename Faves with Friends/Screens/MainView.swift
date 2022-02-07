@@ -35,28 +35,12 @@ struct MainView: View {
 				
 				// Tab 2
 				NavigationView {
-					MyListScreenView()
+					ListScreenView()
 				}
 				.tabItem {
 					Image(systemName: "list.bullet.circle")
                     Text("To Watch")
 				}
-                
-                NavigationView {
-                    WatchingListScreenView()
-                }
-                .tabItem {
-                    Image(systemName: "tv.circle")
-                    Text("Watching")
-                }
-                
-                NavigationView {
-                    MyRatingsScreenView()
-                }
-                .tabItem {
-                    Image(systemName: "star.circle")
-                    Text("Watched")
-                }
                 
                 NavigationView {
                     Text("Inbox")

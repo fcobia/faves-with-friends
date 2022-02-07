@@ -31,7 +31,7 @@ struct MyListScreenView: View {
                         Label("Delete", systemImage: "minus.circle")
                     }
                 }
-            }
+            }   
             .listRowBackground(Color.clear)
         }
         .listStyle(.plain)

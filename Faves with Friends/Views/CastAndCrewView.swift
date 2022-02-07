@@ -38,18 +38,21 @@ struct CastAndCrewView: View {
 					ScrollView(.horizontal, showsIndicators: true) {
 						LazyHStack {
 							ForEach(credits.cast.removeDuplicates(keyPath: \.id), id: \.id) { cast in
-								VStack {
-									ImageLoadingView(
-										url: cast.image,
-										style: .localProgress,
-										progressViewSize: Constants.imageSize) { image in
-											image.resizable()
-												.aspectRatio(contentMode: .fit)
-												.frame(maxWidth: Constants.imageSize.width, maxHeight: Constants.imageSize.height)
-										}
-									Text(cast.name ?? "")
-									Text(cast.character ?? "")
-								}
+                                NavigationLink(destination: PersonDetailScreenView(id: cast.id, title: cast.name ?? "")) {
+                                    VStack {
+                                        ImageLoadingView(
+                                            url: cast.image,
+                                            style: .localProgress,
+                                            progressViewSize: Constants.imageSize) { image in
+                                                image.resizable()
+                                                    .aspectRatio(contentMode: .fit)
+                                                    .frame(maxWidth: Constants.imageSize.width, maxHeight: Constants.imageSize.height)
+                                            }
+                                        Text(cast.name ?? "")
+                                        Text(cast.character ?? "")
+                                            .font(.subheadline)
+                                    }
+                                }
 							}
 						}
 					}
