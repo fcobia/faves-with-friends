@@ -97,13 +97,14 @@ struct PersonDetailScreenView: View {
                             .bold()
                         CastAndCrewView(type: .personTV, id: id)
                     }
-                    Divider()
-                    VStack(alignment: .center, spacing: 5) {
-                        Text("Combined Cast & Crew")
-                            .bold()
-                        CastAndCrewView(type: .personCombined, id: id)
-                    }
                     .padding(.bottom)
+//                    Divider()
+//                    VStack(alignment: .center, spacing: 5) {
+//                        Text("Combined Cast & Crew")
+//                            .bold()
+//                        CastAndCrewView(type: .personCombined, id: id)
+//                    }
+//                    .padding(.bottom)
                 }
             }
             else {
