@@ -24,6 +24,8 @@ struct MyRatingsScreenRowView: View {
     @EnvironmentObject var activityManager: ActivityManager
     @EnvironmentObject var favesViewModel: FaveViewModel
     
+    @State private var rating: Double?
+    
     let watchListItem: WatchListItem
     
     @State private var video: Movie?
@@ -43,6 +45,14 @@ struct MyRatingsScreenRowView: View {
                     Text(DateFormatters.dateOnly.string(from: releaseDate))
                         .font(.footnote)
                 }
+                
+                StarRatingView($rating, size: 16, showText: false)
+                    .allowsHitTesting(false)
+                    .onAppear {
+                        if let index = favesViewModel.watchedList.firstIndex(where: { $0.videoId == video?.id }) {
+                            rating = favesViewModel.watchedList[index].rating
+                        }
+                    }
             }
             
             Spacer()

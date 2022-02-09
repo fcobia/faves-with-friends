@@ -15,7 +15,8 @@ struct StarRatingView: View {
 	private let size: CGFloat
 	private let spacing: CGFloat
 	private let scaling: CGFloat
-	
+    private let showText: Bool
+    
 	// MARK: Private Variables
 	private let coordinateSpaceName = UUID().uuidString
 	private let locations: [(CGFloat, CGFloat, CGFloat)]
@@ -32,8 +33,10 @@ struct StarRatingView: View {
     var body: some View {
 		
 		VStack(spacing: 3) {
-			Text(RatingName.name(for: currentRating))
-				.font(.title)
+            if showText {
+                Text(RatingName.name(for: currentRating))
+                    .font(.title)
+            }
 
 			StarsView(count: count, size: size, spacing: spacing, rating: currentRating)
 				.coordinateSpace(name: coordinateSpaceName)
@@ -54,7 +57,7 @@ struct StarRatingView: View {
 	
 	
 	// MARK: Init
-	init(_ rating: Binding<Double?>, count: Int = 5, size: CGFloat = 25, spacing: CGFloat = 5, scaling: CGFloat = 1) {
+    init(_ rating: Binding<Double?>, count: Int = 5, size: CGFloat = 25, spacing: CGFloat = 5, scaling: CGFloat = 1, showText: Bool =  true) {
 		self._rating = rating
 		self.currentRating = rating.wrappedValue ?? 0
 
@@ -62,7 +65,8 @@ struct StarRatingView: View {
 		self.size = size
 		self.spacing = spacing
 		self.scaling = scaling
-		
+        self.showText = showText
+        
 		self.locations = StarRatingView.calculateLocations(count: count, size: size, spacing: spacing)
 	}
 	
