@@ -1282,10 +1282,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Faves with Friends/Preview Content\"";
-				DEVELOPMENT_TEAM = DE78Q3DZSQ;
+				DEVELOPMENT_TEAM = V774KLLDX5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Faves-with-Friends-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Showz;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1296,7 +1297,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ods.test.Faves-with-Friends";
+				PRODUCT_BUNDLE_IDENTIFIER = com.FavesWithFriends.Showz;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1312,10 +1313,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Faves with Friends/Preview Content\"";
-				DEVELOPMENT_TEAM = DE78Q3DZSQ;
+				DEVELOPMENT_TEAM = V774KLLDX5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Faves-with-Friends-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Showz;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1326,7 +1328,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ods.test.Faves-with-Friends";
+				PRODUCT_BUNDLE_IDENTIFIER = com.FavesWithFriends.Showz;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

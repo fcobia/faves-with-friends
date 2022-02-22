@@ -9,21 +9,14 @@ import SwiftUI
 
 struct MovieDetailScreenView: View {
     
-
-    enum ListType: String, CaseIterable, Identifiable {
-        case NoList     = "None"
-        case ToWatch    = "ToWatch"
-        case Watching   = "Watching"
-        case Watched    = "Watched"
-        
-        var id: String {
-            self.rawValue
-        }
+    enum ListType: String {
+        case Watchlist
+        case Watched
+        case Watching
     }
     
     // MARK: Environment Variables
     @Environment(\.environmentManager) private var environmentManager: EnvironmentManager
-    @Environment(\.preferredPalettes) var palettes
     
     // MARK: EnvironmentObjects
     @EnvironmentObject var alertManager: AlertManager
@@ -34,7 +27,7 @@ struct MovieDetailScreenView: View {
     @State private var movie: Movie? = nil
     @State private var watched = false
     @State private var showingConfirmationDialog = false
-    @State private var list: ListType = .NoList
+    @State private var list: ListType = .Watchlist
     @State private var rating: Double?
     @State private var ratingEnabled = true
     
@@ -57,40 +50,29 @@ struct MovieDetailScreenView: View {
                     }
                     ScrollView {
                         VStack {
-                            HStack {
-                                Picker("", selection: $list) {
-                                    ForEach(ListType.allCases) { type in
-                                        Text(type.rawValue).tag(type)
-                                    }
-                                }
-                                .pickerStyle(SegmentedPickerStyle())
-                                .background(palettes.color.primary).opacity(0.8).cornerRadius(8.0)
-                                .padding(.bottom)
-                                .onAppear {
-                                    if favesViewModel.watchedList.firstIndex(where: { $0.videoId == movie.id }) != nil {
-                                        list = .Watched
-                                    } else if favesViewModel.toWatchList.firstIndex(where: { $0.videoId == movie.id }) != nil {
-                                        list = .ToWatch
-                                    } else if favesViewModel.watchingList.firstIndex(where: { $0.videoId == movie.id }) != nil {
-                                        list = .Watching
-                                    }
-                                }
-                                .onChange(of: list) { value in
-                                    switch value {
-                                    case .NoList:
-                                        favesViewModel.removeFromWatchedList(WatchListItem(videoId: movie.id, rating: rating, type: .movie, title: movie.title, moviePosterURL: movie.posterPath))
-                                            favesViewModel.removeFromWatchingList(WatchListItem(videoId: movie.id, rating: rating, type: .movie, title: movie.title, moviePosterURL: movie.posterPath))
-                                           favesViewModel .removeFromToWatchList(WatchListItem(videoId: movie.id, rating: rating, type: .movie, title: movie.title, moviePosterURL: movie.posterPath))
-                                    case .Watching:
-                                        favesViewModel.addToWatchingList(WatchListItem(videoId: movie.id, rating: rating, type: .movie, title: movie.title, moviePosterURL: movie.posterPath))
-                                    case .ToWatch:
-                                        favesViewModel.addToToWatchList(WatchListItem(videoId: movie.id, rating: rating, type: .movie, title: movie.title, moviePosterURL: movie.posterPath))
-                                    case .Watched:
-                                        favesViewModel.addToWatchedList(WatchListItem(videoId: movie.id, rating: rating, type: .movie, title: movie.title, moviePosterURL: movie.posterPath))
-                                    }
-                                }
+                            
+                            Button {
+                                showingConfirmationDialog.toggle()
+                            } label: {
+                                Image(systemName: "plus.circle.fill")
+                                    .font(.largeTitle)
                             }
-                            .padding(.horizontal)
+                            .confirmationDialog("Add to list", isPresented: $showingConfirmationDialog) {
+                                Button("To Watch") {
+                                    list = .Watchlist
+                                    favesViewModel.addToToWatchList(WatchListItem(videoId: movie.id, rating: rating, type: .movie, title: movie.title, moviePosterURL: movie.posterPath))
+                                }
+                                Button("Watched") {
+                                    list = .Watched
+                                    favesViewModel.addToWatchedList(WatchListItem(videoId: movie.id, rating: rating, type: .movie, title: movie.title, moviePosterURL: movie.posterPath))
+                                }
+                                Button("Watching") {
+                                    list = .Watching
+                                    favesViewModel.addToWatchingList(WatchListItem(videoId: movie.id, rating: rating, type: .movie, title: movie.title, moviePosterURL: movie.posterPath))
+                                }
+                            } message: {
+                                Text("Add to list")
+                            }
                             StarRatingView($rating, size: 36)
                                 .allowsHitTesting(ratingEnabled)
                                 .padding()

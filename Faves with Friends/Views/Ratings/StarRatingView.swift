@@ -25,7 +25,7 @@ struct StarRatingView: View {
 	@Binding private var rating: Double?
 
 	// MARK: State Variables
-	@State private var currentRating: Double	= 0
+	@State private var currentRating: Double?
 	@State private var currentScale: CGFloat	= 1
 
 	
@@ -34,11 +34,15 @@ struct StarRatingView: View {
 		
 		VStack(spacing: 3) {
             if showText {
-                Text(RatingName.name(for: currentRating))
-                    .font(.title)
+                if let currentRating = currentRating {
+                    Text(RatingName.name(for: currentRating))
+                        .font(.title)
+                } else {
+                    Text("")
+                }
             }
 
-			StarsView(count: count, size: size, spacing: spacing, rating: currentRating)
+            StarsView(count: count, size: size, spacing: spacing, rating: currentRating ?? 0)
 				.coordinateSpace(name: coordinateSpaceName)
 				.gesture(
 					DragGesture(minimumDistance: 0, coordinateSpace: .named(coordinateSpaceName))
@@ -59,7 +63,7 @@ struct StarRatingView: View {
 	// MARK: Init
     init(_ rating: Binding<Double?>, count: Int = 5, size: CGFloat = 25, spacing: CGFloat = 5, scaling: CGFloat = 1, showText: Bool =  true) {
 		self._rating = rating
-		self.currentRating = rating.wrappedValue ?? 0
+		self.currentRating = rating.wrappedValue ?? nil
 
 		self.count = count
 		self.size = size

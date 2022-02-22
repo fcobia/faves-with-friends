@@ -11,9 +11,22 @@ struct ListScreenView: View {
     enum ListViews: String, CaseIterable, Identifiable {
         case MyListScreenView = "MyListScreenView"
         case MyRatingsScreenView = "MyRatingsScreenView"
+        case WatchingListScreenView = "WatchingListScreenView"
         
         var id: String {
             self.rawValue
+        }
+        
+        var displayName: String {
+            var title: String = "To Watch"
+            if self == .MyListScreenView {
+                title = "To Watch"
+            } else if self == .MyRatingsScreenView {
+                title = "Watched"
+            } else if self == .WatchingListScreenView {
+                title = "Watching"
+            }
+            return title
         }
     }
     
@@ -29,7 +42,7 @@ struct ListScreenView: View {
                 HStack(alignment: .top) {
                     Picker("", selection: $listView) {
                         ForEach(ListViews.allCases) { type in
-                            Text(type.rawValue).tag(type)
+                            Text(type.displayName).tag(type)
                         }
                     }
                     .pickerStyle(SegmentedPickerStyle())
@@ -41,6 +54,8 @@ struct ListScreenView: View {
                             listView = .MyListScreenView
                         case .MyRatingsScreenView:
                             listView = .MyRatingsScreenView
+                        case .WatchingListScreenView:
+                            listView = .WatchingListScreenView
                         }
                     }
                 }
@@ -50,6 +65,8 @@ struct ListScreenView: View {
                 MyListScreenView()
             } else if listView == .MyRatingsScreenView {
                 MyRatingsScreenView()
+            } else if listView == .WatchingListScreenView {
+                WatchingListScreenView()
             }
         }
     }
