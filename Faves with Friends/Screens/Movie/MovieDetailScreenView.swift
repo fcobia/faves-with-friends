@@ -60,15 +60,15 @@ struct MovieDetailScreenView: View {
                             .confirmationDialog("Add to list", isPresented: $showingConfirmationDialog) {
                                 Button("To Watch") {
                                     list = .Watchlist
-                                    favesViewModel.addToToWatchList(WatchListItem(videoId: movie.id, rating: rating, type: .movie, title: movie.title, moviePosterURL: movie.posterPath))
+                                    favesViewModel.addToToWatchList(createWatchListItem(movie))
                                 }
                                 Button("Watched") {
                                     list = .Watched
-                                    favesViewModel.addToWatchedList(WatchListItem(videoId: movie.id, rating: rating, type: .movie, title: movie.title, moviePosterURL: movie.posterPath))
+                                    favesViewModel.addToWatchedList(createWatchListItem(movie))
                                 }
                                 Button("Watching") {
                                     list = .Watching
-                                    favesViewModel.addToWatchingList(WatchListItem(videoId: movie.id, rating: rating, type: .movie, title: movie.title, moviePosterURL: movie.posterPath))
+                                    favesViewModel.addToWatchingList(createWatchListItem(movie))
                                 }
                             } message: {
                                 Text("Add to list")
@@ -76,13 +76,8 @@ struct MovieDetailScreenView: View {
                             StarRatingView($rating, size: 36)
                                 .allowsHitTesting(ratingEnabled)
                                 .padding()
-                                .onAppear {
-                                    if let index = favesViewModel.watchedList.firstIndex(where: { $0.videoId == movie.id }) {
-                                        rating = favesViewModel.watchedList[index].rating
-                                        watched = true
-                                    }
-                                }
-                            MovieDetailsView(movie: movie)
+
+							MovieDetailsView(movie: movie)
                         }
                     }
                 }
@@ -91,11 +86,19 @@ struct MovieDetailScreenView: View {
             .navigationTitle(movieTitle)
             .navigationBarTitleDisplayMode(.inline)
         }
-        .onAppear() {
-            if movie == nil {
-                getMovieDetails(id: id)
-            }
-        }
+		.onChange(of: rating, perform: { newValue in
+			if let movie = movie, let index = favesViewModel.watchedList.firstIndex(where: { $0.videoId == id }) {
+				favesViewModel.watchedList[index] = createWatchListItem(movie)
+			}
+		})
+		.task {
+			if let index = favesViewModel.watchedList.firstIndex(where: { $0.videoId == id }) {
+				rating = favesViewModel.watchedList[index].rating
+				watched = true
+			}
+			
+			await getMovieDetails(id: id)
+		}
     }
     
     
@@ -108,23 +111,27 @@ struct MovieDetailScreenView: View {
         self.previewPosterPhase = previewPosterPhase
     }
     
+	
     // MARK: Private Methods
-    private func getMovieDetails(id: Int) {
-        Task {
-            do {
-                activityManager.showActivity()
-                movie = try await environmentManager.movieNetworkManager.movieDetails(id: id)
-                //showProgressView = false
-            }
-            catch let error {
-                print("Error: \(error)")
-                //showProgressView = false
-                alertManager.showAlert(for: error)
-            }
-            
-            activityManager.hideActivity()
-        }
+	
+    private func getMovieDetails(id: Int) async {
+		do {
+			activityManager.showActivity()
+			movie = try await environmentManager.movieNetworkManager.movieDetails(id: id)
+			//showProgressView = false
+		}
+		catch let error {
+			print("Error: \(error)")
+			//showProgressView = false
+			alertManager.showAlert(for: error)
+		}
+		
+		activityManager.hideActivity()
     }
+	
+	private func createWatchListItem(_ movie: Movie) -> WatchListItem {
+		.init(videoId: movie.id, rating: rating, type: .movie, title: movie.title, moviePosterURL: movie.posterPath)
+	}
 }
 
 

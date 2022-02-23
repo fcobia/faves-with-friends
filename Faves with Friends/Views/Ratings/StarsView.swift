@@ -25,7 +25,7 @@ struct StarsView: View {
 	// MARK: SwiftUI
     var body: some View {
 		HStack(spacing: spacing) {
-			ForEach(0..<count) { i in
+			ForEach(0..<count, id: \.self) { i in
 				individualStar(rating, min: Double(i), max: Double(i + 1))
 			}
 		}
