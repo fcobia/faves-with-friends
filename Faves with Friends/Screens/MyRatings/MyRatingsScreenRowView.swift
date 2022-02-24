@@ -53,28 +53,28 @@ struct MyRatingsScreenRowView: View {
             
             Spacer()
         }
-        .onAppear {
-            getMovieDetails(id: watchListItem.videoId)
+        .task {
+            await getMovieDetails(id: watchListItem.videoId)
         }
     }
     
     // MARK: Private Methods
-    private func getMovieDetails(id: Int) {
-        Task {
-            do {
-                activityManager.showActivity()
-                video = try await environmentManager.movieNetworkManager.movieDetails(id: id)
-                if let index = favesViewModel.watchedList.firstIndex(where: { $0.videoId == video?.id }) {
-                    rating = favesViewModel.watchedList[index].rating
-                }
-            }
-            catch let error {
-                print("Error: \(error)")
-                alertManager.showAlert(for: error)
-            }
-            
-            activityManager.hideActivity()
-        }
+    private func getMovieDetails(id: Int) async {
+		do {
+			activityManager.showActivity()
+			
+			video = try await environmentManager.movieNetworkManager.movieDetails(id: id)
+			
+			if let index = favesViewModel.watchedList.firstIndex(where: { $0.videoId == id }) {
+				rating = favesViewModel.watchedList[index].rating
+			}
+		}
+		catch let error {
+			print("Error: \(error)")
+			alertManager.showAlert(for: error)
+		}
+		
+		activityManager.hideActivity()
     }
 }
 

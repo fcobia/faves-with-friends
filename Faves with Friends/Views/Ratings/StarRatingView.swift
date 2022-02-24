@@ -57,6 +57,9 @@ struct StarRatingView: View {
 				)
 		}
 		.scaleEffect(currentScale)
+		.onChange(of: rating) { newValue in
+			currentRating = rating
+		}
     }
 	
 	
