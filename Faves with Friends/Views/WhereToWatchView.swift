@@ -48,6 +48,15 @@ struct WhereToWatchView: View {
 							entriesView(link: whereToWatch.link, title: "Buy", entries: entries)
 						}
 					}
+                    HStack {
+                        Image("JustWatch")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 100, height: 50)
+                        Link("Information provided by JustWatch, tap here for more info...", destination: URL(string: "https://www.justwatch.com")!)
+                        .foregroundColor(.blue)
+                        
+                    }
 
 				}
 				else {

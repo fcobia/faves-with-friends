@@ -48,11 +48,7 @@ struct MyRatingsScreenRowView: View {
                 
                 StarRatingView($rating, size: 16, showText: false)
                     .allowsHitTesting(false)
-                    .onAppear {
-                        if let index = favesViewModel.watchedList.firstIndex(where: { $0.videoId == video?.id }) {
-                            rating = favesViewModel.watchedList[index].rating
-                        }
-                    }
+                   
             }
             
             Spacer()
@@ -68,6 +64,9 @@ struct MyRatingsScreenRowView: View {
             do {
                 activityManager.showActivity()
                 video = try await environmentManager.movieNetworkManager.movieDetails(id: id)
+                if let index = favesViewModel.watchedList.firstIndex(where: { $0.videoId == video?.id }) {
+                    rating = favesViewModel.watchedList[index].rating
+                }
             }
             catch let error {
                 print("Error: \(error)")

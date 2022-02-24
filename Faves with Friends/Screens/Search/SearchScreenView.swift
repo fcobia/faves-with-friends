@@ -77,7 +77,7 @@ struct SearchScreenView: View {
 										}
 								}
 							}
-                            .swipeActions {
+                            .swipeActions(allowsFullSwipe: false) {
                                 Button {
                                     favesViewModel.addToWatchingList(WatchListItem(videoId: searchResult.id, rating: nil, type: .movie, title: searchResult.name, moviePosterURL: searchResult.image))
                                 } label: {
