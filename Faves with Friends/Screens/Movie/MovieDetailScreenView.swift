@@ -8,12 +8,7 @@
 import SwiftUI
 
 struct MovieDetailScreenView: View {
-    
-    enum ListType: String {
-        case Watchlist
-        case Watched
-        case Watching
-    }
+
     
     // MARK: Environment Variables
     @Environment(\.environmentManager) private var environmentManager: EnvironmentManager
@@ -27,7 +22,7 @@ struct MovieDetailScreenView: View {
     @State private var movie: Movie? = nil
     @State private var watched = false
     @State private var showingConfirmationDialog = false
-    @State private var list: ListType = .Watchlist
+    @State private var list: ListType? = nil
     @State private var rating: Double?
     @State private var ratingEnabled = true
     
@@ -50,33 +45,30 @@ struct MovieDetailScreenView: View {
                     }
                     ScrollView {
                         VStack {
-                            
-                            Button {
-                                showingConfirmationDialog.toggle()
-                            } label: {
-                                Image(systemName: "plus.circle.fill")
-                                    .font(.largeTitle)
-                            }
-                            .confirmationDialog("Add to list", isPresented: $showingConfirmationDialog) {
-                                Button("To Watch") {
-                                    list = .Watchlist
-                                    favesViewModel.addToToWatchList(createWatchListItem(movie))
-                                }
-                                Button("Watched") {
-                                    list = .Watched
-                                    favesViewModel.addToWatchedList(createWatchListItem(movie))
-                                }
-                                Button("Watching") {
-                                    list = .Watching
-                                    favesViewModel.addToWatchingList(createWatchListItem(movie))
-                                }
-                            } message: {
-                                Text("Add to list")
+                            HStack {
+                                Text("List: \(list?.displayName ?? "None")")
+                                Spacer()
                             }
                             StarRatingView($rating, size: 36)
                                 .allowsHitTesting(ratingEnabled)
                                 .padding()
-
+                            HStack {
+                                Button {
+                                    list = .Watchlist
+                                    favesViewModel.addToToWatchList(createWatchListItem(movie))
+                                } label: {
+                                    Text("Add to Watch List")
+                                }
+                                .appPrimaryButton()
+                                Button {
+                                    list = .Watching
+                                    favesViewModel.addToWatchingList(createWatchListItem(movie))
+                                } label: {
+                                    Text("Add to Watching List")
+                                }
+                                .appPrimaryButton()
+                            }
+                            .padding(.bottom)
 							MovieDetailsView(movie: movie)
                         }
                     }
@@ -88,12 +80,18 @@ struct MovieDetailScreenView: View {
         }
 		.onChange(of: rating, perform: { newValue in
 			if let movie = movie, let index = favesViewModel.watchedList.firstIndex(where: { $0.videoId == id }) {
+                list = .Watched
 				favesViewModel.watchedList[index] = createWatchListItem(movie)
-			}
+            } else if let movie = movie {
+                list = .Watched
+                favesViewModel.addToWatchedList(createWatchListItem(movie))
+            }
 		})
 		.task {
 			if let index = favesViewModel.watchedList.firstIndex(where: { $0.videoId == id }) {
 				rating = favesViewModel.watchedList[index].rating
+                let listString = favesViewModel.watchedList[index].list
+                list = ListType(rawValue: listString)
 				watched = true
 			}
 			
@@ -130,7 +128,7 @@ struct MovieDetailScreenView: View {
     }
 	
 	private func createWatchListItem(_ movie: Movie) -> WatchListItem {
-		.init(videoId: movie.id, rating: rating, type: .movie, title: movie.title, moviePosterURL: movie.posterPath)
+        .init(videoId: movie.id, rating: rating, type: .movie, title: movie.title, moviePosterURL: movie.posterPath, list: list?.rawValue ?? "")
 	}
 }
 

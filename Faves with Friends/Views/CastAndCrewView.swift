@@ -59,28 +59,28 @@ struct CastAndCrewView: View {
                     
                     Spacer()
                         .frame(height: 15)
-                    
-                    Text("Crew")
-                    ScrollView(.horizontal, showsIndicators: true) {
-                        LazyHStack {
-                            ForEach(credits.crew.removeDuplicates(keyPath: \.id), id: \.id) { crew in
-                                NavigationLink(destination: { destination(for: type, cast: crew) }) {
-                                    VStack {
-                                        ImageLoadingView(
-                                            url: crew.image,
-                                            style: .localProgress,
-                                            progressViewSize: Constants.imageSize) { image in
-                                                image.resizable()
-                                                    .aspectRatio(contentMode: .fit)
-                                                    .frame(maxWidth: Constants.imageSize.width, maxHeight: Constants.imageSize.height)
-                                            }
-                                        Text(crew.name ?? "")
-                                        Text(crew.job ?? "")
-                                    }
-                                }
-                            }
-                        }
-                    }
+//
+//                    Text("Crew")
+//                    ScrollView(.horizontal, showsIndicators: true) {
+//                        LazyHStack {
+//                            ForEach(credits.crew.removeDuplicates(keyPath: \.id), id: \.id) { crew in
+//                                NavigationLink(destination: { destination(for: type, cast: crew) }) {
+//                                    VStack {
+//                                        ImageLoadingView(
+//                                            url: crew.image,
+//                                            style: .localProgress,
+//                                            progressViewSize: Constants.imageSize) { image in
+//                                                image.resizable()
+//                                                    .aspectRatio(contentMode: .fit)
+//                                                    .frame(maxWidth: Constants.imageSize.width, maxHeight: Constants.imageSize.height)
+//                                            }
+//                                        Text(crew.name ?? "")
+//                                        Text(crew.job ?? "")
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    }
                 }
             }
             else {
@@ -112,7 +112,7 @@ struct CastAndCrewView: View {
                 }
             }
             catch let error {
-                print("Got error fetching cast & crew: \(error)")
+                print("Got error fetching cast: \(error)")
                 alertManager.showAlert(for: error)
                 credits = CastAndCrewEntries()
             }
@@ -158,21 +158,21 @@ extension CastAndCrewView {
 
 private struct CastAndCrewEntries {
     let cast: [CastCreditEntry]
-    let crew: [CrewCreditEntry]
+    //let crew: [CrewCreditEntry]
     
     init() {
         self.cast = []
-        self.crew = []
+        //self.crew = []
     }
     
     init(_ data: Credits) {
         self.cast = data.cast
-        self.crew = data.crew
+        //self.crew = data.crew
     }
     
     init(_ data: PersonCredits) {
         self.cast = data.cast
-        self.crew = data.crew
+        //self.crew = data.crew
     }
 }
 

@@ -121,6 +121,7 @@
 		ED259E1227751C2300C3D1CF /* MyListScreenRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED259E1127751C2300C3D1CF /* MyListScreenRowView.swift */; };
 		ED259E162775262900C3D1CF /* MyRatingsScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED259E152775262900C3D1CF /* MyRatingsScreenView.swift */; };
 		ED259E182775264300C3D1CF /* MyRatingsScreenRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED259E172775264300C3D1CF /* MyRatingsScreenRowView.swift */; };
+		ED31688B27E0159B000EADC8 /* ListType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED31688A27E0159B000EADC8 /* ListType.swift */; };
 		ED613E2727B08B6B000DEC02 /* ListScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED613E2627B08B6B000DEC02 /* ListScreenView.swift */; };
 		ED887027279DF39D0089228E /* WatchingListScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED887026279DF39D0089228E /* WatchingListScreenView.swift */; };
 		ED887029279DF3FB0089228E /* WatchingListScreenRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED887028279DF3FB0089228E /* WatchingListScreenRowView.swift */; };
@@ -264,6 +265,7 @@
 		ED259E1127751C2300C3D1CF /* MyListScreenRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyListScreenRowView.swift; sourceTree = "<group>"; };
 		ED259E152775262900C3D1CF /* MyRatingsScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRatingsScreenView.swift; sourceTree = "<group>"; };
 		ED259E172775264300C3D1CF /* MyRatingsScreenRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRatingsScreenRowView.swift; sourceTree = "<group>"; };
+		ED31688A27E0159B000EADC8 /* ListType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListType.swift; sourceTree = "<group>"; };
 		ED613E2627B08B6B000DEC02 /* ListScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListScreenView.swift; sourceTree = "<group>"; };
 		ED887026279DF39D0089228E /* WatchingListScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchingListScreenView.swift; sourceTree = "<group>"; };
 		ED887028279DF3FB0089228E /* WatchingListScreenRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchingListScreenRowView.swift; sourceTree = "<group>"; };
@@ -329,6 +331,7 @@
 				01FD629427B0412E00698010 /* CrewCreditEntry.swift */,
 				01FD629827B0463900698010 /* MovieCrewCreditEntry.swift */,
 				01FD629C27B0482E00698010 /* MovieCastCreditEntry.swift */,
+				ED31688A27E0159B000EADC8 /* ListType.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1015,6 +1018,7 @@
 				01B0E148278249D100503979 /* MovieRecommendationsDataSource.swift in Sources */,
 				01A81A37274F666E00D47916 /* Environment+Palettes.swift in Sources */,
 				01A81A30274F658400D47916 /* Palettes.swift in Sources */,
+				ED31688B27E0159B000EADC8 /* ListType.swift in Sources */,
 				01CCDB58274F4AA8008337BB /* MovieHTTPService.swift in Sources */,
 				01A81A34274F658400D47916 /* PrimaryButtonModifier.swift in Sources */,
 				01A81A31274F658400D47916 /* AppTextFieldModifier.swift in Sources */,
@@ -1286,7 +1290,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Faves-with-Friends-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = Showz;
+				INFOPLIST_KEY_CFBundleDisplayName = ShowZ;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1317,7 +1321,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Faves-with-Friends-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = Showz;
+				INFOPLIST_KEY_CFBundleDisplayName = ShowZ;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

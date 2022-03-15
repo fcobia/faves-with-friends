@@ -39,7 +39,7 @@ struct MainView: View {
 				}
 				.tabItem {
 					Image(systemName: "list.bullet.circle")
-                    Text("To Watch")
+                    Text("Lists")
 				}
                 
                 NavigationView {

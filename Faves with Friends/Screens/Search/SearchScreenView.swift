@@ -29,12 +29,8 @@ struct SearchScreenView: View {
 			CurvedHeaderView {
 				VStack {
 					VStack {
-						Text("Faves")
+						Text("ShowZ")
 							.font(.largeTitle.weight(.semibold))
-							.appAltText()
-						
-						Text("with friends")
-							.font(.footnote)
 							.appAltText()
 					}
 					
@@ -79,12 +75,12 @@ struct SearchScreenView: View {
 							}
                             .swipeActions(allowsFullSwipe: false) {
                                 Button {
-                                    favesViewModel.addToWatchingList(WatchListItem(videoId: searchResult.id, rating: nil, type: .movie, title: searchResult.name, moviePosterURL: searchResult.image))
+                                    favesViewModel.addToWatchingList(WatchListItem(videoId: searchResult.id, rating: nil, type: .movie, title: searchResult.name, moviePosterURL: searchResult.image, list: ListType.Watching.rawValue))
                                 } label: {
                                     Label("Add to Watching", systemImage: "tv.circle")
                                 }
                                 Button {
-                                    favesViewModel.addToToWatchList(WatchListItem(videoId: searchResult.id, rating: nil, type: .movie, title: searchResult.name, moviePosterURL: searchResult.image))
+                                    favesViewModel.addToToWatchList(WatchListItem(videoId: searchResult.id, rating: nil, type: .movie, title: searchResult.name, moviePosterURL: searchResult.image, list: ListType.Watchlist.rawValue))
                                 } label: {
                                     Label("Add to To Watch", systemImage: "list.bullet.circle")
                                 }

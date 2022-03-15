@@ -87,13 +87,13 @@ struct PersonDetailScreenView: View {
                     .padding(5)
                     Divider()
                     VStack(alignment: .center, spacing: 5) {
-                        Text("Movie Cast & Crew")
+                        Text("Movie Cast")
                             .bold()
                         CastAndCrewView(type: .personMovie, id: id)
                     }
                     Divider()
                     VStack(alignment: .center, spacing: 5) {
-                        Text("TV Cast & Crew")
+                        Text("TV Cast")
                             .bold()
                         CastAndCrewView(type: .personTV, id: id)
                     }

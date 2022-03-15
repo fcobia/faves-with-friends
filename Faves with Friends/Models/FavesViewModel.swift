@@ -143,4 +143,5 @@ struct WatchListItem: Codable, Identifiable {
     let type: VideoType?
     let title: String?
     let moviePosterURL: URL?
+    let list: String
 }
