@@ -52,6 +52,11 @@ final class PreviewMovieNetworkManager: MovieNetworkManager {
 		fatalError("Not implemented")
 	}
 	
+	func tvSeason(id: Int, seasonNumber: Int) async throws -> TVSeason? {
+		fatalError("Not implemented")
+	}
+
+	
 	// MARK: People
 	func peopleDetails(id: Int) async throws -> Person {
 		fatalError("Not implemented")

@@ -89,6 +89,10 @@ final class AppMovieNetworkManager: MovieNetworkManager {
 		
 		return search.result
 	}
+	
+	func tvSeason(id: Int, seasonNumber: Int) async throws -> TVSeason? {
+		return try await movieNetworkService.fetch(.tvSeason(id: id, seasonNumber: seasonNumber))
+	}
 
 	
 	// MARK: People
@@ -132,7 +136,8 @@ extension SimpleHTTPServicePath {
 	static fileprivate let tvRecommendations	= SimpleHTTPServicePath("\(basePath)tv/{id}/recommendations")
 	static fileprivate let tvCredits			= SimpleHTTPServicePath("\(basePath)tv/{id}/credits")
 	static fileprivate let tvWhereToWatch		= SimpleHTTPServicePath("\(basePath)tv/{id}/watch/providers")
-	
+	static fileprivate let tvSeason				= SimpleHTTPServicePath("\(basePath)tv/{id}/season/{seasonNumber}")
+
 	// People
 	static fileprivate let peopleDetails			= SimpleHTTPServicePath("\(basePath)person")
 	static fileprivate let peopleMovieCredits		= SimpleHTTPServicePath("\(basePath)person/{id}/movie_credits")
@@ -224,6 +229,10 @@ extension SimpleHTTPJSONServiceTask {
 		return .init(path: .tvWhereToWatch.substituting(values: ["id": id]), httpMethod: .get(), jsonDecoder: MovieDBConstnts.movieDBJSONDecoder)
 	}
 	
+	static fileprivate func tvSeason(id: Int, seasonNumber: Int) -> SimpleHTTPJSONServiceTask<TVSeason> {
+		return .init(path: .tvSeason.substituting(values: ["id": id, "seasonNumber": seasonNumber]), httpMethod: .get(), jsonDecoder: MovieDBConstnts.movieDBJSONDecoder)
+	}
+
 	
 	// People
 	

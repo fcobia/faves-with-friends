@@ -27,6 +27,8 @@
 		011920722762FEB800F3C02F /* TVSearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011920712762FEB700F3C02F /* TVSearchResults.swift */; };
 		011920742762FF6600F3C02F /* PersonSearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011920732762FF6600F3C02F /* PersonSearchResults.swift */; };
 		011920772763039D00F3C02F /* MovieDBConstnts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011920762763039D00F3C02F /* MovieDBConstnts.swift */; };
+		0119F37927E2CEE800D67910 /* TVSeason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0119F37827E2CEE800D67910 /* TVSeason.swift */; };
+		0119F37B27E2D11800D67910 /* TVEpisode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0119F37A27E2D11800D67910 /* TVEpisode.swift */; };
 		014151E827A5F13A00562FB9 /* WhereToWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014151E727A5F13A00562FB9 /* WhereToWatch.swift */; };
 		014151EA27A5F1E600562FB9 /* WhereToWatchEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014151E927A5F1E600562FB9 /* WhereToWatchEntry.swift */; };
 		014151EE27A5F9D200562FB9 /* JSONDynamicKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014151ED27A5F9D200562FB9 /* JSONDynamicKey.swift */; };
@@ -168,6 +170,8 @@
 		011920712762FEB700F3C02F /* TVSearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVSearchResults.swift; sourceTree = "<group>"; };
 		011920732762FF6600F3C02F /* PersonSearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonSearchResults.swift; sourceTree = "<group>"; };
 		011920762763039D00F3C02F /* MovieDBConstnts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDBConstnts.swift; sourceTree = "<group>"; };
+		0119F37827E2CEE800D67910 /* TVSeason.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVSeason.swift; sourceTree = "<group>"; };
+		0119F37A27E2D11800D67910 /* TVEpisode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVEpisode.swift; sourceTree = "<group>"; };
 		014151E727A5F13A00562FB9 /* WhereToWatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhereToWatch.swift; sourceTree = "<group>"; };
 		014151E927A5F1E600562FB9 /* WhereToWatchEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhereToWatchEntry.swift; sourceTree = "<group>"; };
 		014151ED27A5F9D200562FB9 /* JSONDynamicKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDynamicKey.swift; sourceTree = "<group>"; };
@@ -343,6 +347,8 @@
 				0119205D275F19DC00F3C02F /* TVCommon.swift */,
 				0119205F275F1AC400F3C02F /* TVSearch.swift */,
 				010D9E1E278127F5008804E7 /* TV.swift */,
+				0119F37827E2CEE800D67910 /* TVSeason.swift */,
+				0119F37A27E2D11800D67910 /* TVEpisode.swift */,
 			);
 			path = TV;
 			sourceTree = "<group>";
@@ -1002,6 +1008,7 @@
 			files = (
 				01192059275DC1F100F3C02F /* DateFormatters.swift in Sources */,
 				01192068275F235D00F3C02F /* SearchResult.swift in Sources */,
+				0119F37927E2CEE800D67910 /* TVSeason.swift in Sources */,
 				01CCDB51274F42C3008337BB /* NetworkConstants.swift in Sources */,
 				01A81A1F274F622100D47916 /* MainView.swift in Sources */,
 				ED259E182775264300C3D1CF /* MyRatingsScreenRowView.swift in Sources */,
@@ -1083,6 +1090,7 @@
 				01B2911F27A238DD009A2CDC /* Credits.swift in Sources */,
 				014151EE27A5F9D200562FB9 /* JSONDynamicKey.swift in Sources */,
 				01192060275F1AC400F3C02F /* TVSearch.swift in Sources */,
+				0119F37B27E2D11800D67910 /* TVEpisode.swift in Sources */,
 				ED11C84B275AF21E00A181D5 /* FavesViewModel.swift in Sources */,
 				01FD629527B0412E00698010 /* CrewCreditEntry.swift in Sources */,
 				01B0E1502782554600503979 /* TVRecommendationsDataSource.swift in Sources */,

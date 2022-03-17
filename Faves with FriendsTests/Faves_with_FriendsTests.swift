@@ -36,10 +36,16 @@ class Faves_with_FriendsTests: XCTestCase {
 		XCTAssert(movie.id == 550)
 		XCTAssert(movie.title == "Fight Club")
     }
-    
-    func testMovieSearch() async throws {
-        let movies = try await movieNetworkManager.search(query: "Star Wars")
-        print(movies)
-        XCTAssert(movies.results.count > 0)
-    }
+	
+	func testMovieSearch() async throws {
+		let movies = try await movieNetworkManager.search(query: "Star Wars", type: .movies, page: 0)
+		print(movies)
+		XCTAssert(movies.results.count > 0)
+	}
+	
+	func testTVSeason() async throws {
+		let season = try await movieNetworkManager.tvSeason(id: 67198, seasonNumber: 1)
+		print("\(String(describing: season))")
+		XCTAssertNotNil(season)
+	}
 }

@@ -26,6 +26,7 @@ protocol MovieNetworkManager {
 	func tvRecommendations(id: Int, page: Int) async throws -> TVSearchResults
 	func tvCredits(id: Int) async throws -> Credits
 	func tvWhereToWatch(id: Int) async throws -> WhereToWatch?
+	func tvSeason(id: Int, seasonNumber: Int) async throws -> TVSeason?
 	
 	// MARK: People
 	func peopleDetails(id: Int) async throws -> Person
