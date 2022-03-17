@@ -50,6 +50,7 @@ final class SearchResultsDataSource: ViewDataSource {
 				return self?.shouldSearch(text: text) ?? false
 			})
 			.sink(receiveValue: { [weak self] text in
+				self?.resetSearch()
 				self?.initiateFetch()
 			})
 	}
