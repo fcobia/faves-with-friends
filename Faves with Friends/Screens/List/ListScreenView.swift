@@ -10,8 +10,8 @@ import SwiftUI
 struct ListScreenView: View {
     enum ListViews: String, CaseIterable, Identifiable {
         case MyListScreenView = "MyListScreenView"
-        case MyRatingsScreenView = "MyRatingsScreenView"
         case WatchingListScreenView = "WatchingListScreenView"
+        case MyRatingsScreenView = "MyRatingsScreenView"
         
         var id: String {
             self.rawValue
