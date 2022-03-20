@@ -11,11 +11,15 @@ import Foundation
 final class MovieRecommendationsDataSource: ViewDataSource {
 	
 	// MARK: Private Variables
-	private let movieId: Int
+	private var movieId: Int = -1
 	
 	
 	// MARK: Init
-	init(movieId: Int) {
+	override init() {
+		super.init()
+	}
+	
+	func inject(movieId: Int) {
 		self.movieId = movieId
 	}
 
@@ -23,6 +27,6 @@ final class MovieRecommendationsDataSource: ViewDataSource {
 	// MARK: ViewDataSource Functions
 	
 	override func performFetch(page: Int) async throws -> MovieDBSearchResults {
-		try await self.movieNetworkManager.movieRecommendations(id: movieId, page: page)
+		return try await self.movieNetworkManager.movieRecommendations(id: movieId, page: page)
 	}
 }

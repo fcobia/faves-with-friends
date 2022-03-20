@@ -11,7 +11,7 @@ struct MovieDetailScreenView: View {
 
     
     // MARK: Environment Variables
-    @Environment(\.environmentManager) private var environmentManager: EnvironmentManager
+    @Environment(\.environmentManager) private var environmentManager
     
     // MARK: EnvironmentObjects
     @EnvironmentObject var alertManager: AlertManager

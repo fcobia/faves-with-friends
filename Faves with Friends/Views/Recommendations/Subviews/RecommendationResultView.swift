@@ -14,39 +14,80 @@ struct RecommendationResultView: View {
     private enum Constants {
         static let imageSize = CGSize(width: 75, height: 100)
     }
-    
-    // Private Variables
+
+	
+	// MARK: Environment Variables
+	@Environment(\.showModal) var showModal
+	@Environment(\.dismiss) var dismiss
+
+    // MARK: Private Variables
     private let searchResult: SearchResult
+	
+	// MARK: Stats Variables
+	@State private var showMovieDetails = false
     
     
     // MARK: SwiftUI View
     var body: some View {
         VStack {
-            NavigationLink(destination: { destination(for: searchResult) }) {
-                ImageLoadingView(url: searchResult.image, style: .localProgress, progressViewSize: Constants.imageSize) { image in
-                    image.resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(maxWidth: Constants.imageSize.width, maxHeight: Constants.imageSize.height)
-                }
-            }
-            .listRowBackground(Color.clear)
+			contentView()
+				.toolbar {
+					if showModal.wrappedValue {
+						Button("Close") {
+							showModal.wrappedValue = false
+						}
+					}
+				}
 
 			Spacer()
         }
+		.sheet(isPresented: $showMovieDetails) {
+			NavigationView {
+				destinationView()
+			}
+			.environment(\.showModal, $showMovieDetails)
+		}
     }
     
     // MARK: Private Methods
-    private func destination(for searchResult: SearchResult) -> some View {
+	private func contentView() -> some View {
+		Group {
+			if showModal.wrappedValue {
+				NavigationLink(destination: {
+					destinationView()
+				}) {
+					searchResultView()
+				}
+			}
+			else {
+				Button {
+					showMovieDetails = true
+				} label: {
+					searchResultView()
+				}
+			}
+		}
+	}
+	
+	private func searchResultView() -> some View {
+		ImageLoadingView(url: searchResult.image, style: .localProgress, progressViewSize: Constants.imageSize) { image in
+			image.resizable()
+				.aspectRatio(contentMode: .fit)
+				.frame(maxWidth: Constants.imageSize.width, maxHeight: Constants.imageSize.height)
+		}
+	}
+	
+    private func destinationView() -> some View {
         switch searchResult.type {
             
-        case .movie:
-            return AnyView(MovieDetailScreenView(id: searchResult.id, movieTitle: searchResult.name))
-            
-        case .tv:
-            return AnyView(TVDetailScreenView(id: searchResult.id, title: searchResult.name))
-            
-        case .person:
-            return AnyView(EmptyView())
+			case .movie:
+				return AnyView(MovieDetailScreenView(id: searchResult.id, movieTitle: searchResult.name))
+				
+			case .tv:
+				return AnyView(TVDetailScreenView(id: searchResult.id, title: searchResult.name))
+				
+			case .person:
+				return AnyView(EmptyView())
         }
     }
     
