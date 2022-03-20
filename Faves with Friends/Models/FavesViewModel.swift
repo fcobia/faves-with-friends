@@ -55,7 +55,6 @@ class FaveViewModel: ObservableObject {
             toWatchList.append(watchListItem)
         }
         //remove from other list now
-        removeFromWatchedList(watchListItem)
         removeFromWatchingList(watchListItem)
     }
     
@@ -65,7 +64,6 @@ class FaveViewModel: ObservableObject {
             watchedList.append(watchListItem)
         }
         //remove from other list
-        removeFromToWatchList(watchListItem)
         removeFromWatchingList(watchListItem)
     }
     
@@ -75,7 +73,6 @@ class FaveViewModel: ObservableObject {
             watchingList.append(watchListItem)
         }
         //remove from other list
-        removeFromWatchedList(watchListItem)
         removeFromToWatchList(watchListItem)
     }
     
