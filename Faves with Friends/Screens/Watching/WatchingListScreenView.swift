@@ -34,7 +34,7 @@ struct WatchingListScreenView: View {
             .listRowBackground(Color.clear)
         }
         .listStyle(.plain)
-        .navigationTitle("Watching List")
+        .navigationTitle("Lists")
     }
     
     // MARK: Private Methods
