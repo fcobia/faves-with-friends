@@ -53,6 +53,7 @@ struct MovieDetailScreenView: View {
                                 .allowsHitTesting(ratingEnabled)
                                 .padding()
                             HStack {
+                                if list == .none || list == .Watched {
                                 Button {
                                     list = .Watchlist
                                     favesViewModel.addToToWatchList(createWatchListItem(movie))
@@ -60,6 +61,8 @@ struct MovieDetailScreenView: View {
                                     Text("Add to Watch List")
                                 }
                                 .appPrimaryButton()
+                                }
+                                if list == .Watchlist || list == .Watched {
                                 Button {
                                     list = .Watching
                                     favesViewModel.addToWatchingList(createWatchListItem(movie))
@@ -67,6 +70,7 @@ struct MovieDetailScreenView: View {
                                     Text("Add to Watching List")
                                 }
                                 .appPrimaryButton()
+                                }
                             }
                             .padding(.bottom)
 							MovieDetailsView(movie: movie)
@@ -94,6 +98,14 @@ struct MovieDetailScreenView: View {
                 list = ListType(rawValue: listString)
 				watched = true
 			}
+            if let index = favesViewModel.toWatchList.firstIndex(where: { $0.videoId == id }) {
+                let listString = favesViewModel.toWatchList[index].list
+                list = ListType(rawValue: listString)
+            }
+            if let index = favesViewModel.watchingList.firstIndex(where: { $0.videoId == id }) {
+                let listString = favesViewModel.watchingList[index].list
+                list = ListType(rawValue: listString)
+            }
 			
 			await getMovieDetails(id: id)
 		}
