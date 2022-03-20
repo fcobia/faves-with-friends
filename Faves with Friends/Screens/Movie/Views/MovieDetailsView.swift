@@ -13,6 +13,13 @@ struct MovieDetailsView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
+            
+            VStack {
+                Text("Recommended")
+                    .bold()
+                    .appText()
+                RecommendedMoviesView(movieId: movie.id)
+            }
 			
             VStack(alignment: .leading, spacing: 10) {
                 Text("Title:")
@@ -92,15 +99,6 @@ struct MovieDetailsView: View {
 				Divider()
 				
 				WhereToWatchView(type: .movie, id: movie.id)
-				
-				Divider()
-
-				VStack {
-					Text("Recommended")
-						.bold()
-						.appText()
-					RecommendedMoviesView(movieId: movie.id)
-				}
 			}
         }
         .padding([.leading, .bottom])
