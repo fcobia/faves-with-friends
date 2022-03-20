@@ -25,6 +25,7 @@ struct MovieDetailsView: View {
                 Text("Title:")
                     .fontWeight(.semibold)
                     .appText()
+				
                 HStack {
                     Text(movie.title)
                         .font(.subheadline)
@@ -34,16 +35,19 @@ struct MovieDetailsView: View {
                         .appText()
                 }
             }
+			
             VStack(alignment: .leading, spacing: 10) {
                 Text("Release Date:")
                     .fontWeight(.semibold)
                     .appText()
+				
 				if let releaseDate = movie.releaseDate {
 					Text(DateFormatters.dateOnly.string(from: releaseDate))
 						.font(.subheadline)
 						.appText()
 				}
             }
+			
             VStack(alignment: .leading, spacing: 10) {
                 Text("Runtime:")
                     .fontWeight(.semibold)
@@ -55,14 +59,17 @@ struct MovieDetailsView: View {
 						.appText()
 				}
             }
+			
             VStack(alignment: .leading, spacing: 10) {
                 Text("Status:")
                     .fontWeight(.semibold)
                     .appText()
+				
                 Text(movie.status)
                     .font(.subheadline)
                     .appText()
             }
+			
             VStack(alignment: .leading, spacing: 10) {
                 Text("Overview:")
                     .fontWeight(.semibold)
@@ -74,6 +81,7 @@ struct MovieDetailsView: View {
 						.appText()
 				}
             }
+			
             VStack(alignment: .leading, spacing: 10) {
                 HStack {
                     ForEach(movie.genres) { genre in

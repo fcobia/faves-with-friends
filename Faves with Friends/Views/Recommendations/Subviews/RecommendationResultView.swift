@@ -29,19 +29,9 @@ struct RecommendationResultView: View {
                         .frame(maxWidth: Constants.imageSize.width, maxHeight: Constants.imageSize.height)
                 }
             }
-            
             .listRowBackground(Color.clear)
-            
-            //			VStack(alignment: .leading) {
-            //				Text(searchResult.name)
-            //
-            //				if let video = searchResult as? Video, let releaseDate = video.releaseDate {
-            //					Text(DateFormatters.dateOnly.string(from: releaseDate))
-            //						.font(.footnote)
-            //				}
-            //			}
-            
-            Spacer()
+
+			Spacer()
         }
     }
     

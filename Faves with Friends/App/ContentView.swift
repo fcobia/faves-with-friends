@@ -84,6 +84,7 @@ struct ContentView_Previews: PreviewProvider {
 		 content
 			 .modifier(Faves_with_FriendsApp_Previews.previewEnvironmentModifier)
 			 .environment(\.user, testUser)
+		 
 	 }
  }
 }

@@ -49,30 +49,34 @@ struct MovieDetailScreenView: View {
                                 Text("List: \(list?.displayName ?? "None")")
                                 Spacer()
                             }
+							
                             StarRatingView($rating, size: 36)
                                 .allowsHitTesting(ratingEnabled)
                                 .padding()
+							
                             HStack {
                                 if list == .none || list == .Watched {
-                                Button {
-                                    list = .Watchlist
-                                    favesViewModel.addToToWatchList(createWatchListItem(movie))
-                                } label: {
-                                    Text("Add to Watch List")
+									Button {
+										list = .Watchlist
+										favesViewModel.addToToWatchList(createWatchListItem(movie))
+									} label: {
+										Text("Add to Watch List")
+									}
+									.appPrimaryButton()
                                 }
-                                .appPrimaryButton()
-                                }
+								
                                 if list == .Watchlist || list == .Watched {
-                                Button {
-                                    list = .Watching
-                                    favesViewModel.addToWatchingList(createWatchListItem(movie))
-                                } label: {
-                                    Text("Add to Watching List")
-                                }
-                                .appPrimaryButton()
+									Button {
+										list = .Watching
+										favesViewModel.addToWatchingList(createWatchListItem(movie))
+									} label: {
+										Text("Add to Watching List")
+									}
+									.appPrimaryButton()
                                 }
                             }
                             .padding(.bottom)
+							
 							MovieDetailsView(movie: movie)
                         }
                     }
