@@ -15,7 +15,7 @@ struct MovieDetailsView: View {
         VStack(alignment: .leading, spacing: 20) {
             
             VStack {
-                Text("Recommended")
+                Text("Similar")
                     .bold()
                     .appText()
                 RecommendedMoviesView(movieId: movie.id)
