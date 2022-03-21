@@ -19,6 +19,7 @@ struct RecommendationResultView: View {
 	// MARK: Environment Variables
 	@Environment(\.showModal) var showModal
 	@Environment(\.dismiss) var dismiss
+	@Environment(\.preferredPalettes) var pallet
 
     // MARK: Private Variables
     private let searchResult: SearchResult
@@ -36,6 +37,7 @@ struct RecommendationResultView: View {
 						Button("Close") {
 							showModal.wrappedValue = false
 						}
+						.foregroundColor(pallet.color.alternativeText)
 					}
 				}
 
