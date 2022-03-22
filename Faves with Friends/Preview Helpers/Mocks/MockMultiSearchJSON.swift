@@ -18,27 +18,28 @@ struct MockMultiSearchJSON: MockJSON {
 							"results": [
 								{
 									"adult": false,
+									"backdrop_path": null,
+									"genre_ids": [
+										18
+									],
+									"id": 531236,
+									"media_type": "movie",
+									"original_language": "en",
+									"original_title": "I Am John Wayne",
+									"overview": "An young urban cowboy copes with the death of his best friend.",
+									"popularity": 1.344,
+									"poster_path": "/tpdFWsjpmGyaLFFOy2dFNQ19xoq.jpg",
+									"release_date": "2012-03-01",
+									"title": "I Am John Wayne",
+									"video": false,
+									"vote_average": 0,
+									"vote_count": 0
+								},
+								{
+									"adult": false,
 									"gender": 2,
 									"id": 4165,
 									"known_for": [
-										{
-											"adult": false,
-											"backdrop_path": "/wTSv5HEJvRIxGrj14lovNRQ2Gyf.jpg",
-											"genre_ids": [
-												37
-											],
-											"id": 3114,
-											"media_type": "movie",
-											"original_language": "en",
-											"original_title": "The Searchers",
-											"overview": "As a Civil War veteran spends years searching for a young niece captured by Indians, his motivation becomes increasingly questionable.",
-											"poster_path": "/jLBmgW0epNzJ1N9uzaVCjbyT94v.jpg",
-											"release_date": "1956-05-07",
-											"title": "The Searchers",
-											"video": false,
-											"vote_average": 7.7,
-											"vote_count": 977
-										},
 										{
 											"adult": false,
 											"backdrop_path": "/aZD1nLaDmmLXvtI2QyPL5rIBsnW.jpg",
@@ -56,6 +57,24 @@ struct MockMultiSearchJSON: MockJSON {
 											"video": false,
 											"vote_average": 7.9,
 											"vote_count": 793
+										},
+										{
+											"adult": false,
+											"backdrop_path": "/wTSv5HEJvRIxGrj14lovNRQ2Gyf.jpg",
+											"genre_ids": [
+												37
+											],
+											"id": 3114,
+											"media_type": "movie",
+											"original_language": "en",
+											"original_title": "The Searchers",
+											"overview": "As a Civil War veteran spends years searching for a young niece captured by Indians, his motivation becomes increasingly questionable.",
+											"poster_path": "/jLBmgW0epNzJ1N9uzaVCjbyT94v.jpg",
+											"release_date": "1956-05-07",
+											"title": "The Searchers",
+											"video": false,
+											"vote_average": 7.7,
+											"vote_count": 977
 										},
 										{
 											"adult": false,
@@ -119,25 +138,6 @@ struct MockMultiSearchJSON: MockJSON {
 									"video": false,
 									"vote_average": 8,
 									"vote_count": 1
-								},
-								{
-									"adult": false,
-									"backdrop_path": null,
-									"genre_ids": [
-										18
-									],
-									"id": 531236,
-									"media_type": "movie",
-									"original_language": "en",
-									"original_title": "I Am John Wayne",
-									"overview": "An young urban cowboy copes with the death of his best friend.",
-									"popularity": 1.344,
-									"poster_path": "/tpdFWsjpmGyaLFFOy2dFNQ19xoq.jpg",
-									"release_date": "2012-03-01",
-									"title": "I Am John Wayne",
-									"video": false,
-									"vote_average": 0,
-									"vote_count": 0
 								},
 								{
 									"adult": false,
