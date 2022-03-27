@@ -131,6 +131,7 @@
 		EDB9F71B27531E990029D771 /* SearchScreenRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB9F71A27531E990029D771 /* SearchScreenRowView.swift */; };
 		EDB9F71D275322A10029D771 /* AppRoundedTextFieldModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB9F71C275322A10029D771 /* AppRoundedTextFieldModifier.swift */; };
 		EDB9F71F275326D30029D771 /* ClearButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB9F71E275326D30029D771 /* ClearButtonModifier.swift */; };
+		EDDBD73527F11C5400C65B18 /* RowViewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDBD73427F11C5400C65B18 /* RowViewButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -278,6 +279,7 @@
 		EDB9F71A27531E990029D771 /* SearchScreenRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchScreenRowView.swift; sourceTree = "<group>"; };
 		EDB9F71C275322A10029D771 /* AppRoundedTextFieldModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRoundedTextFieldModifier.swift; sourceTree = "<group>"; };
 		EDB9F71E275326D30029D771 /* ClearButtonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearButtonModifier.swift; sourceTree = "<group>"; };
+		EDDBD73427F11C5400C65B18 /* RowViewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowViewButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -488,6 +490,7 @@
 			children = (
 				01A81A2C274F658400D47916 /* SecondaryButtonModifier.swift */,
 				01A81A2D274F658400D47916 /* PrimaryButtonModifier.swift */,
+				EDDBD73427F11C5400C65B18 /* RowViewButton.swift */,
 			);
 			path = Button;
 			sourceTree = "<group>";
@@ -1018,6 +1021,7 @@
 				EDB9F71D275322A10029D771 /* AppRoundedTextFieldModifier.swift in Sources */,
 				ED11C84927599D1B00A181D5 /* MovieDetailsView.swift in Sources */,
 				010D9E2827822B81008804E7 /* MockJSON.swift in Sources */,
+				EDDBD73527F11C5400C65B18 /* RowViewButton.swift in Sources */,
 				ED11C84227545D5A00A181D5 /* MovieCommon.swift in Sources */,
 				01CCDB62274F4F46008337BB /* MovieNetworkErrorResponse.swift in Sources */,
 				01FD629327B040DB00698010 /* CastCreditEntry.swift in Sources */,
