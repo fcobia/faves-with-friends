@@ -17,8 +17,8 @@ struct RecommendedTVView: View {
 	@EnvironmentObject var alertManager: AlertManager
 
 	// MARK: Private Observable Objects
-	@ObservedObject private var dataSource: TVRecommendationsDataSource
-	@ObservedObject private var activityManager	= ActivityManager()
+	@StateObject private var dataSource 		= TVRecommendationsDataSource()
+	@StateObject private var activityManager	= ActivityManager()
 
 	//MARK: Private Variables
 	private let tvId: Int
@@ -51,7 +51,9 @@ struct RecommendedTVView: View {
 				}
 				.frame(maxWidth: .infinity)
 			}
-
+			.onAppear {
+				dataSource.inject(tvId: tvId)
+			}
 	}
 	
 	
@@ -59,8 +61,6 @@ struct RecommendedTVView: View {
 	
 	init(tvId: Int) {
 		self.tvId = tvId
-		
-		self.dataSource = TVRecommendationsDataSource(tvId: tvId)
 	}
 }
 

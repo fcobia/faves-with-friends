@@ -11,8 +11,12 @@ import SwiftUI
 struct RecommendedMoviesView: View {
 	
 	// MARK: Environment Variables
-	@Environment(\.environmentManager) private var environmentManager: EnvironmentManager
 	
+	// MARK: Environment Variables
+	@Environment(\.showModal) var showModal
+	@Environment(\.environmentManager) private var environmentManager: EnvironmentManager
+	@Environment(\.preferredPalettes) var pallet
+
 	// MARK: EnvironmentObjects
 	@EnvironmentObject var alertManager: AlertManager
 
@@ -23,46 +27,87 @@ struct RecommendedMoviesView: View {
 	//MARK: Private Variables
 	private let movieId: Int
 	
+	// MARK: Private Computed Variables
+	private var isSearchResultMode: Bool {
+		print("isSearchResultMode: \(showModal.wrappedValue)")
+		return showModal.wrappedValue
+	}
+	
 	
 	// MARK: SwiftUI
     var body: some View {
 		
-		DataSourceView(
-			dataSource: dataSource,
-			activityManager: activityManager,
-			alertManager: alertManager,
-			movieNetworkManager: environmentManager.movieNetworkManager,
-			fetchesOnLoad: true) { results in
-				ScrollView(.horizontal, showsIndicators: true) {
-					LazyHStack {
-						ForEach(results, id: \.equalityId) { searchResult in
-							RecommendationResultView(searchResult: searchResult)
-							.onAppear {
-								dataSource.fetchIfNecessary(searchResult)
-							}
+		Group {
+			if isSearchResultMode {
+				SearchListView(dataSource: dataSource, fetchesOnLoad: true)
+					.toolbar {
+						Button("Close") {
+							showModal.wrappedValue = false
 						}
+						.foregroundColor(pallet.color.alternativeText)
 					}
-				}
-			} noResultsContents: {
-				HStack {
-					Spacer()
-					Text("No Recomendations")
-					Spacer()
-				}
-				.frame(maxWidth: .infinity)
 			}
-			.onAppear {
-				dataSource.inject(movieId: movieId)
+			else {
+				DataSourceView(
+					dataSource: dataSource,
+					activityManager: activityManager,
+					alertManager: alertManager,
+					movieNetworkManager: environmentManager.movieNetworkManager,
+					fetchesOnLoad: true) { results in
+						scrollView(results)
+					} noResultsContents: {
+						HStack {
+							Spacer()
+							Text("No Recomendations")
+							Spacer()
+						}
+						.frame(maxWidth: .infinity)
+					}
 			}
+		}
+		.onAppear {
+			dataSource.inject(movieId: movieId)
+		}
     }
 	
 	
 	// MARK: Init
-	
 	init(movieId: Int) {
 		self.movieId = movieId
-		
-//		self.dataSource.inject(movieId: movieId)
+	}
+	
+	
+	// MARK: Private Methods
+	private func scrollView(_ results: [SearchResult]) -> some View {
+		Group {
+			if isSearchResultMode {
+				ScrollView(.vertical, showsIndicators: true) {
+					LazyVStack {
+						forEachView(results)
+					}
+				}
+			}
+			else {
+				ScrollView(.horizontal, showsIndicators: true) {
+					LazyHStack {
+						forEachView(results)
+					}
+				}
+			}
+		}
+	}
+	
+	private func forEachView(_ results: [SearchResult]) -> some View {
+		ForEach(results, id: \.equalityId) { searchResult in
+			contentView(searchResult: searchResult)
+				.onAppear {
+					dataSource.fetchIfNecessary(searchResult)
+				}
+		}
+	}
+	
+	private func contentView(searchResult: SearchResult) -> some View {
+		RecommendationResultView(searchResult: searchResult)
 	}
 }
 

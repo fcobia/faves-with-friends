@@ -11,11 +11,14 @@ import Foundation
 final class TVRecommendationsDataSource: ViewDataSource {
 	
 	// MARK: Private Variables
-	private let tvId: Int
+	private var tvId: Int = -1
 	
 	
 	// MARK: Init
-	init(tvId: Int) {
+	override init() {
+	}
+	
+	func inject(tvId: Int) {
 		self.tvId = tvId
 	}
 

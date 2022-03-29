@@ -14,7 +14,10 @@ struct SearchScreenRowView: View {
     private enum Constants {
         static let imageSize = CGSize(width: 75, height: 100)
     }
-    
+	
+	// MARK: Environment Variables
+	@Environment(\.showModal) var showModal
+
     // MARK: EnvironmentObjects
     @EnvironmentObject var favesViewModel: FaveViewModel
     
@@ -22,9 +25,9 @@ struct SearchScreenRowView: View {
     @State private var list: ListType? = nil
     @State private var rating: Double?
     @State private var watched = false
-    
     @State private var showingAlert = false
-    
+	@State private var showRecommended = false
+
     // MARK: Preview Support Variables
     private let previewImagePhase: AsyncImagePhase?
     
@@ -34,7 +37,7 @@ struct SearchScreenRowView: View {
     
     // MARK: SwiftUI View
     var body: some View {
-        HStack(alignment: .top) {
+        HStack(alignment: .center) {
             
             ImageLoadingView(url: searchResult.image, style: .localProgress, progressViewSize: Constants.imageSize, previewPhase: previewImagePhase) { image in
                 image.resizable()
@@ -63,79 +66,56 @@ struct SearchScreenRowView: View {
                 if searchResult.type == .movie {
                     HStack {
                         VStack {
-                            HStack {
-                                //Spacer()
-                                
-                                StarRatingView($rating, size: 26, showText: false)
-                                
-                                Spacer()
-                            }
-                            HStack {
-                                Button {
-                                    //switch state var that causes modal to show?
-                                } label: {
-                                    Text("      Similar Movies     ")
-                                }
-                                .rowViewButton()
-                                Spacer()
-                            }
+							StarRatingView($rating, size: 26, showText: false)
+							
+							if showModal.wrappedValue {
+								showWatchListButton()
+								
+								NavigationLink(destination: RecommendedMoviesView(movieId: searchResult.id).navigationTitle("Recommended"), isActive: $showRecommended) {
+									EmptyView()
+								}
+							}
+							else {
+								showWatchListButton()
+									.sheet(isPresented: $showRecommended) {
+										let _ = print("Showing the sheet: \(showRecommended)")
+										NavigationView {
+											RecommendedMoviesView(movieId: searchResult.id)
+												.navigationTitle("Recommended")
+												.navigationBarTitleDisplayMode(.inline)
+										}
+										.environment(\.showModal, $showRecommended)
+									}
+							}
                         }
-                        VStack {
-                            if list == .none || list == .Watched {
-                                HStack {
-                                    Spacer()
-                                    Button {
-                                        list = .Watchlist
-                                        favesViewModel.addToToWatchList(createWatchListItem(searchResult))
-                                        showingAlert = true
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                                            showingAlert = false
-                                        }
-                                    } label: {
-                                        Image(systemName: "text.badge.plus")
-                                            .font(.largeTitle)
-                                    }
-                                    .buttonStyle(PlainButtonStyle())
-                                    Spacer()
-                                }
-                            }
-                        }
-                        .alert("Added to Watch List", isPresented: $showingAlert) {
-                            
-                                }
+						
+						if list == .none || list == .Watched {
+							HStack {
+								Spacer()
+								
+								Button {
+									list = .Watchlist
+									favesViewModel.addToToWatchList(createWatchListItem(searchResult))
+									showingAlert = true
+									DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+										showingAlert = false
+									}
+								} label: {
+									Image(systemName: "text.badge.plus")
+										.font(.largeTitle)
+								}
+								.buttonStyle(PlainButtonStyle())
+								
+								Spacer()
+							}
+						}
                     }
-                    //					HStack {
-                    //						Spacer()
-                    //
-                    //						if list == .none || list == .Watched {
-                    //							Button {
-                    //								list = .Watchlist
-                    //								favesViewModel.addToToWatchList(createWatchListItem(searchResult))
-                    //							} label: {
-                    //								Text("Add to Watch List")
-                    //							}
-                    //							.appPrimaryButton()
-                    //						}
-                    //
-                    //						Spacer()
-                    //
-                    //						if list == .Watchlist || list == .Watched {
-                    //							Button {
-                    //								list = .Watching
-                    //								favesViewModel.addToWatchingList(createWatchListItem(searchResult))
-                    //							} label: {
-                    //								Text("Add to Watching List")
-                    //							}
-                    //							.appPrimaryButton()
-                    //						}
-                    //
-                    //						Spacer()
-                    //					}
                     .padding(.bottom, 5)
                 }
             }
             .padding(.top, 3)
-            
+			.alert("Added to Watch List", isPresented: $showingAlert) {}
+
             Spacer()
         }
         .onChange(of: rating, perform: { newValue in
@@ -179,6 +159,14 @@ struct SearchScreenRowView: View {
     
     
     // MARK: Private Methods
+	private func showWatchListButton() -> some View {
+		Button {
+			showRecommended = true
+		} label: {
+			Text("Similar Movies")
+		}
+		.rowViewButton()
+	}
     
     private func createWatchListItem(_ movie: SearchResult) -> WatchListItem {
         .init(videoId: movie.id, rating: rating, type: .movie, title: movie.name, moviePosterURL: movie.image, list: list?.rawValue ?? "")
