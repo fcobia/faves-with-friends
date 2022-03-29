@@ -29,7 +29,6 @@ struct RecommendedMoviesView: View {
 	
 	// MARK: Private Computed Variables
 	private var isSearchResultMode: Bool {
-		print("isSearchResultMode: \(showModal.wrappedValue)")
 		return showModal.wrappedValue
 	}
 	

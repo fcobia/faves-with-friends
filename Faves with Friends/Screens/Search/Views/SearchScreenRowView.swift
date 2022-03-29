@@ -78,7 +78,6 @@ struct SearchScreenRowView: View {
 							else {
 								showWatchListButton()
 									.sheet(isPresented: $showRecommended) {
-										let _ = print("Showing the sheet: \(showRecommended)")
 										NavigationView {
 											RecommendedMoviesView(movieId: searchResult.id)
 												.navigationTitle("Recommended")
