@@ -37,7 +37,7 @@ struct SearchScreenRowView: View {
     
     // MARK: SwiftUI View
     var body: some View {
-        HStack(alignment: .center) {
+        HStack(alignment: .center, spacing: 5) {
             
             ImageLoadingView(url: searchResult.image, style: .localProgress, progressViewSize: Constants.imageSize, previewPhase: previewImagePhase) { image in
                 image.resizable()
@@ -74,12 +74,14 @@ struct SearchScreenRowView: View {
 								NavigationLink(destination: RecommendedMoviesView(movieId: searchResult.id).navigationTitle("Recommended"), isActive: $showRecommended) {
 									EmptyView()
 								}
+                                .opacity(0.0)
+                                   .buttonStyle(PlainButtonStyle())
 							}
 							else {
 								showWatchListButton()
 									.sheet(isPresented: $showRecommended) {
 										NavigationView {
-											RecommendedMoviesView(movieId: searchResult.id)
+											RecommendedMoviesViewVertical(movieId: searchResult.id)
 												.navigationTitle("Recommended")
 												.navigationBarTitleDisplayMode(.inline)
 										}

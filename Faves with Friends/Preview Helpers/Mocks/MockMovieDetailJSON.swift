@@ -8,7 +8,7 @@
 import Foundation
 
 
-#if DEBUG
+//#if DEBUG
 struct MockMovieDetailJSON: MockJSON {
 	typealias JSONType = Movie
 	
@@ -84,4 +84,4 @@ struct MockMovieDetailJSON: MockJSON {
 						}
 						"""
 }
-#endif
+//#endif

@@ -71,7 +71,7 @@ struct RecommendedMoviesView: View {
 	
 	
 	// MARK: Init
-	init(movieId: Int) {
+    init(movieId: Int) {
 		self.movieId = movieId
 	}
 	

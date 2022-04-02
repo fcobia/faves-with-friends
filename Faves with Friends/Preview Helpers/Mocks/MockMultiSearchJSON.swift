@@ -8,7 +8,7 @@
 import Foundation
 
 
-#if DEBUG
+//#if DEBUG
 struct MockMultiSearchJSON: MockJSON {
 	typealias JSONType = MultiSearchResults
 	
@@ -444,4 +444,4 @@ struct MockMultiSearchJSON: MockJSON {
 						}
 						"""
 }
-#endif
+//#endif

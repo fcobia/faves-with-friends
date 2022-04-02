@@ -7,7 +7,7 @@
 
 import Foundation
 
-#if DEBUG
+//#if DEBUG
 protocol MockJSON {
 	associatedtype JSONType: Decodable
 	
@@ -23,4 +23,4 @@ extension MockJSON {
 		try! MovieDBConstnts.movieDBJSONDecoder.decode(JSONType.self, from: Self.json.data(using: .utf8)!)
 	}
 }
-#endif
+//#endif

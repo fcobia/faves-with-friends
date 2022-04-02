@@ -133,6 +133,7 @@
 		EDB9F71D275322A10029D771 /* AppRoundedTextFieldModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB9F71C275322A10029D771 /* AppRoundedTextFieldModifier.swift */; };
 		EDB9F71F275326D30029D771 /* ClearButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB9F71E275326D30029D771 /* ClearButtonModifier.swift */; };
 		EDDBD73527F11C5400C65B18 /* RowViewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDBD73427F11C5400C65B18 /* RowViewButton.swift */; };
+		EDE738CF27F8D06100AD15A7 /* RecommendedMoviesViewVertical.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE738CE27F8D06100AD15A7 /* RecommendedMoviesViewVertical.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -282,6 +283,7 @@
 		EDB9F71C275322A10029D771 /* AppRoundedTextFieldModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRoundedTextFieldModifier.swift; sourceTree = "<group>"; };
 		EDB9F71E275326D30029D771 /* ClearButtonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearButtonModifier.swift; sourceTree = "<group>"; };
 		EDDBD73427F11C5400C65B18 /* RowViewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowViewButton.swift; sourceTree = "<group>"; };
+		EDE738CE27F8D06100AD15A7 /* RecommendedMoviesViewVertical.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedMoviesViewVertical.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -594,6 +596,7 @@
 				01B0E14C278253B300503979 /* Subviews */,
 				01B0E1422782333300503979 /* RecommendedMoviesView.swift */,
 				01B0E14D278254D500503979 /* RecommendedTVView.swift */,
+				EDE738CE27F8D06100AD15A7 /* RecommendedMoviesViewVertical.swift */,
 			);
 			path = Recommendations;
 			sourceTree = "<group>";
@@ -1127,6 +1130,7 @@
 				01192065275F204D00F3C02F /* PersonSearch.swift in Sources */,
 				0145A1E72756D70C00633B98 /* AppMovieNetworkManager.swift in Sources */,
 				01A81A33274F658400D47916 /* SecondaryButtonModifier.swift in Sources */,
+				EDE738CF27F8D06100AD15A7 /* RecommendedMoviesViewVertical.swift in Sources */,
 				ED11C8472754686600A181D5 /* MovieDetailScreenView.swift in Sources */,
 				010D9E2127812A43008804E7 /* Gender.swift in Sources */,
 				ED259E162775262900C3D1CF /* MyRatingsScreenView.swift in Sources */,
