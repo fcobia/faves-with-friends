@@ -136,6 +136,7 @@
 		EDE738CF27F8D06100AD15A7 /* RecommendedMoviesViewVertical.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE738CE27F8D06100AD15A7 /* RecommendedMoviesViewVertical.swift */; };
 		EDE738D227FCEAE000AD15A7 /* TVShowDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE738D127FCEAE000AD15A7 /* TVShowDetailsView.swift */; };
 		EDE738D427FCED3B00AD15A7 /* TVShowDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE738D327FCED3B00AD15A7 /* TVShowDetailHeaderView.swift */; };
+		EDE738D627FE3BA000AD15A7 /* RecommendedTVViewVertical.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE738D527FE3BA000AD15A7 /* RecommendedTVViewVertical.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -288,6 +289,7 @@
 		EDE738CE27F8D06100AD15A7 /* RecommendedMoviesViewVertical.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedMoviesViewVertical.swift; sourceTree = "<group>"; };
 		EDE738D127FCEAE000AD15A7 /* TVShowDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowDetailsView.swift; sourceTree = "<group>"; };
 		EDE738D327FCED3B00AD15A7 /* TVShowDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowDetailHeaderView.swift; sourceTree = "<group>"; };
+		EDE738D527FE3BA000AD15A7 /* RecommendedTVViewVertical.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedTVViewVertical.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -601,6 +603,7 @@
 				01B0E1422782333300503979 /* RecommendedMoviesView.swift */,
 				01B0E14D278254D500503979 /* RecommendedTVView.swift */,
 				EDE738CE27F8D06100AD15A7 /* RecommendedMoviesViewVertical.swift */,
+				EDE738D527FE3BA000AD15A7 /* RecommendedTVViewVertical.swift */,
 			);
 			path = Recommendations;
 			sourceTree = "<group>";
@@ -1148,6 +1151,7 @@
 				01A81A33274F658400D47916 /* SecondaryButtonModifier.swift in Sources */,
 				EDE738CF27F8D06100AD15A7 /* RecommendedMoviesViewVertical.swift in Sources */,
 				ED11C8472754686600A181D5 /* MovieDetailScreenView.swift in Sources */,
+				EDE738D627FE3BA000AD15A7 /* RecommendedTVViewVertical.swift in Sources */,
 				010D9E2127812A43008804E7 /* Gender.swift in Sources */,
 				ED259E162775262900C3D1CF /* MyRatingsScreenView.swift in Sources */,
 				01192056275DBC6600F3C02F /* Genre.swift in Sources */,

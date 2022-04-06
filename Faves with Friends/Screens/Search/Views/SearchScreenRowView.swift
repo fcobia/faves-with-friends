@@ -14,10 +14,10 @@ struct SearchScreenRowView: View {
     private enum Constants {
         static let imageSize = CGSize(width: 75, height: 100)
     }
-	
-	// MARK: Environment Variables
-	@Environment(\.showModal) var showModal
-
+    
+    // MARK: Environment Variables
+    @Environment(\.showModal) var showModal
+    
     // MARK: EnvironmentObjects
     @EnvironmentObject var favesViewModel: FaveViewModel
     
@@ -26,8 +26,8 @@ struct SearchScreenRowView: View {
     @State private var rating: Double?
     @State private var watched = false
     @State private var showingAlert = false
-	@State private var showRecommended = false
-
+    @State private var showRecommended = false
+    
     // MARK: Preview Support Variables
     private let previewImagePhase: AsyncImagePhase?
     
@@ -63,60 +63,74 @@ struct SearchScreenRowView: View {
                     }
                 }
                 
-                if searchResult.type == .movie {
-                    HStack {
-                        VStack {
-							StarRatingView($rating, size: 26, showText: false)
-							
-							if showModal.wrappedValue {
-								showWatchListButton()
-								
-								NavigationLink(destination: RecommendedMoviesView(movieId: searchResult.id).navigationTitle("Recommended"), isActive: $showRecommended) {
-									EmptyView()
-								}
+                HStack {
+                    VStack {
+                        StarRatingView($rating, size: 26, showText: false)
+                        
+                        if showModal.wrappedValue {
+                            showWatchListButton()
+                            if searchResult.type == .movie {
+                                NavigationLink(destination: RecommendedMoviesView(movieId: searchResult.id).navigationTitle("Recommended"), isActive: $showRecommended) {
+                                    EmptyView()
+                                }
                                 .opacity(0.0)
-                                   .buttonStyle(PlainButtonStyle())
-							}
-							else {
-								showWatchListButton()
-									.sheet(isPresented: $showRecommended) {
-										NavigationView {
-											RecommendedMoviesViewVertical(movieId: searchResult.id)
-												.navigationTitle("Recommended")
-												.navigationBarTitleDisplayMode(.inline)
-										}
-										.environment(\.showModal, $showRecommended)
-									}
-							}
+                                .buttonStyle(PlainButtonStyle())
+                            } else if searchResult.type == .tv {
+                                NavigationLink(destination: RecommendedTVView(tvId: searchResult.id).navigationTitle("Recommended"), isActive: $showRecommended) {
+                                    EmptyView()
+                                }
+                                .opacity(0.0)
+                                .buttonStyle(PlainButtonStyle())
+                            }
                         }
-						
-						if list == .none || list == .Watched {
-							HStack {
-								Spacer()
-								
-								Button {
-									list = .Watchlist
-									favesViewModel.addToToWatchList(createWatchListItem(searchResult))
-									showingAlert = true
-									DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-										showingAlert = false
-									}
-								} label: {
-									Image(systemName: "text.badge.plus")
-										.font(.largeTitle)
-								}
-								.buttonStyle(PlainButtonStyle())
-								
-								Spacer()
-							}
-						}
+                        else {
+                            showWatchListButton()
+                                .sheet(isPresented: $showRecommended) {
+                                    if searchResult.type == .movie {
+                                        NavigationView {
+                                            RecommendedMoviesViewVertical(movieId: searchResult.id)
+                                                .navigationTitle("Recommended")
+                                                .navigationBarTitleDisplayMode(.inline)
+                                        }
+                                        .environment(\.showModal, $showRecommended)
+                                    } else if searchResult.type == .tv {
+                                        NavigationView {
+                                            RecommendedTVViewVertical(tvId: searchResult.id)
+                                                .navigationTitle("Recommended")
+                                                .navigationBarTitleDisplayMode(.inline)
+                                        }
+                                        .environment(\.showModal, $showRecommended)
+                                    }
+                                }
+                        }
                     }
-                    .padding(.bottom, 5)
+                    
+                    if list == .none || list == .Watched {
+                        HStack {
+                            Spacer()
+                            
+                            Button {
+                                list = .Watchlist
+                                favesViewModel.addToToWatchList(createWatchListItem(searchResult))
+                                showingAlert = true
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                    showingAlert = false
+                                }
+                            } label: {
+                                Image(systemName: "text.badge.plus")
+                                    .font(.largeTitle)
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                            
+                            Spacer()
+                        }
+                    }
                 }
+                .padding(.bottom, 5)
             }
             .padding(.top, 3)
-			.alert("Added to Watch List", isPresented: $showingAlert) {}
-
+            .alert("Added to Watch List", isPresented: $showingAlert) {}
+            
             Spacer()
         }
         .onChange(of: rating, perform: { newValue in
@@ -160,14 +174,18 @@ struct SearchScreenRowView: View {
     
     
     // MARK: Private Methods
-	private func showWatchListButton() -> some View {
-		Button {
-			showRecommended = true
-		} label: {
-			Text("Similar Movies")
-		}
-		.rowViewButton()
-	}
+    private func showWatchListButton() -> some View {
+        Button {
+            showRecommended = true
+        } label: {
+            if searchResult.type == .movie {
+                Text("Similar Movies")
+            } else if searchResult.type == .tv {
+                Text("Similar Shows")
+            }
+        }
+        .rowViewButton()
+    }
     
     private func createWatchListItem(_ movie: SearchResult) -> WatchListItem {
         .init(videoId: movie.id, rating: rating, type: .movie, title: movie.name, moviePosterURL: movie.image, list: list?.rawValue ?? "")
