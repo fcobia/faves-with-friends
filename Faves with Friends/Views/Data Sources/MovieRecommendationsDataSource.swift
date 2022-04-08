@@ -12,20 +12,18 @@ final class MovieRecommendationsDataSource: ViewDataSource {
 	
 	// MARK: Private Variables
 	private var movieId: Int = -1
-	
-	
-	// MARK: Init
-	override init() {
-		super.init()
-	}
-	
+
 	func inject(movieId: Int) {
 		self.movieId = movieId
 	}
 
-	
 	// MARK: ViewDataSource Functions
-	
+	override func filterResults(_ results: [SearchResult]) async throws -> [SearchResult] {
+		results.filter { searchResult in
+			favesViewModel.watchedList.firstIndex(where: { $0.videoId == searchResult.id }) == nil
+		}
+	}
+
 	override func performFetch(page: Int) async throws -> MovieDBSearchResults {
 		return try await self.movieNetworkManager.movieRecommendations(id: movieId, page: page)
 	}

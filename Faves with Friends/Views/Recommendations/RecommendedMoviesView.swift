@@ -19,6 +19,7 @@ struct RecommendedMoviesView: View {
 
 	// MARK: EnvironmentObjects
 	@EnvironmentObject var alertManager: AlertManager
+	@EnvironmentObject var favesViewModel: FaveViewModel
 
 	// MARK: Private Observable Objects
 	@StateObject private var dataSource 		= MovieRecommendationsDataSource()
@@ -52,6 +53,7 @@ struct RecommendedMoviesView: View {
 					activityManager: activityManager,
 					alertManager: alertManager,
 					movieNetworkManager: environmentManager.movieNetworkManager,
+					favesViewModel: favesViewModel,
 					fetchesOnLoad: true) { results in
 						scrollView(results)
 					} noResultsContents: {

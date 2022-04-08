@@ -28,9 +28,11 @@ class ViewDataSource: ObservableObject {
 	private(set) var totalResults: Int	= 0
 
 	// MARK: Init Variables
-	private(set) var alertManager: AlertManager!
-	private(set) var activityManager: ActivityManager!
-	private(set) var movieNetworkManager: MovieNetworkManager!
+	private 		let batchSize: Int
+	private(set) 	var alertManager: AlertManager!
+	private(set) 	var activityManager: ActivityManager!
+	private(set) 	var movieNetworkManager: MovieNetworkManager!
+	private(set)	var favesViewModel: FaveViewModel!
 
 	// MARK: Private Variables
 	private let loadingCoordinator						= LoadingCoordinator()
@@ -42,7 +44,8 @@ class ViewDataSource: ObservableObject {
 	
 	// MARK: Init
 	
-	init() {
+	init(batchSize: Int = 20) {
+		self.batchSize = batchSize
 	}
 	
 	
@@ -52,13 +55,18 @@ class ViewDataSource: ObservableObject {
 		fatalError("Not implemented")
 	}
 	
+	func filterResults(_ results: [SearchResult]) async throws -> [SearchResult] {
+		results
+	}
+	
 	
 	// MARK: Public Functions
 	
-	func inject(alertManager: AlertManager, activityManager: ActivityManager, movieNetworkManager: MovieNetworkManager) {
+	func inject(alertManager: AlertManager, activityManager: ActivityManager, movieNetworkManager: MovieNetworkManager, favesViewModel: FaveViewModel) {
 		self.alertManager = alertManager
 		self.activityManager = activityManager
 		self.movieNetworkManager = movieNetworkManager
+		self.favesViewModel = favesViewModel
 	}
 	
 	func fetchIfNecessary(_ item: SearchResult) {
@@ -93,16 +101,31 @@ class ViewDataSource: ObservableObject {
 				
 				// Show the activity view
 				activityManager.showActivity()
+				
+				// Loop until we get enough results
+				var filteredResults: [SearchResult] = []
+				while (filteredResults.count < batchSize && (nextPage == 0 || nextPage < totalPages)) {
+					
+					// Perform the search
+					let fetchResults = try await performFetch(page: nextPage)
+					
+					// Take total counts
+					totalResults = fetchResults.totalResults
+					totalPages = fetchResults.totalPages
+					
+					// Remove duplicate results
+					let localDuplicateFiltered = fetchResults.results.filter({ resultIds.contains($0.equalityId) == false })
+					
+					// Filter by the data source
+					let localFiltered = try await filterResults(localDuplicateFiltered)
+					filteredResults.append(contentsOf: localFiltered)
+					
+					// Keep track of the results already loaded
+					filteredResults.forEach({ resultIds.insert($0.equalityId) })
 
-				// Perform the search
-				let fetchResults = try await performFetch(page: nextPage)
-				
-				// Take total counts
-				totalResults = fetchResults.totalResults
-				totalPages = fetchResults.totalPages
-				
-				// Remove duplicate results
-				let filteredResults:[SearchResult] = fetchResults.results.filter({ resultIds.contains($0.equalityId) == false })
+					// Increment the current page number
+					nextPage += 1
+				}
 				
 				// Set the results
 				if let results = results {
@@ -119,12 +142,6 @@ class ViewDataSource: ObservableObject {
 				else {
 					nextFetchIndex = totalResults + 1
 				}
-				
-				// Keep track of the results already loaded
-				filteredResults.forEach({ resultIds.insert($0.equalityId) })
-				
-				// Increment the current page number
-				nextPage += 1
 				
 				// Hide the activity view
 				activityManager.hideActivity()

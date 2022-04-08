@@ -35,6 +35,7 @@ struct SearchListView: View {
 			activityManager: activityManager,
 			alertManager: alertManager,
 			movieNetworkManager: environmentManager.movieNetworkManager,
+			favesViewModel: favesViewModel,
 			fetchesOnLoad: fetchesOnLoad) { results in
 				List {
 					ForEach(results, id: \.equalityId) { searchResult in
