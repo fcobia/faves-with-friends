@@ -69,6 +69,7 @@
 		01A81A4727504C9A00D47916 /* DisplayableErrorInfoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A81A4627504C9A00D47916 /* DisplayableErrorInfoButton.swift */; };
 		01A81A4B27505D2100D47916 /* ErrorAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A81A4A27505D2100D47916 /* ErrorAlertView.swift */; };
 		01A81A4E2751D09C00D47916 /* SearchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A81A4D2751D09C00D47916 /* SearchScreenView.swift */; };
+		01AF09E92801056F001848BB /* WatchListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AF09E82801056F001848BB /* WatchListItem.swift */; };
 		01B0E1432782333300503979 /* RecommendedMoviesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B0E1422782333300503979 /* RecommendedMoviesView.swift */; };
 		01B0E145278235EA00503979 /* DataSourceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B0E144278235EA00503979 /* DataSourceView.swift */; };
 		01B0E148278249D100503979 /* MovieRecommendationsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B0E147278249D100503979 /* MovieRecommendationsDataSource.swift */; };
@@ -219,6 +220,7 @@
 		01A81A4627504C9A00D47916 /* DisplayableErrorInfoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayableErrorInfoButton.swift; sourceTree = "<group>"; };
 		01A81A4A27505D2100D47916 /* ErrorAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertView.swift; sourceTree = "<group>"; };
 		01A81A4D2751D09C00D47916 /* SearchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchScreenView.swift; sourceTree = "<group>"; };
+		01AF09E82801056F001848BB /* WatchListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchListItem.swift; sourceTree = "<group>"; };
 		01B0E1422782333300503979 /* RecommendedMoviesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedMoviesView.swift; sourceTree = "<group>"; };
 		01B0E144278235EA00503979 /* DataSourceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceView.swift; sourceTree = "<group>"; };
 		01B0E147278249D100503979 /* MovieRecommendationsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRecommendationsDataSource.swift; sourceTree = "<group>"; };
@@ -587,6 +589,14 @@
 			path = Search;
 			sourceTree = "<group>";
 		};
+		01AF09E72801052A001848BB /* Faves */ = {
+			isa = PBXGroup;
+			children = (
+				01AF09E82801056F001848BB /* WatchListItem.swift */,
+			);
+			path = Faves;
+			sourceTree = "<group>";
+		};
 		01B0E146278249A500503979 /* Data Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -751,6 +761,7 @@
 		01CCDB45274F3D9B008337BB /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				ED11C84A275AF21E00A181D5 /* FavesViewModel.swift */,
 				01A81A11274F5DD100D47916 /* EnvironmentManager.swift */,
 				01A81A13274F5E5600D47916 /* AppEnvironmentManager.swift */,
 				01A81A4027504A8100D47916 /* AlertManager.swift */,
@@ -820,9 +831,9 @@
 		01CCDB6B274F57EB008337BB /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				01AF09E72801052A001848BB /* Faves */,
 				01192066275F22D000F3C02F /* MovieDB */,
 				01A81A4327504AFD00D47916 /* Error */,
-				ED11C84A275AF21E00A181D5 /* FavesViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1132,6 +1143,7 @@
 				ED613E2727B08B6B000DEC02 /* ListScreenView.swift in Sources */,
 				01CCDB60274F4EF2008337BB /* MovieNetworkErrorInfo.swift in Sources */,
 				01192063275F1CD800F3C02F /* PersonCommon.swift in Sources */,
+				01AF09E92801056F001848BB /* WatchListItem.swift in Sources */,
 				018C19942777C9E800840E21 /* LoadingRowView.swift in Sources */,
 				0145A1D9275477B100633B98 /* StringConstants.swift in Sources */,
 				01CCDB16274F3BF4008337BB /* Faves_with_FriendsApp.swift in Sources */,

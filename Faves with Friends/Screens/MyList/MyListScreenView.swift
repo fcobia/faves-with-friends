@@ -15,7 +15,7 @@ struct MyListScreenView: View {
     // MARK: EnvironmentObjects
     @EnvironmentObject var alertManager: AlertManager
     @EnvironmentObject var activityManager: ActivityManager
-    @EnvironmentObject var favesViewModel: FaveViewModel
+    @EnvironmentObject var favesViewModel: FavesManager
     
     
     var body: some View {
@@ -46,9 +46,6 @@ struct MyListScreenView: View {
             return AnyView(MovieDetailScreenView(id: video.videoId, movieTitle: video.title ?? "Unknown"))
             
         case .tv:
-            return AnyView(EmptyView())
-            
-        case .none:
             return AnyView(EmptyView())
         }
     }

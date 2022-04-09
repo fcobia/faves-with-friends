@@ -16,15 +16,19 @@ struct MovieDetailScreenView: View {
     // MARK: EnvironmentObjects
     @EnvironmentObject var alertManager: AlertManager
     @EnvironmentObject var activityManager: ActivityManager
-    @EnvironmentObject var favesViewModel: FaveViewModel
+    @EnvironmentObject var favesViewModel: FavesManager
     
     // MARK: State Variables
     @State private var movie: Movie? = nil
-    @State private var watched = false
     @State private var showingConfirmationDialog = false
     @State private var list: ListType? = nil
     @State private var rating: Double?
     @State private var ratingEnabled = true
+	
+	// MARK: Computed Variables
+	private var watched: Bool {
+		list == .Watched
+	}
     
     // MARK: Preview Support Variables
     private let previewBackdropPhase: AsyncImagePhase?
@@ -58,7 +62,7 @@ struct MovieDetailScreenView: View {
                                 if list == .none || list == .Watched {
 									Button {
 										list = .Watchlist
-										favesViewModel.addToToWatchList(createWatchListItem(movie))
+										favesViewModel.addToToWatchList(movie)
 									} label: {
 										Text("Add to Watch List")
 									}
@@ -68,7 +72,7 @@ struct MovieDetailScreenView: View {
                                 if list == .Watchlist || list == .Watched {
 									Button {
 										list = .Watching
-										favesViewModel.addToWatchingList(createWatchListItem(movie))
+										favesViewModel.addToWatchingList(movie)
 									} label: {
 										Text("Add to Watching List")
 									}
@@ -87,29 +91,17 @@ struct MovieDetailScreenView: View {
             .navigationBarTitleDisplayMode(.inline)
         }
 		.onChange(of: rating, perform: { newValue in
-			if let movie = movie, let index = favesViewModel.watchedList.firstIndex(where: { $0.videoId == id }) {
-                list = .Watched
-				favesViewModel.watchedList[index] = createWatchListItem(movie)
-            } else if let movie = movie {
-                list = .Watched
-                favesViewModel.addToWatchedList(createWatchListItem(movie))
-            }
+			
+			if let movie = movie {
+				favesViewModel.updateRating(for: movie, rating: newValue)
+				list = favesViewModel.list(for: movie)
+			}
 		})
 		.task {
-			if let index = favesViewModel.watchedList.firstIndex(where: { $0.videoId == id }) {
-				rating = favesViewModel.watchedList[index].rating
-                let listString = favesViewModel.watchedList[index].list
-                list = ListType(rawValue: listString)
-				watched = true
+			if let findResult = favesViewModel.find(videoId: id, type: .movie) {
+				rating = findResult.item.rating
+				list = findResult.listType
 			}
-            if let index = favesViewModel.toWatchList.firstIndex(where: { $0.videoId == id }) {
-                let listString = favesViewModel.toWatchList[index].list
-                list = ListType(rawValue: listString)
-            }
-            if let index = favesViewModel.watchingList.firstIndex(where: { $0.videoId == id }) {
-                let listString = favesViewModel.watchingList[index].list
-                list = ListType(rawValue: listString)
-            }
 			
 			await getMovieDetails(id: id)
 		}
@@ -142,10 +134,6 @@ struct MovieDetailScreenView: View {
 		
 		activityManager.hideActivity()
     }
-	
-	private func createWatchListItem(_ movie: Movie) -> WatchListItem {
-        .init(videoId: movie.id, rating: rating, type: .movie, title: movie.title, moviePosterURL: movie.posterPath, list: list?.rawValue ?? "")
-	}
 }
 
 

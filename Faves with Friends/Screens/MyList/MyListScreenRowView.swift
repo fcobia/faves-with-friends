@@ -23,7 +23,7 @@ struct MyListScreenRowView: View {
     // MARK: EnvironmentObjects
     @EnvironmentObject var alertManager: AlertManager
     @EnvironmentObject var activityManager: ActivityManager
-    @EnvironmentObject var favesViewModel: FaveViewModel
+    @EnvironmentObject var favesViewModel: FavesManager
     
     let watchListItem: WatchListItem
     

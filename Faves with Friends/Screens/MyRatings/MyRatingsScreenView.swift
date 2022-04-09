@@ -14,7 +14,7 @@ struct MyRatingsScreenView: View {
     // MARK: EnvironmentObjects
     @EnvironmentObject var alertManager: AlertManager
     @EnvironmentObject var activityManager: ActivityManager
-    @EnvironmentObject var favesViewModel: FaveViewModel
+    @EnvironmentObject var favesViewModel: FavesManager
     
     
     var body: some View {
@@ -40,16 +40,13 @@ struct MyRatingsScreenView: View {
     // MARK: Private Methods
     private func destination(for video: WatchListItem) -> some View {
         switch video.type {
-            
-        case .movie:
-            return AnyView(MovieDetailScreenView(id: video.videoId, movieTitle: video.title ?? "Unknown"))
-            
-        case .tv:
-            return AnyView(EmptyView())
-            
-        case .none:
-            return AnyView(EmptyView())
-        }
+				
+			case .movie:
+				return AnyView(MovieDetailScreenView(id: video.videoId, movieTitle: video.title ?? "Unknown"))
+				
+			case .tv:
+				return AnyView(EmptyView())
+		}
     }
 }
 

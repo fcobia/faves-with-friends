@@ -17,7 +17,7 @@ struct RecommendedTVView: View {
     
     // MARK: EnvironmentObjects
     @EnvironmentObject var alertManager: AlertManager
-	@EnvironmentObject var favesViewModel: FaveViewModel
+	@EnvironmentObject var favesViewModel: FavesManager
 
     // MARK: Private Observable Objects
     @StateObject private var dataSource 		= TVRecommendationsDataSource()
