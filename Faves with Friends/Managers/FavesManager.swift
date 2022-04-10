@@ -1,5 +1,5 @@
 //
-//  FavesViewModel.swift
+//  FavesManager.swift
 //  Faves with Friends
 //
 //  Created by CHRIS RINER on 12/3/21.
