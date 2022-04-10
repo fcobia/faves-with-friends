@@ -20,7 +20,7 @@ final class MovieRecommendationsDataSource: ViewDataSource {
 	// MARK: ViewDataSource Functions
 	override func filterResults(_ results: [SearchResult]) async throws -> [SearchResult] {
 		results.filter { searchResult in
-			favesViewModel.watchedList.firstIndex(where: { $0.videoId == searchResult.id }) == nil
+			favesViewModel.list(for: searchResult) != .watched
 		}
 	}
 

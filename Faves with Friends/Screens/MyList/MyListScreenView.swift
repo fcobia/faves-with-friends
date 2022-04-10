@@ -20,7 +20,7 @@ struct MyListScreenView: View {
     
     var body: some View {
         List {
-            ForEach(favesViewModel.toWatchList, id: \.id) { watchListItem in
+            ForEach(favesViewModel.allToWatch, id: \.id) { watchListItem in
                 NavigationLink(destination: { destination(for: watchListItem) }) {
                     MyListScreenRowView(previewImagePhase: nil,  watchListItem: watchListItem)
                 }

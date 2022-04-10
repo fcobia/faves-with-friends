@@ -22,7 +22,7 @@ class FavesManager: ObservableObject {
 	
     
     // MARK: Published Variables
-    @Published var toWatchList = [WatchListItem]() {
+    @Published private var toWatchList = [WatchListItem]() {
         didSet {
             //first turn the array into nsdata so we can save it in userdefaults
             let encoder = JSONEncoder()
@@ -34,7 +34,7 @@ class FavesManager: ObservableObject {
             }
         }
     }
-    @Published var watchedList = [WatchListItem]() {
+    @Published private var watchedList = [WatchListItem]() {
         didSet {
             //first turn the array into nsdata so we can save it in userdefaults
             let encoder = JSONEncoder()
@@ -46,7 +46,7 @@ class FavesManager: ObservableObject {
             }
         }
     }
-    @Published var watchingList = [WatchListItem]() {
+    @Published private var watchingList = [WatchListItem]() {
         didSet {
             //first turn the array into nsdata so we can save it in userdefaults
             let encoder = JSONEncoder()
@@ -58,6 +58,25 @@ class FavesManager: ObservableObject {
             }
         }
     }
+	
+	// MARK: Computed Variables
+	var allToWatch: [WatchListItem] {
+		get {
+			toWatchList
+		}
+	}
+	
+	var allWatched: [WatchListItem] {
+		get {
+			watchedList
+		}
+	}
+	
+	var allWatching: [WatchListItem] {
+		get {
+			watchingList
+		}
+	}
 	
 	
 	// MARK: - Init
@@ -95,36 +114,40 @@ class FavesManager: ObservableObject {
 
 	
 	// MARK: Private Common Methods
+	private func index(in list: [WatchListItem], videoId: Int, type: VideoType) -> Int? {
+		list.firstIndex(where: { $0.videoId == videoId && $0.type == type })
+	}
+	
 	private func listAndIndexFor(videoId: Int, type: VideoType) -> ListAndIndex? {
 		
 		// Check the toWatchList
-		if let index = toWatchList.firstIndex(where: { $0.videoId == videoId && $0.type == type }) {
-			return (index, .Watchlist, \.toWatchList)
+		if let index = index(in: toWatchList, videoId: videoId, type: type) {
+			return (index, .toWatch, \.toWatchList)
 		}
 		
 		// Check the watched list
-		if let index = watchedList.firstIndex(where: { $0.videoId == videoId && $0.type == type }) {
-			return (index, .Watched, \.watchedList)
+		if let index = index(in: watchedList, videoId: videoId, type: type) {
+			return (index, .watched, \.watchedList)
 		}
 		
 		// Check the watching list
-		if let index = watchingList.firstIndex(where: { $0.videoId == videoId && $0.type == type }) {
-			return (index, .Watching, \.watchingList)
+		if let index = index(in: watchingList, videoId: videoId, type: type) {
+			return (index, .watching, \.watchingList)
 		}
 		
 		return nil
 	}
 	
 	private func remove(_ item: WatchListItem, from listKeyPath: WritableKeyPath<FavesManager, [WatchListItem]>, type: ListType) {
-		
+		var localList = self[keyPath: listKeyPath]
+
 		// Make sure it is in the list
-		guard let listAndIndex = listAndIndexFor(videoId: item.videoId, type: item.type), listAndIndex.listType == type else {
+		guard let index = index(in: localList, videoId: item.videoId, type: item.type) else {
 			return
 		}
 		
 		// Remove it
-		var localList = self[keyPath: listKeyPath]
-		localList.remove(at: listAndIndex.index)
+		localList.remove(at: index)
 		var mutableSelf = self
 		mutableSelf[keyPath: listKeyPath] = localList
 	}
@@ -182,13 +205,13 @@ class FavesManager: ObservableObject {
 			// Add to the watched list
 			addToWatchedList(item)
 			
-			listAndIndex = (watchedList.count - 1, .Watched, \.watchedList)
+			listAndIndex = (watchedList.count - 1, .watched, \.watchedList)
 		}
 		
 		// Figure out which list
 		switch listAndIndex.listType {
 				
-			case .Watchlist:
+			case .toWatch:
 				
 				// Update or move to the watched list
 				// Really it should already be nil, but we will be safe
@@ -197,6 +220,7 @@ class FavesManager: ObservableObject {
 					// Remove from the to watch
 					var localToWatchList = toWatchList
 					localToWatchList.remove(at: listAndIndex.index)
+					toWatchList = localToWatchList
 					
 					// Add to the watched list
 					var localWatchedList = watchedList
@@ -209,12 +233,12 @@ class FavesManager: ObservableObject {
 					toWatchList = localList
 				}
 				
-			case .Watched:
+			case .watched:
 				var localList = watchedList
 				localList[listAndIndex.index] = item
 				watchedList = localList
 				
-			case .Watching:
+			case .watching:
 				
 				// Update or move to the watched list
 				// Really it should already be nil, but we will be safe
@@ -223,6 +247,7 @@ class FavesManager: ObservableObject {
 					// Remove from the to watch
 					var localWatchingList = watchingList
 					localWatchingList.remove(at: listAndIndex.index)
+					watchingList = localWatchingList
 					
 					// Add to the watched list
 					var localWatchedList = watchedList
@@ -240,7 +265,7 @@ class FavesManager: ObservableObject {
 
 	// MARK: - Watch List
     func addToToWatchList(_ watchListItem: WatchListItem) {
-		add(watchListItem, to: \.toWatchList, type: .Watchlist)
+		add(watchListItem, to: \.toWatchList, type: .toWatch)
 
 		// Remove from other lists
         removeFromWatchingList(watchListItem)
@@ -248,13 +273,13 @@ class FavesManager: ObservableObject {
     }
 	
 	func removeFromToWatchList(_ watchListItem: WatchListItem) {
-		remove(watchListItem, from: \.toWatchList, type: .Watchlist)
+		remove(watchListItem, from: \.toWatchList, type: .toWatch)
 	}
 
 	
 	// MARK: - Watched List
     func addToWatchedList(_ watchListItem: WatchListItem) {
-		add(watchListItem, to: \.watchedList, type: .Watched)
+		add(watchListItem, to: \.watchedList, type: .watched)
 		
 		// Remove from other lists
 		removeFromWatchingList(watchListItem)
@@ -262,13 +287,13 @@ class FavesManager: ObservableObject {
     }
 	
 	func removeFromWatchedList(_ watchListItem: WatchListItem) {
-		remove(watchListItem, from: \.watchedList, type: .Watched)
+		remove(watchListItem, from: \.watchedList, type: .watched)
 	}
 
 	
 	// MARK: - Watching List
     func addToWatchingList(_ watchListItem: WatchListItem) {
-		add(watchListItem, to: \.watchingList, type: .Watching)
+		add(watchListItem, to: \.watchingList, type: .watching)
 		
 		// Remove from other lists
 		removeFromToWatchList(watchListItem)
@@ -276,7 +301,7 @@ class FavesManager: ObservableObject {
     }
     
     func removeFromWatchingList(_ watchListItem: WatchListItem) {
-		remove(watchListItem, from: \.watchingList, type: .Watching)
+		remove(watchListItem, from: \.watchingList, type: .watching)
     }
 }
 
@@ -363,7 +388,7 @@ extension FavesManager {
 			return
 		}
 		
-		addToWatchedList(watchListItem)
+		addToToWatchList(watchListItem)
 	}
 	
 	func addToWatchedList(_ searchResult: SearchResult, rating: Double? = nil) {

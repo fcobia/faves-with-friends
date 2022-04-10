@@ -19,7 +19,7 @@ struct MyRatingsScreenView: View {
     
     var body: some View {
         List {
-            ForEach(favesViewModel.watchedList, id: \.id) { watchListItem in
+            ForEach(favesViewModel.allWatched, id: \.id) { watchListItem in
                 NavigationLink(destination: { destination(for: watchListItem) }) {
                     MyRatingsScreenRowView(previewImagePhase: nil, watchListItem: watchListItem)
                 }

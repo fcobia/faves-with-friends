@@ -29,7 +29,7 @@ struct TVDetailScreenView: View {
 	
 	// MARK: Computed Variables
 	private var watched: Bool {
-		return list == .Watched
+		return list == .watched
 	}
     
     // MARK: Preview Support Variables
@@ -57,9 +57,9 @@ struct TVDetailScreenView: View {
                                 .padding()
                             
                             HStack {
-                                if list == .none || list == .Watched {
+                                if list == .none || list == .watched {
                                     Button {
-                                        list = .Watchlist
+                                        list = .toWatch
                                         favesViewModel.addToToWatchList(tvShow)
                                     } label: {
                                         Text("Add to Watch List")
@@ -67,9 +67,9 @@ struct TVDetailScreenView: View {
                                     .appPrimaryButton()
                                 }
                                 
-                                if list == .Watchlist || list == .Watched {
+                                if list == .toWatch || list == .watched {
                                     Button {
-                                        list = .Watching
+                                        list = .watching
                                         favesViewModel.addToWatchingList(tvShow)
                                     } label: {
                                         Text("Add to Watching List")
@@ -97,16 +97,10 @@ struct TVDetailScreenView: View {
 			list = favesViewModel.list(for: tvShow)
         })
         .task {
-            if let index = favesViewModel.watchedList.firstIndex(where: { $0.videoId == id }) {
-                rating = favesViewModel.watchedList[index].rating
-				list = .Watched
-            }
-            if let _ = favesViewModel.toWatchList.firstIndex(where: { $0.videoId == id }) {
-				list = .Watchlist
-            }
-            if let _ = favesViewModel.watchingList.firstIndex(where: { $0.videoId == id }) {
-				list = .Watching
-            }
+			if let findResult = favesViewModel.find(videoId: id, type: .tv) {
+				rating = findResult.item.rating
+				list = findResult.listType
+			}
             
             await getTVDetails(id: id)
         }

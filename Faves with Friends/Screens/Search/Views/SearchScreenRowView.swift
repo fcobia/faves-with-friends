@@ -29,7 +29,7 @@ struct SearchScreenRowView: View {
 	
 	// MARK: Computed Variables
 	private var watched: Bool {
-		list == .Watched
+		list == .watched
 	}
 
     // MARK: Preview Support Variables
@@ -109,12 +109,12 @@ struct SearchScreenRowView: View {
                         }
                     }
                     
-                    if list == .none || list == .Watched {
+                    if list == .none || list == .watched {
                         HStack {
                             Spacer()
                             
                             Button {
-                                list = .Watchlist
+                                list = .toWatch
                                 favesViewModel.addToToWatchList(searchResult)
                                 showingAlert = true
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {

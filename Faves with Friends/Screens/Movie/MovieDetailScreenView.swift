@@ -27,7 +27,7 @@ struct MovieDetailScreenView: View {
 	
 	// MARK: Computed Variables
 	private var watched: Bool {
-		list == .Watched
+		list == .watched
 	}
     
     // MARK: Preview Support Variables
@@ -59,9 +59,9 @@ struct MovieDetailScreenView: View {
                                 .padding()
 							
                             HStack {
-                                if list == .none || list == .Watched {
+                                if list == .none || list == .watched {
 									Button {
-										list = .Watchlist
+										list = .toWatch
 										favesViewModel.addToToWatchList(movie)
 									} label: {
 										Text("Add to Watch List")
@@ -69,9 +69,9 @@ struct MovieDetailScreenView: View {
 									.appPrimaryButton()
                                 }
 								
-                                if list == .Watchlist || list == .Watched {
+                                if list == .toWatch || list == .watched {
 									Button {
-										list = .Watching
+										list = .watching
 										favesViewModel.addToWatchingList(movie)
 									} label: {
 										Text("Add to Watching List")

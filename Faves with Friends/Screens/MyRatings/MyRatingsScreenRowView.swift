@@ -65,8 +65,8 @@ struct MyRatingsScreenRowView: View {
 			
 			video = try await environmentManager.movieNetworkManager.movieDetails(id: id)
 			
-			if let index = favesViewModel.watchedList.firstIndex(where: { $0.videoId == id }) {
-				rating = favesViewModel.watchedList[index].rating
+			if let video = video {
+				rating = favesViewModel.find(video: video)?.item.rating
 			}
 		}
 		catch let error {
