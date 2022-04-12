@@ -14,7 +14,8 @@ struct SearchScreenView: View {
 	// MARK: Private StateObject Objects
 	@StateObject private var dataSource 		= SearchResultsDataSource()
 
-	
+    @FocusState var isInputActive: Bool
+    
 	// MARK: SwiftUI
     var body: some View {
 		VStack {
@@ -33,6 +34,17 @@ struct SearchScreenView: View {
                         .onAppear {
                             UITextField.appearance().backgroundColor = .white
                         }
+                        .focused($isInputActive)
+                        .toolbar {
+                            ToolbarItemGroup(placement: .keyboard) {
+                                Spacer()
+                                Button("Done") {
+                                    isInputActive = false
+                                }
+                                .foregroundColor(.blue)
+                            }
+                        }
+                    
 					Picker("", selection: $dataSource.searchType) {
 						ForEach(SearchType.allCases) { type in
 							Text(type.rawValue).tag(type)
