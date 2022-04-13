@@ -46,6 +46,22 @@ struct WatchingListScreenRowView: View {
             }
             
             Spacer()
+            
+            VStack(alignment: .trailing) {
+                Button(role: .destructive) {
+                    favesViewModel.removeFromWatchingList(watchListItem)
+                } label: {
+                    VStack {
+                        Image(systemName: "minus.circle.fill")
+                            .font(.title)
+                            .foregroundColor(.red)
+                        Text("Remove")
+                            .font(.caption)
+                    }
+                }
+                .buttonStyle(PlainButtonStyle())
+                .padding(.trailing, 20)
+            }
         }
         .onAppear {
             getMovieDetails(id: watchListItem.videoId)

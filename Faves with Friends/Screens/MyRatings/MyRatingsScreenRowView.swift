@@ -52,6 +52,22 @@ struct MyRatingsScreenRowView: View {
             }
             
             Spacer()
+            
+            VStack(alignment: .trailing) {
+                Button(role: .destructive) {
+                    favesViewModel.removeFromWatchedList(watchListItem)
+                } label: {
+                    VStack {
+                        Image(systemName: "minus.circle.fill")
+                            .font(.title)
+                            .foregroundColor(.red)
+                        Text("Remove")
+                            .font(.caption)
+                    }
+                }
+                .buttonStyle(PlainButtonStyle())
+                .padding(.trailing, 20)
+            }
         }
         .task {
             await getMovieDetails(id: watchListItem.videoId)
