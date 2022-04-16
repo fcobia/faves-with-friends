@@ -62,7 +62,7 @@ struct DataSourceView<ResultContent: View, NoResultContent: View>: View {
 		activityManager: ActivityManager,
 		alertManager: AlertManager,
 		movieNetworkManager: MovieNetworkManager,
-		favesViewModel: FaveViewModel,
+		favesViewModel: FavesManager,
 		fetchesOnLoad: Bool,
 		@ViewBuilder resultsContents: @escaping ([SearchResult]) -> ResultContent,
 		@ViewBuilder noResultsContents: @escaping () -> NoResultContent)

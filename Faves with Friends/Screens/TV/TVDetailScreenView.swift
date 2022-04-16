@@ -15,7 +15,7 @@ struct TVDetailScreenView: View {
     // MARK: EnvironmentObjects
     @EnvironmentObject var alertManager: AlertManager
     @EnvironmentObject var activityManager: ActivityManager
-    @EnvironmentObject var favesViewModel: FaveViewModel
+    @EnvironmentObject var favesViewModel: FavesManager
     
 	// MARK: Private Variables
 	private let id: Int
@@ -26,7 +26,11 @@ struct TVDetailScreenView: View {
     @State private var list: ListType? = nil
     @State private var rating: Double?
     @State private var ratingEnabled = true
-    @State private var watched = false
+	
+	// MARK: Computed Variables
+	private var watched: Bool {
+		return list == .watched
+	}
     
     // MARK: Preview Support Variables
     private let previewBackdropPhase: AsyncImagePhase?
@@ -53,20 +57,20 @@ struct TVDetailScreenView: View {
                                 .padding()
                             
                             HStack {
-                                if list == .none || list == .Watched {
+                                if list == .none || list == .watched {
                                     Button {
-                                        list = .Watchlist
-                                        favesViewModel.addToToWatchList(createWatchListItem(tvShow))
+                                        list = .toWatch
+                                        favesViewModel.addToToWatchList(tvShow)
                                     } label: {
                                         Text("Add to Watch List")
                                     }
                                     .appPrimaryButton()
                                 }
                                 
-                                if list == .Watchlist || list == .Watched {
+                                if list == .toWatch || list == .watched {
                                     Button {
-                                        list = .Watching
-                                        favesViewModel.addToWatchingList(createWatchListItem(tvShow))
+                                        list = .watching
+                                        favesViewModel.addToWatchingList(tvShow)
                                     } label: {
                                         Text("Add to Watching List")
                                     }
@@ -85,29 +89,18 @@ struct TVDetailScreenView: View {
             .navigationBarTitleDisplayMode(.inline)
         }
         .onChange(of: rating, perform: { newValue in
-            if let tvShow = tvShow, let index = favesViewModel.watchedList.firstIndex(where: { $0.videoId == id }) {
-                list = .Watched
-                favesViewModel.watchedList[index] = createWatchListItem(tvShow)
-            } else if let tvShow = tvShow {
-                list = .Watched
-                favesViewModel.addToWatchedList(createWatchListItem(tvShow))
-            }
+			guard let tvShow = tvShow else {
+				return
+			}
+
+			favesViewModel.updateRating(for: tvShow, rating: newValue)
+			list = favesViewModel.list(for: tvShow)
         })
         .task {
-            if let index = favesViewModel.watchedList.firstIndex(where: { $0.videoId == id }) {
-                rating = favesViewModel.watchedList[index].rating
-                let listString = favesViewModel.watchedList[index].list
-                list = ListType(rawValue: listString)
-                watched = true
-            }
-            if let index = favesViewModel.toWatchList.firstIndex(where: { $0.videoId == id }) {
-                let listString = favesViewModel.toWatchList[index].list
-                list = ListType(rawValue: listString)
-            }
-            if let index = favesViewModel.watchingList.firstIndex(where: { $0.videoId == id }) {
-                let listString = favesViewModel.watchingList[index].list
-                list = ListType(rawValue: listString)
-            }
+			if let findResult = favesViewModel.find(videoId: id, type: .tv) {
+				rating = findResult.item.rating
+				list = findResult.listType
+			}
             
             await getTVDetails(id: id)
         }
@@ -122,6 +115,8 @@ struct TVDetailScreenView: View {
         self.previewPosterPhase = previewPosterPhase
 	}
     
+	
+	// MARK: Private Methods
     private func getTVDetails(id: Int) async {
         do {
             activityManager.showActivity()
@@ -133,10 +128,6 @@ struct TVDetailScreenView: View {
         }
         
         activityManager.hideActivity()
-    }
-    
-    private func createWatchListItem(_ tvShow: TV) -> WatchListItem {
-        .init(videoId: tvShow.id, rating: rating, type: .tv, title: tvShow.title, moviePosterURL: tvShow.posterPath, list: list?.rawValue ?? "")
     }
 }
 

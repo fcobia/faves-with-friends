@@ -32,7 +32,7 @@ class ViewDataSource: ObservableObject {
 	private(set) 	var alertManager: AlertManager!
 	private(set) 	var activityManager: ActivityManager!
 	private(set) 	var movieNetworkManager: MovieNetworkManager!
-	private(set)	var favesViewModel: FaveViewModel!
+	private(set)	var favesViewModel: FavesManager!
 
 	// MARK: Private Variables
 	private let loadingCoordinator						= LoadingCoordinator()
@@ -62,7 +62,7 @@ class ViewDataSource: ObservableObject {
 	
 	// MARK: Public Functions
 	
-	func inject(alertManager: AlertManager, activityManager: ActivityManager, movieNetworkManager: MovieNetworkManager, favesViewModel: FaveViewModel) {
+	func inject(alertManager: AlertManager, activityManager: ActivityManager, movieNetworkManager: MovieNetworkManager, favesViewModel: FavesManager) {
 		self.alertManager = alertManager
 		self.activityManager = activityManager
 		self.movieNetworkManager = movieNetworkManager

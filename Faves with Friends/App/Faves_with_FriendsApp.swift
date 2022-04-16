@@ -56,7 +56,7 @@ private struct EnvironmentModifier: ViewModifier {
 			.environment(\.environmentManager, environmentManager)
 			.environmentObject(AlertManager())
 			.environmentObject(ActivityManager())
-			.environmentObject(FaveViewModel())
+			.environmentObject(FavesManager())
 	}
 }
 

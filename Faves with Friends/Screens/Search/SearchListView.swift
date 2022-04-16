@@ -16,7 +16,7 @@ struct SearchListView: View {
 	
 	// MARK: EnvironmentObjects
 	@EnvironmentObject var alertManager: AlertManager
-	@EnvironmentObject var favesViewModel: FaveViewModel
+	@EnvironmentObject var favesViewModel: FavesManager
 	
 	// MARK: Private StateObject Objects
 	@StateObject private var activityManager	= ActivityManager()
@@ -49,12 +49,12 @@ struct SearchListView: View {
 						}
 						.swipeActions(allowsFullSwipe: false) {
 							Button {
-								favesViewModel.addToWatchingList(WatchListItem(videoId: searchResult.id, rating: nil, type: .movie, title: searchResult.name, moviePosterURL: searchResult.image, list: ListType.Watching.rawValue))
+								favesViewModel.addToWatchingList(searchResult)
 							} label: {
 								Label("Add to Watching", systemImage: "tv.circle")
 							}
 							Button {
-								favesViewModel.addToToWatchList(WatchListItem(videoId: searchResult.id, rating: nil, type: .movie, title: searchResult.name, moviePosterURL: searchResult.image, list: ListType.Watchlist.rawValue))
+								favesViewModel.addToToWatchList(searchResult)
 							} label: {
 								Label("Add to To Watch", systemImage: "list.bullet.circle")
 							}

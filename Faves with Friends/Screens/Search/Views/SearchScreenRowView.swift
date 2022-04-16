@@ -19,15 +19,19 @@ struct SearchScreenRowView: View {
     @Environment(\.showModal) var showModal
     
     // MARK: EnvironmentObjects
-    @EnvironmentObject var favesViewModel: FaveViewModel
+    @EnvironmentObject var favesViewModel: FavesManager
     
     // MARK: Private State Variables
     @State private var list: ListType? = nil
     @State private var rating: Double?
-    @State private var watched = false
     @State private var showingAlert = false
     @State private var showRecommended = false
-    
+	
+	// MARK: Computed Variables
+	private var watched: Bool {
+		list == .watched
+	}
+
     // MARK: Preview Support Variables
     private let previewImagePhase: AsyncImagePhase?
     
@@ -105,13 +109,13 @@ struct SearchScreenRowView: View {
                         }
                     }
                     
-                    if list == .none || list == .Watched {
+                    if list == .none || list == .watched {
                         HStack {
                             Spacer()
                             
                             Button {
-                                list = .Watchlist
-                                favesViewModel.addToToWatchList(createWatchListItem(searchResult))
+                                list = .toWatch
+                                favesViewModel.addToToWatchList(searchResult)
                                 showingAlert = true
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                                     showingAlert = false
@@ -134,34 +138,14 @@ struct SearchScreenRowView: View {
             Spacer()
         }
         .onChange(of: rating, perform: { newValue in
-            if searchResult.type == .movie, let index = favesViewModel.watchedList.firstIndex(where: { $0.videoId == searchResult.id }) {
-                list = .Watched
-                favesViewModel.watchedList[index] = createWatchListItem(searchResult)
-            }
-            else {
-                list = .Watched
-                favesViewModel.addToWatchedList(createWatchListItem(searchResult))
-            }
+			favesViewModel.updateRating(for: searchResult, rating: newValue)
+			list = favesViewModel.list(for: searchResult)
         })
         .task {
-            if searchResult.type == .movie {
-                if let index = favesViewModel.watchedList.firstIndex(where: { $0.videoId == searchResult.id }) {
-                    rating = favesViewModel.watchedList[index].rating
-                    let listString = favesViewModel.watchedList[index].list
-                    list = ListType(rawValue: listString)
-                    watched = true
-                }
-                
-                if let index = favesViewModel.toWatchList.firstIndex(where: { $0.videoId == searchResult.id }) {
-                    let listString = favesViewModel.toWatchList[index].list
-                    list = ListType(rawValue: listString)
-                }
-                
-                if let index = favesViewModel.watchingList.firstIndex(where: { $0.videoId == searchResult.id }) {
-                    let listString = favesViewModel.watchingList[index].list
-                    list = ListType(rawValue: listString)
-                }
-            }
+			if let findResult = favesViewModel.find(searchResult: searchResult) {
+				rating = findResult.item.rating
+				list = findResult.listType
+			}
         }
     }
     
@@ -185,10 +169,6 @@ struct SearchScreenRowView: View {
             }
         }
         .rowViewButton()
-    }
-    
-    private func createWatchListItem(_ movie: SearchResult) -> WatchListItem {
-        .init(videoId: movie.id, rating: rating, type: .movie, title: movie.name, moviePosterURL: movie.image, list: list?.rawValue ?? "")
     }
 }
 

@@ -31,6 +31,13 @@ final class AlertManager: ObservableObject {
 	}
 	
 	func showAlert(for error: Error, allowAppend: Bool = false) {
+		
+		// Is this a user cancel error?
+		let nsError = error as NSError
+		if nsError.code == -999 {
+			return
+		}
+		
 		showAlert(for: ErrorInfo(), allowAppend: allowAppend)
 	}
 	
