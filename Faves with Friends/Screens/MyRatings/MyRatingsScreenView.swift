@@ -44,8 +44,8 @@ struct MyRatingsScreenView: View {
 			case .movie:
 				return AnyView(MovieDetailScreenView(id: video.videoId, movieTitle: video.title ?? "Unknown"))
 				
-			case .tv:
-				return AnyView(EmptyView())
+            case .tv:
+                return AnyView(TVDetailScreenView(id: video.videoId, title: video.title ?? "Unknown"))
 		}
     }
 }

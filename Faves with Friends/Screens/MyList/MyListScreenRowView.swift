@@ -28,21 +28,42 @@ struct MyListScreenRowView: View {
     let watchListItem: WatchListItem
     
     @State private var video: Movie?
+    @State private var tv: TV?
     
     var body: some View {
         HStack {
-            ImageLoadingView(url: video?.posterPath, style: .localProgress, progressViewSize: Constants.imageSize, previewPhase: previewImagePhase) { image in
-                image.resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(maxWidth: Constants.imageSize.width, maxHeight: Constants.imageSize.height)
+            if watchListItem.type == .movie {
+                ImageLoadingView(url: video?.posterPath, style: .localProgress, progressViewSize: Constants.imageSize, previewPhase: previewImagePhase) { image in
+                    image.resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(maxWidth: Constants.imageSize.width, maxHeight: Constants.imageSize.height)
+                }
+            } else if watchListItem.type == .tv {
+                ImageLoadingView(url: tv?.posterPath, style: .localProgress, progressViewSize: Constants.imageSize, previewPhase: previewImagePhase) { image in
+                    image.resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(maxWidth: Constants.imageSize.width, maxHeight: Constants.imageSize.height)
+                }
             }
+           
             
             VStack(alignment: .leading) {
-                Text(video?.title ?? "")
+                if watchListItem.type == .movie {
+                    Text(video?.title ?? "")
+                } else if watchListItem.type == .tv {
+                    Text(tv?.title ?? "")
+                }
                 
-                if let releaseDate = video?.releaseDate {
-                    Text(DateFormatters.dateOnly.string(from: releaseDate))
-                        .font(.footnote)
+                if watchListItem.type == .movie {
+                    if let releaseDate = video?.releaseDate {
+                        Text(DateFormatters.dateOnly.string(from: releaseDate))
+                            .font(.footnote)
+                    }
+                } else if watchListItem.type == .tv {
+                    if let releaseDate = tv?.releaseDate {
+                        Text(DateFormatters.dateOnly.string(from: releaseDate))
+                            .font(.footnote)
+                    }
                 }
             }
             
@@ -58,7 +79,11 @@ struct MyListScreenRowView: View {
         Task {
             do {
                 activityManager.showActivity()
-                video = try await environmentManager.movieNetworkManager.movieDetails(id: id)
+                if watchListItem.type == .movie {
+                    video = try await environmentManager.movieNetworkManager.movieDetails(id: id)
+                } else if watchListItem.type == .tv {
+                    tv = try await environmentManager.movieNetworkManager.tvDetails(id: id)
+                }
             }
             catch let error {
                 print("Error: \(error)")
