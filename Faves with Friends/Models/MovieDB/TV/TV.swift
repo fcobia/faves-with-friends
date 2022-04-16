@@ -43,7 +43,7 @@ struct TV: Codable, TVCommon {
 	let numberOfEpisodes: Int
 	let numberOfSeasons: Int
 	let overview: String?
-	let popularity: Int
+	let popularity: Double
 	
 	// MARK: Computed Variables
 	var title: String {
@@ -82,7 +82,7 @@ struct TV: Codable, TVCommon {
 		numberOfEpisodes = try container.decode(Int.self, forKey: .numberOfEpisodes)
 		numberOfSeasons = try container.decode(Int.self, forKey: .numberOfSeasons)
 		overview = try container.decodeIfPresent(String.self, forKey: .overview)
-		popularity = try container.decode(Int.self, forKey: .popularity)
+		popularity = try container.decode(Double.self, forKey: .popularity)
 
 		// Found a date with an empty string
 		do {
@@ -117,7 +117,7 @@ struct TVPerson: Codable, PersonCommon {
 	// MARK: CodingKeys
 	private enum CodingKeys: String, CodingKey {
 		case id
-		case creditId
+		case creditId = "credit_id"
 		case name
 		case gender
 		case profilePathString	= "profile_path"
@@ -126,7 +126,7 @@ struct TVPerson: Codable, PersonCommon {
 	
 	// MARK: JSON Variables
 	let id: Int
-	let creditId: Int
+	let creditId: String
 	let name: String
 	let gender: Gender
 	let profilePathString: String?

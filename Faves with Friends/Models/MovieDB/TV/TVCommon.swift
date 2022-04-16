@@ -14,3 +14,11 @@ protocol TVCommon: Video {
 	var name: String { get }
 	var firstAirDate: Date? { get }
 }
+
+
+extension TVCommon {
+	
+	var type: VideoType {
+		.tv
+	}
+}

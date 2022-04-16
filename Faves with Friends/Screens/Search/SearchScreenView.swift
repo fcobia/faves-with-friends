@@ -10,19 +10,12 @@ import Combine
 
 
 struct SearchScreenView: View {
-	
-	// MARK: Environment Variables
-	@Environment(\.environmentManager) private var environmentManager: EnvironmentManager
-	
-	// MARK: EnvironmentObjects
-	@EnvironmentObject var alertManager: AlertManager
-    @EnvironmentObject var favesViewModel: FaveViewModel
     
-	// MARK: Private Observable Objects
-	@ObservedObject private var dataSource 		= SearchResultsDataSource()
-	@ObservedObject private var activityManager	= ActivityManager()
+	// MARK: Private StateObject Objects
+	@StateObject private var dataSource 		= SearchResultsDataSource()
 
-	
+    @FocusState var isInputActive: Bool
+    
 	// MARK: SwiftUI
     var body: some View {
 		VStack {
@@ -41,6 +34,17 @@ struct SearchScreenView: View {
                         .onAppear {
                             UITextField.appearance().backgroundColor = .white
                         }
+                        .focused($isInputActive)
+                        .toolbar {
+                            ToolbarItemGroup(placement: .keyboard) {
+                                Spacer()
+                                Button("Done") {
+                                    isInputActive = false
+                                }
+                                .foregroundColor(.blue)
+                            }
+                        }
+                    
 					Picker("", selection: $dataSource.searchType) {
 						ForEach(SearchType.allCases) { type in
 							Text(type.rawValue).tag(type)
@@ -57,66 +61,10 @@ struct SearchScreenView: View {
 				.padding([.horizontal, .bottom])
 			}
 			
-			DataSourceView(
-				dataSource: dataSource,
-				activityManager: activityManager,
-				alertManager: alertManager,
-				movieNetworkManager: environmentManager.movieNetworkManager,
-				fetchesOnLoad: false) { results in
-					List {
-						ForEach(results, id: \.equalityId) { searchResult in
-							NavigationLink(destination: { destination(for: searchResult) }) {
-								HStack {
-									SearchScreenRowView(searchResult: searchResult)
-										.onAppear {
-											dataSource.fetchIfNecessary(searchResult)
-										}
-								}
-							}
-                            .swipeActions(allowsFullSwipe: false) {
-                                Button {
-                                    favesViewModel.addToWatchingList(WatchListItem(videoId: searchResult.id, rating: nil, type: .movie, title: searchResult.name, moviePosterURL: searchResult.image, list: ListType.Watching.rawValue))
-                                } label: {
-                                    Label("Add to Watching", systemImage: "tv.circle")
-                                }
-                                Button {
-                                    favesViewModel.addToToWatchList(WatchListItem(videoId: searchResult.id, rating: nil, type: .movie, title: searchResult.name, moviePosterURL: searchResult.image, list: ListType.Watchlist.rawValue))
-                                } label: {
-                                    Label("Add to To Watch", systemImage: "list.bullet.circle")
-                                }
-                                .tint(.indigo)
-                            }
-						}
-						.listRowBackground(Color.clear)
-					}
-					.listStyle(.plain)
-				} noResultsContents: {
-					HStack {
-						Spacer()
-						Text("No Results")
-						Spacer()
-					}
-					.frame(maxHeight: .infinity)
-				}
+			SearchListView(dataSource: dataSource, fetchesOnLoad: false)
 		}
         .navigationBarHidden(true)
     }
-	
-	
-	// MARK: Private Methods
-	private func destination(for searchResult: SearchResult) -> some View {
-		switch searchResult.type {
-				
-			case .movie:
-				return AnyView(MovieDetailScreenView(id: searchResult.id, movieTitle: searchResult.name))
-				
-			case .tv:
-				return AnyView(TVDetailScreenView(id: searchResult.id, title: searchResult.name))
-				
-			case .person:
-				return AnyView(PersonDetailScreenView(id: searchResult.id, title: searchResult.name))
-		}
-	}
 }
 
 

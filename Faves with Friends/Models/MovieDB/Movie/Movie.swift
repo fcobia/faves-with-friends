@@ -52,7 +52,7 @@ struct Movie: Codable, MovieCommon {
 }
 
 
-#if DEBUG
+//#if DEBUG
 extension Movie {
 	
 	private static var df: DateFormatter = {
@@ -64,4 +64,4 @@ extension Movie {
 	
 	static let movieExample = Movie(id: 550, title: "Fight Club", posterPathString: nil, backdropPathString: "/fCayJrkfRaCRCTh8GqN30f8oyQF.jpg", releaseDate: df.date(from: "1999-10-12")!, overview: "A ticking-time-bomb insomniac and a slippery soap salesman channel primal male aggression into a shocking new form of therapy. Their concept catches on, with underground \"fight clubs\" forming in every town, until an eccentric gets in the way and ignites an out-of-control spiral toward oblivion.", runtime: 139, status: "Released", genres: [Genre(id: 18, name: "Drama"), Genre(id: 17, name: "Action")])
 }
-#endif
+//#endif

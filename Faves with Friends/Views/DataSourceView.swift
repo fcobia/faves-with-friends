@@ -9,7 +9,7 @@ import SwiftUI
 
 
 struct DataSourceView<ResultContent: View, NoResultContent: View>: View {
-	
+
 	// MARK: Private Observable Objects
 	@ObservedObject private var dataSource: ViewDataSource
 	@ObservedObject private var activityManager: ActivityManager
@@ -62,6 +62,7 @@ struct DataSourceView<ResultContent: View, NoResultContent: View>: View {
 		activityManager: ActivityManager,
 		alertManager: AlertManager,
 		movieNetworkManager: MovieNetworkManager,
+		favesViewModel: FavesManager,
 		fetchesOnLoad: Bool,
 		@ViewBuilder resultsContents: @escaping ([SearchResult]) -> ResultContent,
 		@ViewBuilder noResultsContents: @escaping () -> NoResultContent)
@@ -73,7 +74,7 @@ struct DataSourceView<ResultContent: View, NoResultContent: View>: View {
 		self.resultsContents = resultsContents
 		self.noResultsContents = noResultsContents
 		
-		dataSource.inject(alertManager: alertManager, activityManager: activityManager, movieNetworkManager: movieNetworkManager)
+		dataSource.inject(alertManager: alertManager, activityManager: activityManager, movieNetworkManager: movieNetworkManager, favesViewModel: favesViewModel)
 	}
 }
 

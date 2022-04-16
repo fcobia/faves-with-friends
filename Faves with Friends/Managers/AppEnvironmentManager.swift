@@ -35,12 +35,12 @@ extension AppEnvironmentManager {
 		return AppEnvironmentManager(userManager: userManager, movieNetworkManager: movieNetworkManager)
 	}
 	
-	#if DEBUG
+	//#if DEBUG
 	static func createPreview(loggedIn: Bool) -> EnvironmentManager {
 		let userManager = TemporaryUserManager(loggedIn: loggedIn)
 		let movieNetworkManager = PreviewMovieNetworkManager()
 		
 		return AppEnvironmentManager(userManager: userManager, movieNetworkManager: movieNetworkManager)
 	}
-	#endif
+	//#endif
 }

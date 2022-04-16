@@ -22,62 +22,104 @@ struct MyRatingsScreenRowView: View {
     // MARK: EnvironmentObjects
     @EnvironmentObject var alertManager: AlertManager
     @EnvironmentObject var activityManager: ActivityManager
-    @EnvironmentObject var favesViewModel: FaveViewModel
+    @EnvironmentObject var favesViewModel: FavesManager
     
     @State private var rating: Double?
     
     let watchListItem: WatchListItem
     
     @State private var video: Movie?
+    @State private var tv: TV?
     
     var body: some View {
         HStack {
-            ImageLoadingView(url: video?.posterPath, style: .localProgress, progressViewSize: Constants.imageSize, previewPhase: previewImagePhase) { image in
-                image.resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(maxWidth: Constants.imageSize.width, maxHeight: Constants.imageSize.height)
+            if watchListItem.type == .movie {
+                ImageLoadingView(url: video?.posterPath, style: .localProgress, progressViewSize: Constants.imageSize, previewPhase: previewImagePhase) { image in
+                    image.resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(maxWidth: Constants.imageSize.width, maxHeight: Constants.imageSize.height)
+                }
+            } else if watchListItem.type == .tv {
+                ImageLoadingView(url: tv?.posterPath, style: .localProgress, progressViewSize: Constants.imageSize, previewPhase: previewImagePhase) { image in
+                    image.resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(maxWidth: Constants.imageSize.width, maxHeight: Constants.imageSize.height)
+                }
             }
+           
             
             VStack(alignment: .leading) {
-                Text(video?.title ?? "")
+                if watchListItem.type == .movie {
+                    Text(video?.title ?? "")
+                } else if watchListItem.type == .tv {
+                    Text(tv?.title ?? "")
+                }
                 
-                if let releaseDate = video?.releaseDate {
-                    Text(DateFormatters.dateOnly.string(from: releaseDate))
-                        .font(.footnote)
+                if watchListItem.type == .movie {
+                    if let releaseDate = video?.releaseDate {
+                        Text(DateFormatters.dateOnly.string(from: releaseDate))
+                            .font(.footnote)
+                    }
+                } else if watchListItem.type == .tv {
+                    if let releaseDate = tv?.releaseDate {
+                        Text(DateFormatters.dateOnly.string(from: releaseDate))
+                            .font(.footnote)
+                    }
                 }
                 
                 StarRatingView($rating, size: 16, showText: false)
                     .allowsHitTesting(false)
-                   
             }
             
             Spacer()
+            
+            VStack(alignment: .trailing) {
+                Button(role: .destructive) {
+                    favesViewModel.removeFromWatchedList(watchListItem)
+                } label: {
+                    VStack {
+                        Image(systemName: "minus.circle.fill")
+                            .font(.title)
+                            .foregroundColor(.red)
+                        Text("Remove")
+                            .font(.caption)
+                    }
+                }
+                .buttonStyle(PlainButtonStyle())
+                .padding(.trailing, 20)
+            }
         }
-        .task {
-            await getMovieDetails(id: watchListItem.videoId)
+        .onAppear {
+            getMovieDetails(id: watchListItem.videoId)
         }
     }
     
     // MARK: Private Methods
-    private func getMovieDetails(id: Int) async {
-		do {
-			activityManager.showActivity()
-			
-			video = try await environmentManager.movieNetworkManager.movieDetails(id: id)
-			
-			if let index = favesViewModel.watchedList.firstIndex(where: { $0.videoId == id }) {
-				rating = favesViewModel.watchedList[index].rating
-			}
-		}
-		catch let error {
-			print("Error: \(error)")
-			alertManager.showAlert(for: error)
-		}
-		
-		activityManager.hideActivity()
+    private func getMovieDetails(id: Int) {
+        Task {
+            do {
+                activityManager.showActivity()
+                if watchListItem.type == .movie {
+                    video = try await environmentManager.movieNetworkManager.movieDetails(id: id)
+                    if let video = video {
+                        rating = favesViewModel.find(video: video)?.item.rating
+                    }
+                } else if watchListItem.type == .tv {
+                    tv = try await environmentManager.movieNetworkManager.tvDetails(id: id)
+                    if let video = tv {
+                        rating = favesViewModel.find(video: video)?.item.rating
+                    }
+                }
+            }
+            catch let error {
+                print("Error: \(error)")
+                alertManager.showAlert(for: error)
+            }
+            
+            activityManager.hideActivity()
+        }
     }
 }
-
 //struct MyRatingsScreenRowview_Previews: PreviewProvider {
 //    static var previews: some View {
 //        MyRatingsScreenRowview()

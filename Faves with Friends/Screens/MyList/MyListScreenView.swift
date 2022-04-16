@@ -15,12 +15,12 @@ struct MyListScreenView: View {
     // MARK: EnvironmentObjects
     @EnvironmentObject var alertManager: AlertManager
     @EnvironmentObject var activityManager: ActivityManager
-    @EnvironmentObject var favesViewModel: FaveViewModel
+    @EnvironmentObject var favesViewModel: FavesManager
     
     
     var body: some View {
         List {
-            ForEach(favesViewModel.toWatchList, id: \.id) { watchListItem in
+            ForEach(favesViewModel.allToWatch, id: \.id) { watchListItem in
                 NavigationLink(destination: { destination(for: watchListItem) }) {
                     MyListScreenRowView(previewImagePhase: nil,  watchListItem: watchListItem)
                 }
@@ -46,10 +46,7 @@ struct MyListScreenView: View {
             return AnyView(MovieDetailScreenView(id: video.videoId, movieTitle: video.title ?? "Unknown"))
             
         case .tv:
-            return AnyView(EmptyView())
-            
-        case .none:
-            return AnyView(EmptyView())
+            return AnyView(TVDetailScreenView(id: video.videoId, title: video.title ?? "Unknown"))
         }
     }
 }

@@ -41,7 +41,7 @@ final class SearchResultsDataSource: ViewDataSource {
 	
 	// MARK: Init
 	
-	override init() {
+	init() {
 		super.init()
 		
 		searchTextCancellable = searchTextSubject

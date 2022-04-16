@@ -8,9 +8,9 @@
 import Foundation
 
 enum ListType: String {
-    case Watchlist
-    case Watched
-    case Watching
+    case toWatch
+    case watched
+    case watching
     
     var id: String {
         self.rawValue
@@ -18,11 +18,11 @@ enum ListType: String {
     
     var displayName: String {
         var title: String = "To Watch"
-        if self == .Watchlist {
+        if self == .toWatch {
             title = "To Watch"
-        } else if self == .Watched {
+        } else if self == .watched {
             title = "Watched"
-        } else if self == .Watching {
+        } else if self == .watching {
             title = "Watching"
         }
         return title

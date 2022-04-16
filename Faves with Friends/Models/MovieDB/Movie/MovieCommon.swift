@@ -9,3 +9,11 @@ import Foundation
 
 protocol MovieCommon: Video {
 }
+
+
+extension MovieCommon {
+	
+	var type: VideoType {
+		.movie
+	}
+}
