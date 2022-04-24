@@ -11,7 +11,8 @@ import Foundation
 struct WatchListItem: Codable, Identifiable {
 	
 	// MARK: JSON Variables
-	var id: String
+	let id: String
+	let dateAdded: Date
 	let videoId: Int
 	let type: VideoType
 	let title: String?
@@ -21,10 +22,15 @@ struct WatchListItem: Codable, Identifiable {
 	// MARK: Init
 	init(videoId: Int, type: VideoType, title: String?, rating: Double? = nil) {
 		self.id = UUID().uuidString
+		self.dateAdded = Date()
 		self.videoId = videoId
 		self.type = type
 		self.title = title
 		self.rating = rating
+	}
+	
+	init(watchListItem item: WatchListItem) {
+		self.init(videoId: item.videoId, type: item.type, title: item.title, rating: item.rating)
 	}
 }
 

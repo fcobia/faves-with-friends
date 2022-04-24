@@ -14,7 +14,7 @@ struct RatingView: View {
         case Awful = 0.5
         case Bad = 1.0
         case Poor = 1.5
-        case Medicore = 2.0
+        case Mediocre = 2.0
         case Fair = 2.5
         case Good = 3.0
         case Great = 3.5

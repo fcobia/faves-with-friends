@@ -80,6 +80,7 @@
 		01B2911F27A238DD009A2CDC /* Credits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B2911E27A238DD009A2CDC /* Credits.swift */; };
 		01B2912127A23CB3009A2CDC /* CastAndCrewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B2912027A23CB3009A2CDC /* CastAndCrewView.swift */; };
 		01B2912527A24AF8009A2CDC /* Collection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B2912427A24AF8009A2CDC /* Collection+Extensions.swift */; };
+		01B29848281596AF0005CA9E /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 01B29847281596AF0005CA9E /* OrderedCollections */; };
 		01CCDB16274F3BF4008337BB /* Faves_with_FriendsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CCDB15274F3BF4008337BB /* Faves_with_FriendsApp.swift */; };
 		01CCDB18274F3BF4008337BB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CCDB17274F3BF4008337BB /* ContentView.swift */; };
 		01CCDB1A274F3BF5008337BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01CCDB19274F3BF5008337BB /* Assets.xcassets */; };
@@ -299,6 +300,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01B29848281596AF0005CA9E /* OrderedCollections in Frameworks */,
 				01CCDB41274F3CF8008337BB /* HTTPServiceFoundation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -732,8 +734,6 @@
 			isa = PBXGroup;
 			children = (
 				ED613E2527B08B49000DEC02 /* List */,
-				ED887025279DF3670089228E /* Watching */,
-				ED259E142775260800C3D1CF /* MyRatings */,
 				01B0E1512782570900503979 /* TV */,
 				ED11C8452754683600A181D5 /* Movie */,
 				01FD628B27B0338700698010 /* Person */,
@@ -741,7 +741,6 @@
 				01A81A1E274F622100D47916 /* MainView.swift */,
 				01A81A20274F62B500D47916 /* LoginScreenView.swift */,
 				01A81A1A274F60AF00D47916 /* LaunchScreenView.swift */,
-				ED259E1327751C3100C3D1CF /* MyList */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -885,6 +884,9 @@
 		ED613E2527B08B49000DEC02 /* List */ = {
 			isa = PBXGroup;
 			children = (
+				ED259E142775260800C3D1CF /* MyRatings */,
+				ED887025279DF3670089228E /* Watching */,
+				ED259E1327751C3100C3D1CF /* MyList */,
 				ED613E2627B08B6B000DEC02 /* ListScreenView.swift */,
 			);
 			path = List;
@@ -926,6 +928,7 @@
 			name = "Faves with Friends";
 			packageProductDependencies = (
 				01CCDB40274F3CF8008337BB /* HTTPServiceFoundation */,
+				01B29847281596AF0005CA9E /* OrderedCollections */,
 			);
 			productName = "Faves with Friends";
 			productReference = 01CCDB12274F3BF4008337BB /* Faves with Friends.app */;
@@ -1001,6 +1004,7 @@
 			mainGroup = 01CCDB09274F3BF4008337BB;
 			packageReferences = (
 				01CCDB3F274F3CF8008337BB /* XCRemoteSwiftPackageReference "HTTPService" */,
+				01B29846281596AF0005CA9E /* XCRemoteSwiftPackageReference "swift-collections" */,
 			);
 			productRefGroup = 01CCDB13274F3BF4008337BB /* Products */;
 			projectDirPath = "";
@@ -1514,6 +1518,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		01B29846281596AF0005CA9E /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-collections.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		01CCDB3F274F3CF8008337BB /* XCRemoteSwiftPackageReference "HTTPService" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/fcobia/HTTPService";
@@ -1525,6 +1537,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		01B29847281596AF0005CA9E /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 01B29846281596AF0005CA9E /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
+		};
 		01CCDB40274F3CF8008337BB /* HTTPServiceFoundation */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 01CCDB3F274F3CF8008337BB /* XCRemoteSwiftPackageReference "HTTPService" */;

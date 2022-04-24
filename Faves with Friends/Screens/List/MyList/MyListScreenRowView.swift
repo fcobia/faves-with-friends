@@ -1,13 +1,14 @@
 //
-//  WatchingListScreenRowView.swift
+//  MyListScreenRowView.swift
 //  Faves with Friends
 //
-//  Created by CHRIS RINER on 1/23/22.
+//  Created by CHRIS RINER on 12/23/21.
 //
 
 import SwiftUI
 
-struct WatchingListScreenRowView: View {
+struct MyListScreenRowView: View {
+
     // MARK: Constants
     private enum Constants {
         static let imageSize = CGSize(width: 75, height: 100)
@@ -67,22 +68,6 @@ struct WatchingListScreenRowView: View {
             }
             
             Spacer()
-            
-            VStack(alignment: .trailing) {
-                Button(role: .destructive) {
-                    favesViewModel.removeFromWatchingList(watchListItem)
-                } label: {
-                    VStack {
-                        Image(systemName: "minus.circle.fill")
-                            .font(.title)
-                            .foregroundColor(.red)
-                        Text("Remove")
-                            .font(.caption)
-                    }
-                }
-                .buttonStyle(PlainButtonStyle())
-                .padding(.trailing, 20)
-            }
         }
         .onAppear {
             getMovieDetails(id: watchListItem.videoId)
@@ -110,9 +95,8 @@ struct WatchingListScreenRowView: View {
     }
 }
 
-
-//struct WatchingListScreenRowView_Previews: PreviewProvider {
+//struct MyListScreenRowView_Previews: PreviewProvider {
 //    static var previews: some View {
-//        WatchingListScreenRowView()
+//        MyListScreenRowView(watchListItem: WatchListItem(videoId: 500, rating: nil, type: nil))
 //    }
 //}

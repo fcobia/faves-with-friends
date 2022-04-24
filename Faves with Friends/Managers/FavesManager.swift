@@ -154,15 +154,18 @@ class FavesManager: ObservableObject {
 	
 	private func add(_ item: WatchListItem, to listKeyPath: WritableKeyPath<FavesManager,[WatchListItem]>, type: ListType) {
 		
+		// Make sure the date added gets updated
+		let itemToUse = WatchListItem(watchListItem: item)
+		
 		// Get a local copy of the list
 		var localList = self[keyPath: listKeyPath]
 		
 		// Add or Update
 		if let listAndIndex = listAndIndexFor(videoId: item.videoId, type: item.type), listAndIndex.listType == type {
-			localList[listAndIndex.index] = item
+			localList[listAndIndex.index] = itemToUse
 		}
 		else {
-			localList.append(item)
+			localList.append(itemToUse)
 		}
 		
 		// Save the changed list
