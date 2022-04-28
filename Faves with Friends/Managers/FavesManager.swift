@@ -325,7 +325,7 @@ extension FavesManager {
 	}
 
 	func addToToWatchList<T: Video>(_ video: T, rating: Double? = nil) {
-		addToWatchedList(.init(video: video, rating: rating))
+		addToToWatchList(.init(video: video, rating: rating))
 	}
 	
 	func addToWatchedList<T: Video>(_ video: T, rating: Double? = nil) {
