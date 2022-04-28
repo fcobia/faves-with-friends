@@ -29,7 +29,7 @@ struct MyRatingsScreenView: View {
 				return lhs.dateAdded < rhs.dateAdded
 			}
 			
-			return lr < rr
+			return lr > rr
 		}
 
 		
@@ -55,6 +55,7 @@ struct MyRatingsScreenView: View {
 							}
 						}
 					}
+                    .onMove(perform: move)
 				}, header: {
 					HStack {
 						StarsView(rating: rating ?? 0)
@@ -71,8 +72,15 @@ struct MyRatingsScreenView: View {
 			}
             .listRowBackground(Color.clear)
         }
+        .toolbar {
+            EditButton()
+        }
         .listStyle(.plain)
         .navigationTitle("Lists")
+    }
+    
+    func move(from source: IndexSet, to destination: Int) {
+        // move the data here
     }
     
     // MARK: Private Methods
