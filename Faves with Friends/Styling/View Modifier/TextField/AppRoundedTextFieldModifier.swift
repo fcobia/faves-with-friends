@@ -48,7 +48,6 @@ struct AppRoundedTextFieldModifier_Previews: PreviewProvider {
                 .appTextField()
             .preferredColorScheme(.dark)
         }
-        .padding()
         .previewLayout(.sizeThatFits)
     }
 }

@@ -35,15 +35,17 @@ struct SearchScreenView: View {
                             UITextField.appearance().backgroundColor = .white
                         }
                         .focused($isInputActive)
-                        .toolbar {
-                            ToolbarItemGroup(placement: .keyboard) {
-                                Spacer()
-                                Button("Done") {
-                                    isInputActive = false
-                                }
-                                .foregroundColor(.blue)
-                            }
-                        }
+                        .submitLabel(.done)
+//                        .toolbar {
+//                            ToolbarItemGroup(placement: .keyboard) {
+//                                Spacer()
+//                                Button("Done") {
+//                                    isInputActive = false
+//                                }
+//                                .foregroundColor(.blue)
+//                            }
+//                        }
+                        
                     
 					Picker("", selection: $dataSource.searchType) {
 						ForEach(SearchType.allCases) { type in
@@ -53,10 +55,10 @@ struct SearchScreenView: View {
 					.pickerStyle(SegmentedPickerStyle())
 					.background(Color(UIColor.systemBackground)).opacity(0.8).cornerRadius(8.0)
 					.padding(.bottom)
-				   
-					Text("\(dataSource.totalResults) Results")
-						.font(.subheadline)
-						.foregroundColor(.white)
+//
+//					Text("\(dataSource.totalResults) Results")
+//						.font(.subheadline)
+//						.foregroundColor(.white)
 				}
 				.padding([.horizontal, .bottom])
 			}

@@ -44,7 +44,6 @@ struct AppAltTextModifier_Previews: PreviewProvider {
 				.appText()
 			.preferredColorScheme(.dark)
 		}
-		.padding()
 		.previewLayout(.sizeThatFits)
 	}
 }
