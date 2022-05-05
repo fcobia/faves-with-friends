@@ -9,6 +9,7 @@ import Foundation
 
 
 enum Gender: Int, Codable {
-	case female	= 1
-	case male	= 2
+	case unknoiwn	= 0
+	case female		= 1
+	case male		= 2
 }
