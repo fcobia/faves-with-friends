@@ -128,9 +128,6 @@ struct TVPerson: Codable, PersonCommon {
 	let id: Int
 	let creditId: String
 	let name: String
-	let gender: Gender
+	let gender: Gender?
 	let profilePathString: String?
 }
-
-
-// MARK:
