@@ -62,7 +62,11 @@ struct MovieDetailScreenView: View {
                                 if list == .none || list == .watched {
 									Button {
 										list = .toWatch
-										favesViewModel.addToToWatchList(movie)
+                                        if let movieRating = rating {
+                                            favesViewModel.addToToWatchList(movie, rating: movieRating)
+                                        } else {
+                                            favesViewModel.addToToWatchList(movie)
+                                        }
 									} label: {
 										Text("Add to Watch List")
 									}

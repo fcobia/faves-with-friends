@@ -272,7 +272,7 @@ class FavesManager: ObservableObject {
 
 		// Remove from other lists
         removeFromWatchingList(watchListItem)
-		removeFromWatchedList(watchListItem)
+		//removeFromWatchedList(watchListItem) - leave on both lists as it is still a rated movie
     }
 	
 	func removeFromToWatchList(_ watchListItem: WatchListItem) {
@@ -300,7 +300,7 @@ class FavesManager: ObservableObject {
 		
 		// Remove from other lists
 		removeFromToWatchList(watchListItem)
-		removeFromWatchedList(watchListItem)
+//		removeFromWatchedList(watchListItem) - leave on both lists as it is still a rated movie
     }
     
     func removeFromWatchingList(_ watchListItem: WatchListItem) {
