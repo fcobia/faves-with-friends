@@ -15,6 +15,7 @@ struct PersonSearch: PersonCommon, SearchResult {
 		case id
 		case name
 		case profilePathString	= "profile_path"
+        case popularity
 	}
 	
 	
@@ -22,6 +23,7 @@ struct PersonSearch: PersonCommon, SearchResult {
 	let id: Int
 	let name: String
 	let profilePathString: String?
+    let popularity: Double?
 
 
 	// MARK: SearchResult Computed Variables

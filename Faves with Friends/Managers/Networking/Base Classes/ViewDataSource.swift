@@ -129,10 +129,13 @@ class ViewDataSource: ObservableObject {
 				
 				// Set the results
 				if let results = results {
-					self.results = results + filteredResults
+                    let newResults = results + filteredResults
+                    let sortedResults = newResults.sorted { $0.popularity ?? 0.0 > $1.popularity ?? 0.0 }
+					self.results = sortedResults
 				}
 				else {
-					results = filteredResults
+                    let sortedResults = filteredResults.sorted { $0.popularity ?? 0.0 > $1.popularity ?? 0.0 }
+					results = sortedResults
 				}
 				
 				// Calculate the next fetch index

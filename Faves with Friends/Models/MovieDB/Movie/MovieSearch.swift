@@ -18,6 +18,7 @@ struct MovieSearch: Decodable, MovieCommon, SearchResult {
 		case backdropPathString		= "backdrop_path"
         case releaseDate 			= "release_date"
 		case overview
+        case popularity
     }
     
     
@@ -28,6 +29,7 @@ struct MovieSearch: Decodable, MovieCommon, SearchResult {
 	let backdropPathString: String?
 	let releaseDate: Date?
 	let overview: String?
+    let popularity: Double?
 
 	
 	// MARK: SearchResult Computed Variables
@@ -56,7 +58,8 @@ struct MovieSearch: Decodable, MovieCommon, SearchResult {
 		posterPathString = try container.decodeIfPresent(String.self, forKey: .posterPathString)
 		backdropPathString = try container.decodeIfPresent(String.self, forKey: .backdropPathString)
 		overview = try container.decodeIfPresent(String.self, forKey: .overview)
-
+        popularity = try container.decodeIfPresent(Double.self, forKey: .popularity)
+        
 		// Found a movie with an empty string for a date
 		do {
 			releaseDate = try container.decodeIfPresent(Date.self, forKey: .releaseDate)

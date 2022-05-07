@@ -19,6 +19,7 @@ struct TVSearch: TVCommon, SearchResult {
 		case overview
 		case name
 		case firstAirDate		= "first_air_date"
+        case popularity
 	}
 	
 	
@@ -29,7 +30,7 @@ struct TVSearch: TVCommon, SearchResult {
 	let overview: String?
 	let name: String
 	let firstAirDate: Date?
-
+    let popularity: Double?
 	
 	// MARK: Computed Variables
 	var title: String {
@@ -65,6 +66,7 @@ struct TVSearch: TVCommon, SearchResult {
 		posterPathString = try container.decodeIfPresent(String.self, forKey: .posterPathString)
 		backdropPathString = try container.decodeIfPresent(String.self, forKey: .backdropPathString)
 		overview = try container.decodeIfPresent(String.self, forKey: .overview)
+        popularity = try container.decodeIfPresent(Double.self, forKey: .popularity)
 
 		// Found a movie with an empty string for a date
 		do {

@@ -17,6 +17,7 @@ protocol SearchResult: Decodable {
 	var image: URL? { get }
 	var date: Date? { get }
 	var equalityId: String { get }
+    var popularity: Double? { get }
 }
 
 
