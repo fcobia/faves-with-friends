@@ -62,6 +62,8 @@ struct MyRatingsScreenView: View {
 						if let unwrapped = rating {
 							Text("-")
 							Text(RatingName.name(for: unwrapped))
+                            Text("-")
+                            Text("Count: \(allWatchedByRating[rating]!.count)")
 						}
 					}
 					.padding([.top, .bottom], 10)

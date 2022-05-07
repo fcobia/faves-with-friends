@@ -34,11 +34,16 @@ struct ListScreenView: View {
     @Environment(\.environmentManager) private var environmentManager: EnvironmentManager
     @Environment(\.preferredPalettes) var palettes
     
+    @EnvironmentObject var favesViewModel: FavesManager
+    
     @State private var listView: ListViews = .MyListScreenView
+    @State private var count = 0
     
     var body: some View {
         VStack {
             VStack(alignment: .center) {
+                Text("Total: \(count)")
+                    .padding(.top, 5)
                 HStack(alignment: .top) {
                     Picker("", selection: $listView) {
                         ForEach(ListViews.allCases) { type in
@@ -52,10 +57,23 @@ struct ListScreenView: View {
                         switch value {
                         case .MyListScreenView:
                             listView = .MyListScreenView
+                            count = favesViewModel.allToWatch.count
                         case .MyRatingsScreenView:
                             listView = .MyRatingsScreenView
+                            count = favesViewModel.allWatched.count
                         case .WatchingListScreenView:
                             listView = .WatchingListScreenView
+                            count = favesViewModel.allWatching.count
+                        }
+                    }
+                    .onAppear() {
+                        switch listView {
+                        case .MyListScreenView:
+                            count = favesViewModel.allToWatch.count
+                        case .MyRatingsScreenView:
+                            count = favesViewModel.allWatched.count
+                        case .WatchingListScreenView:
+                            count = favesViewModel.allWatching.count
                         }
                     }
                 }
