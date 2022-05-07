@@ -74,13 +74,13 @@ struct SearchScreenRowView: View {
                         if showModal.wrappedValue {
                             showWatchListButton()
                             if searchResult.type == .movie {
-                                NavigationLink(destination: RecommendedMoviesView(movieId: searchResult.id).navigationTitle("Recommended"), isActive: $showRecommended) {
+                                NavigationLink(destination: RecommendedMoviesView(movieId: searchResult.id).navigationTitle("Rate Similar"), isActive: $showRecommended) {
                                     EmptyView()
                                 }
                                 .opacity(0.0)
                                 .buttonStyle(PlainButtonStyle())
                             } else if searchResult.type == .tv {
-                                NavigationLink(destination: RecommendedTVView(tvId: searchResult.id).navigationTitle("Recommended"), isActive: $showRecommended) {
+                                NavigationLink(destination: RecommendedTVView(tvId: searchResult.id).navigationTitle("Rate Similar"), isActive: $showRecommended) {
                                     EmptyView()
                                 }
                                 .opacity(0.0)
@@ -93,14 +93,14 @@ struct SearchScreenRowView: View {
                                     if searchResult.type == .movie {
                                         NavigationView {
                                             RecommendedMoviesViewVertical(movieId: searchResult.id)
-                                                .navigationTitle("Recommended")
+                                                .navigationTitle("Rate Similar")
                                                 .navigationBarTitleDisplayMode(.inline)
                                         }
                                         .environment(\.showModal, $showRecommended)
                                     } else if searchResult.type == .tv {
                                         NavigationView {
                                             RecommendedTVViewVertical(tvId: searchResult.id)
-                                                .navigationTitle("Recommended")
+                                                .navigationTitle("Rate Similar")
                                                 .navigationBarTitleDisplayMode(.inline)
                                         }
                                         .environment(\.showModal, $showRecommended)
@@ -163,9 +163,9 @@ struct SearchScreenRowView: View {
             showRecommended = true
         } label: {
             if searchResult.type == .movie {
-                Text("Similar Movies")
+                Text("Rate Similar")
             } else if searchResult.type == .tv {
-                Text("Similar Shows")
+                Text("Rate Similar")
             }
         }
         .rowViewButton()
