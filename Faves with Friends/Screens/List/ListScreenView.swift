@@ -52,7 +52,6 @@ struct ListScreenView: View {
                     }
                     .pickerStyle(SegmentedPickerStyle())
                     .background(palettes.color.primary).opacity(0.8).cornerRadius(8.0)
-                    .padding(.bottom)
                     .onChange(of: listView) { value in
                         switch value {
                         case .MyListScreenView:
@@ -77,7 +76,6 @@ struct ListScreenView: View {
                         }
                     }
                 }
-                .padding()
             }
             if listView == .MyListScreenView {
                 MyListScreenView()

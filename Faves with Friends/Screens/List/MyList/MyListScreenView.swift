@@ -35,6 +35,7 @@ struct MyListScreenView: View {
             .listRowBackground(Color.clear)
         }
         .listStyle(.plain)
+        .padding(.top, 20)
         .navigationBarTitle(("Lists"), displayMode: .inline)
     }
     
