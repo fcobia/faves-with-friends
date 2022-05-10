@@ -23,7 +23,7 @@ struct LoginScreenView: View {
 		
 		VStack {
 			
-			Text("Faves with Friends")
+			Text("ShowZ")
 				.font(.largeTitle.weight(.semibold))
 				.appText()
 			

@@ -43,7 +43,7 @@ struct ListScreenView: View {
         VStack {
             VStack(alignment: .center) {
                 Text("Total: \(count)")
-                    .padding(.top, 5)
+                    .padding(.top, 10)
                 HStack(alignment: .top) {
                     Picker("", selection: $listView) {
                         ForEach(ListViews.allCases) { type in

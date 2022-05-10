@@ -34,7 +34,7 @@ struct WatchingListScreenView: View {
             .listRowBackground(Color.clear)
         }
         .listStyle(.plain)
-        .navigationTitle("Lists")
+        .navigationBarTitle(("Lists"), displayMode: .inline)
     }
     
     // MARK: Private Methods

@@ -169,6 +169,7 @@ struct SearchScreenRowView: View {
             }
         }
         .rowViewButton()
+        .frame(minWidth: 20)
     }
 }
 

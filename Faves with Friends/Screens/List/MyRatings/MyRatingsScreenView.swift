@@ -78,7 +78,7 @@ struct MyRatingsScreenView: View {
             EditButton()
         }
         .listStyle(.plain)
-        .navigationTitle("Lists")
+        .navigationBarTitle(("Lists"), displayMode: .inline)
     }
     
     func move(from source: IndexSet, to destination: Int) {
