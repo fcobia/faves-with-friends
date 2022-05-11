@@ -69,7 +69,9 @@ struct SearchScreenRowView: View {
                 
                 HStack {
                     VStack {
-                        StarRatingView($rating, size: 26, showText: false)
+                        if searchResult.type != .person {
+                            StarRatingView($rating, size: 26, showText: false)
+                        }
                         
                         if showModal.wrappedValue {
                             showWatchListButton()
@@ -110,6 +112,7 @@ struct SearchScreenRowView: View {
                     }
                     
                     if list == .none || list == .watched {
+                        if searchResult.type != .person {
                         HStack {
                             Spacer()
                             
@@ -127,6 +130,7 @@ struct SearchScreenRowView: View {
                             .buttonStyle(PlainButtonStyle())
                             
                             Spacer()
+                        }
                         }
                     }
                 }

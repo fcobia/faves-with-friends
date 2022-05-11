@@ -17,6 +17,8 @@ struct MyRatingsScreenView: View {
     @EnvironmentObject var activityManager: ActivityManager
     @EnvironmentObject var favesViewModel: FavesManager
 	
+    @State private var filter = SearchType.all
+    @State private var list = OrderedDictionary<Double?,[WatchListItem]>()
 	
 	// MARK: Computed Variables
 	private var allWatchedByRating: OrderedDictionary<Double?,[WatchListItem]> {
@@ -36,14 +38,80 @@ struct MyRatingsScreenView: View {
 		return OrderedDictionary<Double?, [WatchListItem]>(grouping: orderedList, by: { $0.rating })
 	}
     
+    private var moviesWatchedByRating: OrderedDictionary<Double?, [WatchListItem]> {
+        let filteredOrderedList = favesViewModel.allWatched.filter { $0.type == .movie }.sorted { lhs, rhs in
+            guard let lr = lhs.rating else { return true }
+            guard let rr = rhs.rating else { return false }
+            
+            // Secondary sort
+            if lr == rr {
+                return lhs.dateAdded < rhs.dateAdded
+            }
+            
+            return lr > rr
+        }
+        
+        return OrderedDictionary<Double?, [WatchListItem]>(grouping: filteredOrderedList, by: { $0.rating })
+    }
+    
+    private var tvWatchedByRating: OrderedDictionary<Double?, [WatchListItem]> {
+        let filteredOrderedList = favesViewModel.allWatched.filter { $0.type == .tv }.sorted { lhs, rhs in
+            guard let lr = lhs.rating else { return true }
+            guard let rr = rhs.rating else { return false }
+            
+            // Secondary sort
+            if lr == rr {
+                return lhs.dateAdded < rhs.dateAdded
+            }
+            
+            return lr > rr
+        }
+        
+        return OrderedDictionary<Double?, [WatchListItem]>(grouping: filteredOrderedList, by: { $0.rating })
+    }
     
     var body: some View {
+        Picker("", selection: $filter) {
+            ForEach(SearchType.allCases) { type in
+                if type != .person {
+                    Text(type.rawValue).tag(type)
+                }
+            }
+        }
+        .pickerStyle(SegmentedPickerStyle())
+        .onChange(of: filter) { value in
+                switch value {
+                case .all:
+                    list = allWatchedByRating
+                case .movies:
+                    list = moviesWatchedByRating
+                case .tv:
+                    list = tvWatchedByRating
+                case .person:
+                    list = allWatchedByRating
+                }
+        }
+        .onAppear() {
+                switch filter {
+                case .all:
+                    list = allWatchedByRating
+                case .movies:
+                    list = moviesWatchedByRating
+                case .tv:
+                    list = tvWatchedByRating
+                case .person:
+                    list = allWatchedByRating
+                }
+        }
+        .background(Color(UIColor.systemBackground)).opacity(0.8).cornerRadius(8.0)
+        .padding()
+       
         List {
 			
-			ForEach(allWatchedByRating.keys, id: \.self) { rating in
+			ForEach(list.keys, id: \.self) { rating in
 				
 				Section(content: {
-					ForEach(allWatchedByRating[rating]!, id: \.id) { watchListItem in
+					ForEach(list[rating]!, id: \.id) { watchListItem in
 						NavigationLink(destination: { destination(for: watchListItem) }) {
 							MyRatingsScreenRowView(previewImagePhase: nil, watchListItem: watchListItem)
 						}
@@ -74,6 +142,7 @@ struct MyRatingsScreenView: View {
 			}
             .listRowBackground(Color.clear)
         }
+        
         .toolbar {
             EditButton()
         }
