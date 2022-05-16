@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MovieDetailScreenView: View {
-
+    
     
     // MARK: Environment Variables
     @Environment(\.environmentManager) private var environmentManager
@@ -18,17 +18,20 @@ struct MovieDetailScreenView: View {
     @EnvironmentObject var activityManager: ActivityManager
     @EnvironmentObject var favesViewModel: FavesManager
     
+    @Environment(\.showModal) var showModal
+    
     // MARK: State Variables
     @State private var movie: Movie? = nil
     @State private var showingConfirmationDialog = false
     @State private var list: ListType? = nil
     @State private var rating: Double?
     @State private var ratingEnabled = true
-	
-	// MARK: Computed Variables
-	private var watched: Bool {
-		list == .watched
-	}
+    @State private var showRecommended = false
+    
+    // MARK: Computed Variables
+    private var watched: Bool {
+        list == .watched
+    }
     
     // MARK: Preview Support Variables
     private let previewBackdropPhase: AsyncImagePhase?
@@ -53,39 +56,46 @@ struct MovieDetailScreenView: View {
                                 Text("List: \(list?.displayName ?? "None")")
                                 Spacer()
                             }
-							
+                            
                             StarRatingView($rating, size: 36)
                                 .allowsHitTesting(ratingEnabled)
                                 .padding()
-							
+                            
                             HStack {
                                 if list == .none || list == .watched {
-									Button {
-										list = .toWatch
+                                    Button {
+                                        list = .toWatch
                                         if let movieRating = rating {
                                             favesViewModel.addToToWatchList(movie, rating: movieRating)
                                         } else {
                                             favesViewModel.addToToWatchList(movie)
                                         }
-									} label: {
-										Text("Add to Watch List")
-									}
-									.appPrimaryButton()
+                                    } label: {
+                                        Text("Add to Watch List")
+                                    }
+                                    .appPrimaryButton()
                                 }
-								
-                                if list == .toWatch || list == .watched {
-									Button {
-										list = .watching
-										favesViewModel.addToWatchingList(movie)
-									} label: {
-										Text("Add to Watching List")
-									}
-									.appPrimaryButton()
+                                
+                                
+                                Button {
+                                    showRecommended = true
+                                } label: {
+                                    Text("Rate Similar")
                                 }
+                                .appPrimaryButton()
+                                .sheet(isPresented: $showRecommended) {
+                                    NavigationView {
+                                        RecommendedMoviesViewVertical(movieId: movie.id)
+                                            .navigationTitle("Rate Similar")
+                                            .navigationBarTitleDisplayMode(.inline)
+                                    }
+                                    .environment(\.showModal, $showRecommended)
+                                }
+                                
                             }
                             .padding(.bottom)
-							
-							MovieDetailsView(movie: movie)
+                            
+                            MovieDetailsView(movie: movie)
                         }
                     }
                 }
@@ -94,21 +104,21 @@ struct MovieDetailScreenView: View {
             .navigationTitle(movieTitle)
             .navigationBarTitleDisplayMode(.inline)
         }
-		.onChange(of: rating, perform: { newValue in
-			
-			if let movie = movie {
-				favesViewModel.updateRating(for: movie, rating: newValue)
-				list = favesViewModel.list(for: movie)
-			}
-		})
-		.task {
-			if let findResult = favesViewModel.find(videoId: id, type: .movie) {
-				rating = findResult.item.rating
-				list = findResult.listType
-			}
-			
-			await getMovieDetails(id: id)
-		}
+        .onChange(of: rating, perform: { newValue in
+            
+            if let movie = movie {
+                favesViewModel.updateRating(for: movie, rating: newValue)
+                list = favesViewModel.list(for: movie)
+            }
+        })
+        .task {
+            if let findResult = favesViewModel.find(videoId: id, type: .movie) {
+                rating = findResult.item.rating
+                list = findResult.listType
+            }
+            
+            await getMovieDetails(id: id)
+        }
     }
     
     
@@ -121,22 +131,22 @@ struct MovieDetailScreenView: View {
         self.previewPosterPhase = previewPosterPhase
     }
     
-	
+    
     // MARK: Private Methods
-	
+    
     private func getMovieDetails(id: Int) async {
-		do {
-			activityManager.showActivity()
-			movie = try await environmentManager.movieNetworkManager.movieDetails(id: id)
-			//showProgressView = false
-		}
-		catch let error {
-			print("Error: \(error)")
-			//showProgressView = false
-			alertManager.showAlert(for: error)
-		}
-		
-		activityManager.hideActivity()
+        do {
+            activityManager.showActivity()
+            movie = try await environmentManager.movieNetworkManager.movieDetails(id: id)
+            //showProgressView = false
+        }
+        catch let error {
+            print("Error: \(error)")
+            //showProgressView = false
+            alertManager.showAlert(for: error)
+        }
+        
+        activityManager.hideActivity()
     }
 }
 
